@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\playerScript.js">
+    <Files>
+      <File FileName="Assets\scripts\enemyBehavior.js" Line="20" Column="3" />
+      <File FileName="Assets\scripts\playerScript.js" Line="64" Column="35" />
+      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" Line="170" Column="43" />
+      <File FileName="..\..\..\Desktop\BIGS_Game\Assets\scripts\characterScript.js" Line="75" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
