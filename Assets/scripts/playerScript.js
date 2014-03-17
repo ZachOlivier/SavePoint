@@ -50,13 +50,13 @@ function Update () {
 	if (Input.GetButton("Sprint")) {
 		movement.movement.maxForwardSpeed 		= 15.0;
 		movement.movement.maxSidewaysSpeed 		= 15.0;
-		movement.movement.maxBackwardsSpeed		= 15.0;
+		movement.movement.maxBackwardsSpeed		= 5.0;
 	}
 	
 	if (Input.GetButton("Stealth")) {
 		movement.movement.maxForwardSpeed 		= 3.0;
 		movement.movement.maxSidewaysSpeed 		= 3.0;
-		movement.movement.maxBackwardsSpeed 	= 3.0;
+		movement.movement.maxBackwardsSpeed 	= 2.0;
 		
 		isStealth	= true;
 		isIdle 		= false;
@@ -68,13 +68,13 @@ function Update () {
 	else if (Input.GetButtonUp("Sprint")) {
 		movement.movement.maxForwardSpeed 		= 6.0;
 		movement.movement.maxSidewaysSpeed 		= 6.0;
-		movement.movement.maxBackwardsSpeed		= 6.0;
+		movement.movement.maxBackwardsSpeed		= 2.0;
 	}
 	
 	else if (Input.GetButtonUp("Stealth")) {
 		movement.movement.maxForwardSpeed 		= 6.0;
 		movement.movement.maxSidewaysSpeed 		= 6.0;
-		movement.movement.maxBackwardsSpeed		= 6.0;
+		movement.movement.maxBackwardsSpeed		= 2.0;
 	
 		isStealth = false;
 	}

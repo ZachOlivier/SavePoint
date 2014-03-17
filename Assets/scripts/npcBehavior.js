@@ -2,22 +2,30 @@
 
 var canTalk												: boolean = false;
 
+var holder												: GameObject;
+
 
 function Start () {
 
 }
 
 function Update () {
-	if (Input.GetButtonDown("Talk") && canTalk) {
+	var cam : cameraMode = holder.gameObject.GetComponent(cameraMode);
+
+	if (Input.GetButtonDown("Talk") && canTalk && cam.cameraMode == 0) {
 		canTalk = false;
 		
-		Time.timeScale = 0.0;
+		cam.canChange = false;
+		
+		//Time.timeScale = 0.0;
 		
 		TalkInitiated();
 	}
 	
-	else if (Input.GetButtonDown("Talk") && !canTalk) {
-		Time.timeScale = 1.0;
+	else if (Input.GetButtonDown("Talk") && !canTalk && cam.cameraMode == 0) {
+		//Time.timeScale = 1.0;
+		
+		cam.canChange = true;
 	
 		print("Can't talk right now");
 	}

@@ -49,6 +49,7 @@
      <Compile Include="Assets\scripts\cameraMode.js" />
      <Compile Include="Assets\scripts\enemyBehavior.js" />
      <Compile Include="Assets\scripts\introScript.js" />
+     <Compile Include="Assets\scripts\menuScript.js" />
      <Compile Include="Assets\scripts\npcBehavior.js" />
      <Compile Include="Assets\scripts\playerScript.js" />
      <Compile Include="Assets\scripts\zoneScript.js" />

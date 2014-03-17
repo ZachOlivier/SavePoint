@@ -1,13 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\introScript.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\playerScript.js">
     <Files>
-      <File FileName="Assets\scripts\zoneScript.js" Line="39" Column="58" />
-      <File FileName="Assets\scripts\enemyBehavior.js" Line="166" Column="17" />
-      <File FileName="Assets\scripts\playerScript.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\zoneScript.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\enemyBehavior.js" Line="317" Column="59" />
+      <File FileName="Assets\scripts\playerScript.js" Line="59" Column="43" />
       <File FileName="Assets\scripts\npcBehavior.js" Line="1" Column="1" />
       <File FileName="Assets\scripts\cameraMode.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\introScript.js" Line="30" Column="25" />
+      <File FileName="Assets\scripts\introScript.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\menuScript.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -39,8 +39,6 @@ function OnTriggerEnter (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = AWARE;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -58,8 +56,6 @@ function OnTriggerEnter (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = AWARE;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 	}
@@ -79,8 +75,6 @@ function OnTriggerEnter (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = AWARE;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -98,8 +92,6 @@ function OnTriggerEnter (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -117,8 +109,6 @@ function OnTriggerEnter (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 	}
@@ -138,8 +128,6 @@ function OnTriggerEnter (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -157,8 +145,6 @@ function OnTriggerEnter (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -176,8 +162,6 @@ function OnTriggerEnter (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 	}
@@ -202,8 +186,6 @@ function OnTriggerExit (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = AWARE;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -221,8 +203,6 @@ function OnTriggerExit (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = AWARE;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 	}
@@ -242,8 +222,6 @@ function OnTriggerExit (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = AWARE;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -261,8 +239,6 @@ function OnTriggerExit (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -280,8 +256,6 @@ function OnTriggerExit (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 	}
@@ -301,8 +275,6 @@ function OnTriggerExit (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -320,8 +292,6 @@ function OnTriggerExit (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 		
@@ -339,8 +309,6 @@ function OnTriggerExit (other : Collider) {
 			enemy.detectedPosition.z = Enemy.transform.position.z;
 			
 			enemy.state = CHASING;
-		
-			print(enemy.state + "  " + enemy.lastDetect);
 			}
 		}
 	}
