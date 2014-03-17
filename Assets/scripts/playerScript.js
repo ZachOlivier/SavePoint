@@ -14,14 +14,12 @@ function Start () {
 function Update () {
 	var movement : CharacterMotor = gameObject.GetComponent(CharacterMotor);
 
-	if (movement.movement.velocity.magnitude == 0.0){
+	if (movement.movement.velocity.magnitude == 0.0) {
 		isIdle 		= true;
 		isWalking	= false;
 		isRunning 	= false;
 		isJump 		= false;
 		isStealth	= false;
-		
-		print("Idle");
 	}
 
 	else if (movement.movement.velocity.magnitude > 1.0 && movement.movement.velocity.magnitude <= 9.0 && movement.grounded != false && !isStealth) {
@@ -30,8 +28,6 @@ function Update () {
 		isRunning 	= false;
 		isJump 		= false;
 		isStealth	= false;
-		
-		print("Walking");
 	}
 	
 	else if (movement.movement.velocity.magnitude > 9.0 && movement.grounded != false) {
@@ -40,8 +36,6 @@ function Update () {
 		isRunning 	= true;
 		isJump 		= false;
 		isStealth	= false;
-		
-		print("Running");
 	}
 	
 	else if (movement.grounded == false) {
@@ -50,15 +44,13 @@ function Update () {
 		isRunning 	= false;
 		isJump 		= true;
 		isStealth	= false;
-		
-		print("Jumped");
 	}
 
 	
 	if (Input.GetButton("Sprint")) {
-		movement.movement.maxForwardSpeed 		= 16.0;
-		movement.movement.maxSidewaysSpeed 		= 16.0;
-		movement.movement.maxBackwardsSpeed		= 16.0;
+		movement.movement.maxForwardSpeed 		= 15.0;
+		movement.movement.maxSidewaysSpeed 		= 15.0;
+		movement.movement.maxBackwardsSpeed		= 15.0;
 	}
 	
 	if (Input.GetButton("Stealth")) {
@@ -71,8 +63,6 @@ function Update () {
 		isWalking 	= false;
 		isRunning 	= false;
 		isJump 		= false;
-		
-		print("Stealthing");
 	}
 	
 	else if (Input.GetButtonUp("Sprint")) {
