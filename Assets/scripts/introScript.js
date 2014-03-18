@@ -31,7 +31,7 @@ function Update () {
 	}
 	
 	if (Time.time > timer && part == 2) {
-		episodeText.transform.position.z = 4;
+		episodeText.transform.position.z = 8;
 		
 		part = 3;
 		
