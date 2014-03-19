@@ -9,6 +9,7 @@ var canChange											: boolean = true;
 // Variables to hold the player and npc game objects so that we can access their scripts
 var pc													: GameObject;
 var npc													: GameObject;
+var text												: GameObject;
 
 // This function only fires once during the start of this script
 function Start () {
@@ -24,6 +25,7 @@ function Update () {
 	var cam : MouseLook = Camera.main.GetComponent(MouseLook);
 	var talk : npcBehavior = npc.gameObject.GetComponent(npcBehavior);
 	var menu : menuScript = this.gameObject.GetComponent(menuScript);
+	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	// If the player pressed the tab key and the camera is currently in normal mode and can change
 	if (Input.GetButtonDown("Camera") && cameraMode == 0 && canChange) {
@@ -43,7 +45,8 @@ function Update () {
 		mouse.enabled = false;
 		cam.enabled = false;
 		
-		print("Inventory Mode");
+		// Display a message on the screen that will stay for 4 seconds
+		message.displayWarning("Inventory mode active..", 4);
 	}
 	
 	// Else if the player pressed the tab key and the camera is currently in inventory mode and can change
@@ -58,7 +61,7 @@ function Update () {
 		mouse.enabled = true;
 		cam.enabled = true;
 		
-		print("Normal Mode");
+		message.displayWarning("Normal mode active..", 4);
 	}
 	
 	// Else if the player pressed the tab key and the camera isn't in either mode but can change
@@ -73,6 +76,6 @@ function Update () {
 		mouse.enabled = true;
 		cam.enabled = true;
 		
-		print("Camera Mode Error");
+		message.displayWarning("Camera error!..", 4);
 	}
 }

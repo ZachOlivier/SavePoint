@@ -1,15 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\timeChanger.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\npcBehavior.js">
     <Files>
-      <File FileName="Assets\scripts\introScript.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\introScript.js" Line="1" Column="4" />
       <File FileName="Assets\scripts\zoneScript.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\enemyBehavior.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\enemyBehavior.js" Line="228" Column="35" />
       <File FileName="Assets\scripts\playerScript.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\npcBehavior.js" Line="10" Column="25" />
-      <File FileName="Assets\scripts\cameraMode.js" Line="9" Column="1" />
-      <File FileName="Assets\scripts\menuScript.js" Line="63" Column="95" />
-      <File FileName="Assets\scripts\timeChanger.js" Line="31" Column="2" />
+      <File FileName="Assets\scripts\npcBehavior.js" Line="46" Column="19" />
+      <File FileName="Assets\scripts\cameraMode.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\menuScript.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\timeChanger.js" Line="1" Column="1" />
+      <File FileName="Assets\scripts\uiSystem.js" Line="70" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

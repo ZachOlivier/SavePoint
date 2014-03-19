@@ -8,7 +8,7 @@ var path1												: int = 0;
 var path2												: int = 1;
 var path3												: int = 2;
 
-// Variables to hold the npc game object so that we can access its script
+// Variables to hold the npc game object so that we can access its scripts
 var npc													: GameObject;
 
 // This function only fires once during the start of this script

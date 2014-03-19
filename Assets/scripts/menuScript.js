@@ -9,6 +9,7 @@ var canMenu												: boolean = true;
 // Variables to hold the player and npc game objects so that we can access their scripts
 var pc													: GameObject;
 var npc													: GameObject;
+var text												: GameObject;
 
 // This function only fires once during the start of this script
 function Start () {
@@ -24,6 +25,7 @@ function Update () {
 	var cam : MouseLook = Camera.main.GetComponent(MouseLook);
 	var talk : npcBehavior = npc.gameObject.GetComponent(npcBehavior);
 	var inventory : cameraMode = this.gameObject.GetComponent(cameraMode);
+	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	// If the player pressed the escape key and the menu is currently not open and can change
 	if (Input.GetButtonDown("Menu") && menuMode == 0 && canMenu) {
@@ -42,7 +44,8 @@ function Update () {
 		mouse.enabled = false;
 		cam.enabled = false;
 		
-		print("Menu Open");
+		// Display a message on the screen that will stay for 4 seconds
+		message.displayWarning("Menu opened..", 4);
 	}
 	
 	// Else if the player pressed the escape key and the menu is currently open and can change
@@ -57,7 +60,7 @@ function Update () {
 		mouse.enabled = true;
 		cam.enabled = true;
 		
-		print("Menu Closed");
+		message.displayWarning("Menu closed..", 4);
 	}
 	
 	// Else if the player pressed the escape key and the menu isn't in either mode but can change
@@ -72,6 +75,6 @@ function Update () {
 		mouse.enabled = true;
 		cam.enabled = true;
 		
-		print("Menu Mode Error");
+		message.displayWarning("Menu error!..", 4);
 	}
 }

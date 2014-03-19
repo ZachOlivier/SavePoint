@@ -43,6 +43,8 @@ function Start () {
 
 	// Set the first timer for how long the enemy should be idle to a random number between 3 and 6
 	timeIdle = Time.time + Random.Range(3, 6);
+	
+	waypointTarget = 0;
 }
 
 // This function fires over and over again throughout the life of this script
@@ -65,6 +67,39 @@ function Update () {
 		if (Time.time > timeIdle) {
 		
 			// Set a timer for how long the enemy will wander
+			//timeWander = Time.time + Random.Range(4, 9);
+			
+			// Set the waypoint or direction for the enemy to go
+			waypointTarget++;
+			//waypointTarget = Random.Range(1, 5);
+			//direction = Random.Range(1, 4);
+			
+			// If the set waypoint is waypoint 1 and the last waypoint was not waypoint 1
+			if (waypointTarget == 1) {
+			
+				// Set the waypoint to waypoint one
+				waypointTargeted = waypointOne;
+			}
+			
+			else if (waypointTarget == 2) {
+				waypointTargeted = waypointTwo;
+			}
+			
+			else if (waypointTarget == 3) {
+				waypointTargeted = waypointThree;
+			}
+			
+			else if (waypointTarget == 4) {
+				waypointTargeted = waypointFour;
+			}
+			
+			else if (waypointTarget == 5) {
+				waypointTargeted = waypointFive;
+				
+				waypointTarget = 0;
+			}
+		
+			/*// Set a timer for how long the enemy will wander
 			timeWander = Time.time + Random.Range(4, 9);
 			
 			// Set the waypoint or direction for the enemy to go
@@ -97,7 +132,7 @@ function Update () {
 			// If the waypoint that was picked was the last waypoint picked
 			else {
 				waypointTarget = Random.Range(1, 5);
-			}
+			}*/
 			
 			// Set the current state to wandering
 			state = WANDERING;
@@ -132,14 +167,26 @@ function Update () {
 			if (this.transform.position.x > waypointOne.transform.position.x) {
 			
 				// Move the enemy's x position towards the waypoint by decreasing it
-				this.transform.position.x -= 2 * Time.deltaTime;
+				this.transform.position.x -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.x - waypointOne.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointOne.transform.position.x;
+				}
 			}
 		
 			// Else if the enemy's current x position is less than the waypoint's x position
 			else if (this.transform.position.x < waypointOne.transform.position.x) {
 			
 				// Move the enemy's x position towards the waypoint by increasing it
-				this.transform.position.x += 2 * Time.deltaTime;
+				this.transform.position.x += 4 * Time.deltaTime;
+				
+				if (waypointOne.transform.position.x - this.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointOne.transform.position.x;
+				}
 			}
 		
 			/*if (this.transform.position.y > waypointOne.transform.position.y) {
@@ -152,127 +199,293 @@ function Update () {
 		
 			// Same as above only for the enemy's z position compared to the waypoint's z position
 			if (this.transform.position.z > waypointOne.transform.position.z) {
-				this.transform.position.z -= 2 * Time.deltaTime;
+				this.transform.position.z -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.z - waypointOne.transform.position.z < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.z = waypointOne.transform.position.z;
+				}
 			}
 		
 			else if (this.transform.position.z < waypointOne.transform.position.z) {
-				this.transform.position.z += 2 * Time.deltaTime;
+				this.transform.position.z += 4 * Time.deltaTime;
+				
+				if (waypointOne.transform.position.z - this.transform.position.z < .1) {
+			
+					// Set the enemy's z position to the detected object's z position
+					this.transform.position.z = waypointOne.transform.position.z;
+				}
 			}
 		}
 		
 		else if (waypointTargeted == waypointTwo) {
 		
+			// If the enemy's current x position is greater than the waypoint's x position
 			if (this.transform.position.x > waypointTwo.transform.position.x) {
-				this.transform.position.x -= 2 * Time.deltaTime;
+			
+				// Move the enemy's x position towards the waypoint by decreasing it
+				this.transform.position.x -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.x - waypointTwo.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointTwo.transform.position.x;
+				}
 			}
 		
+			// Else if the enemy's current x position is less than the waypoint's x position
 			else if (this.transform.position.x < waypointTwo.transform.position.x) {
-				this.transform.position.x += 2 * Time.deltaTime;
+			
+				// Move the enemy's x position towards the waypoint by increasing it
+				this.transform.position.x += 4 * Time.deltaTime;
+				
+				if (waypointTwo.transform.position.x - this.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointTwo.transform.position.x;
+				}
 			}
 		
 			/*if (this.transform.position.y > waypointTwo.transform.position.y) {
-				this.transform.position.y -= 2 * Time.deltaTime;
+				this.transform.position.y -= 4 * Time.deltaTime;
 			}
 		
 			else if (this.transform.position.y < waypointTwo.transform.position.y) {
-				this.transform.position.y += 2 * Time.deltaTime;
+				this.transform.position.y += 4 * Time.deltaTime;
 			}*/
 		
+			// Same as above only for the enemy's z position compared to the waypoint's z position
 			if (this.transform.position.z > waypointTwo.transform.position.z) {
-				this.transform.position.z -= 2 * Time.deltaTime;
+				this.transform.position.z -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.z - waypointTwo.transform.position.z < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.z = waypointTwo.transform.position.z;
+				}
 			}
 		
 			else if (this.transform.position.z < waypointTwo.transform.position.z) {
-				this.transform.position.z += 2 * Time.deltaTime;
+				this.transform.position.z += 4 * Time.deltaTime;
+				
+				if (waypointTwo.transform.position.z - this.transform.position.z < .1) {
+			
+					// Set the enemy's z position to the detected object's z position
+					this.transform.position.z = waypointTwo.transform.position.z;
+				}
 			}
 		}
 		
-		else if (waypointTargeted == waypointThree) {
+		if (waypointTargeted == waypointThree) {
 		
+			// If the enemy's current x position is greater than the waypoint's x position
 			if (this.transform.position.x > waypointThree.transform.position.x) {
-				this.transform.position.x -= 2 * Time.deltaTime;
+			
+				// Move the enemy's x position towards the waypoint by decreasing it
+				this.transform.position.x -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.x - waypointThree.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointThree.transform.position.x;
+				}
 			}
 		
+			// Else if the enemy's current x position is less than the waypoint's x position
 			else if (this.transform.position.x < waypointThree.transform.position.x) {
-				this.transform.position.x += 2 * Time.deltaTime;
+			
+				// Move the enemy's x position towards the waypoint by increasing it
+				this.transform.position.x += 4 * Time.deltaTime;
+				
+				if (waypointThree.transform.position.x - this.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointThree.transform.position.x;
+				}
 			}
 		
 			/*if (this.transform.position.y > waypointThree.transform.position.y) {
-				this.transform.position.y -= 2 * Time.deltaTime;
+				this.transform.position.y -= 4 * Time.deltaTime;
 			}
 		
 			else if (this.transform.position.y < waypointThree.transform.position.y) {
-				this.transform.position.y += 2 * Time.deltaTime;
+				this.transform.position.y += 4 * Time.deltaTime;
 			}*/
 		
+			// Same as above only for the enemy's z position compared to the waypoint's z position
 			if (this.transform.position.z > waypointThree.transform.position.z) {
-				this.transform.position.z -= 2 * Time.deltaTime;
+				this.transform.position.z -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.z - waypointThree.transform.position.z < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.z = waypointThree.transform.position.z;
+				}
 			}
 		
 			else if (this.transform.position.z < waypointThree.transform.position.z) {
-				this.transform.position.z += 2 * Time.deltaTime;
+				this.transform.position.z += 4 * Time.deltaTime;
+				
+				if (waypointThree.transform.position.z - this.transform.position.z < .1) {
+			
+					// Set the enemy's z position to the detected object's z position
+					this.transform.position.z = waypointThree.transform.position.z;
+				}
 			}
 		}
 		
-		else if (waypointTargeted == waypointFour) {
+		if (waypointTargeted == waypointFour) {
 		
+			// If the enemy's current x position is greater than the waypoint's x position
 			if (this.transform.position.x > waypointFour.transform.position.x) {
-				this.transform.position.x -= 2 * Time.deltaTime;
+			
+				// Move the enemy's x position towards the waypoint by decreasing it
+				this.transform.position.x -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.x - waypointFour.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointFour.transform.position.x;
+				}
 			}
 		
+			// Else if the enemy's current x position is less than the waypoint's x position
 			else if (this.transform.position.x < waypointFour.transform.position.x) {
-				this.transform.position.x += 2 * Time.deltaTime;
+			
+				// Move the enemy's x position towards the waypoint by increasing it
+				this.transform.position.x += 4 * Time.deltaTime;
+				
+				if (waypointFour.transform.position.x - this.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointFour.transform.position.x;
+				}
 			}
 		
 			/*if (this.transform.position.y > waypointFour.transform.position.y) {
-				this.transform.position.y -= 2 * Time.deltaTime;
+				this.transform.position.y -= 4 * Time.deltaTime;
 			}
 		
 			else if (this.transform.position.y < waypointFour.transform.position.y) {
-				this.transform.position.y += 2 * Time.deltaTime;
+				this.transform.position.y += 4 * Time.deltaTime;
 			}*/
 		
+			// Same as above only for the enemy's z position compared to the waypoint's z position
 			if (this.transform.position.z > waypointFour.transform.position.z) {
-				this.transform.position.z -= 2 * Time.deltaTime;
+				this.transform.position.z -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.z - waypointFour.transform.position.z < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.z = waypointFour.transform.position.z;
+				}
 			}
 		
 			else if (this.transform.position.z < waypointFour.transform.position.z) {
-				this.transform.position.z += 2 * Time.deltaTime;
+				this.transform.position.z += 4 * Time.deltaTime;
+				
+				if (waypointFour.transform.position.z - this.transform.position.z < .1) {
+			
+					// Set the enemy's z position to the detected object's z position
+					this.transform.position.z = waypointFour.transform.position.z;
+				}
 			}
 		}
 		
-		else if (waypointTargeted == waypointFive) {
+		if (waypointTargeted == waypointFive) {
 		
+			// If the enemy's current x position is greater than the waypoint's x position
 			if (this.transform.position.x > waypointFive.transform.position.x) {
-				this.transform.position.x -= 2 * Time.deltaTime;
+			
+				// Move the enemy's x position towards the waypoint by decreasing it
+				this.transform.position.x -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.x - waypointFive.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointFive.transform.position.x;
+				}
 			}
 		
+			// Else if the enemy's current x position is less than the waypoint's x position
 			else if (this.transform.position.x < waypointFive.transform.position.x) {
-				this.transform.position.x += 2 * Time.deltaTime;
+			
+				// Move the enemy's x position towards the waypoint by increasing it
+				this.transform.position.x += 4 * Time.deltaTime;
+				
+				if (waypointFive.transform.position.x - this.transform.position.x < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.x = waypointFive.transform.position.x;
+				}
 			}
 		
 			/*if (this.transform.position.y > waypointFive.transform.position.y) {
-				this.transform.position.y -= 2 * Time.deltaTime;
+				this.transform.position.y -= 4 * Time.deltaTime;
 			}
 		
 			else if (this.transform.position.y < waypointFive.transform.position.y) {
-				this.transform.position.y += 2 * Time.deltaTime;
+				this.transform.position.y += 4 * Time.deltaTime;
 			}*/
 		
+			// Same as above only for the enemy's z position compared to the waypoint's z position
 			if (this.transform.position.z > waypointFive.transform.position.z) {
-				this.transform.position.z -= 2 * Time.deltaTime;
+				this.transform.position.z -= 4 * Time.deltaTime;
+				
+				if (this.transform.position.z - waypointFive.transform.position.z < .1) {
+			
+					// Set the enemy's x position to the detected object's x position
+					this.transform.position.z = waypointFive.transform.position.z;
+				}
 			}
 		
 			else if (this.transform.position.z < waypointFive.transform.position.z) {
-				this.transform.position.z += 2 * Time.deltaTime;
+				this.transform.position.z += 4 * Time.deltaTime;
+				
+				if (waypointFive.transform.position.z - this.transform.position.z < .1) {
+			
+					// Set the enemy's z position to the detected object's z position
+					this.transform.position.z = waypointFive.transform.position.z;
+				}
 			}
 		}
 		
-		 if (Time.time > timeWander) {
+		if (this.transform.position.x == waypointOne.transform.position.x && this.transform.position.z == waypointOne.transform.position.z) {
 		 	timeIdle = Time.time + Random.Range(3, 6);
 		 	
 		 	state = IDLE;
 		 }
+		 
+		 if (this.transform.position.x == waypointTwo.transform.position.x && this.transform.position.z == waypointTwo.transform.position.z) {
+		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	
+		 	state = IDLE;
+		 }
+		 
+		 if (this.transform.position.x == waypointThree.transform.position.x && this.transform.position.z == waypointThree.transform.position.z) {
+		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	
+		 	state = IDLE;
+		 }
+		 
+		 if (this.transform.position.x == waypointFour.transform.position.x && this.transform.position.z == waypointFour.transform.position.z) {
+		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	
+		 	state = IDLE;
+		 }
+		 
+		 if (this.transform.position.x == waypointFive.transform.position.x && this.transform.position.z == waypointFive.transform.position.z) {
+		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	
+		 	state = IDLE;
+		 }
+		
+		 /*if (Time.time > timeWander) {
+		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	
+		 	state = IDLE;
+		 }*/
 	}
 	
 	else if (state == AWARE) {
