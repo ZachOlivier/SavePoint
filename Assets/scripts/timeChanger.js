@@ -1,4 +1,4 @@
-﻿#pragma strict
+﻿/*#pragma strict
 
 // Variable to hold which path the player is on from the decisions they've made
 var pathChosen											: int = 0;
@@ -36,4 +36,4 @@ function Update () {
 	else if (pathChosen == path3) {
 		//Application.LoadLevel(2);
 	}
-}
+}*/
