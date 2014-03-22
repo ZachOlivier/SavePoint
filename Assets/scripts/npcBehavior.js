@@ -259,7 +259,7 @@ function OnTriggerEnter (other : Collider) {
 		// Set can talk to true, this lets the player be able to use the E key to start a conversation
 		canTalk = true;
 		
-		message.displayInfo("Security Guard", 4);
+		message.displayInfo("Security Guard - Can Talk", 100);
 	}
 }
 
@@ -272,6 +272,7 @@ function OnTriggerExit (other : Collider) {
 	var mouse : MouseLook = pc.gameObject.GetComponent(MouseLook);
 	var look : MouseLook = Camera.main.GetComponent(MouseLook);
 	var movement : CharacterMotor = pc.gameObject.GetComponent(CharacterMotor);
+	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	// If the player exits the talk zone
 	if (other.gameObject.tag == "Player") {
@@ -287,6 +288,8 @@ function OnTriggerExit (other : Collider) {
 		mouse.enabled = true;
 		
 		movement.enabled = true;
+		
+		message.info.enabled = false;
 	}
 }
 

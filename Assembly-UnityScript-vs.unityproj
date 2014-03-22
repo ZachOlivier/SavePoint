@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\cameraMode.js" />
      <Compile Include="Assets\scripts\decisionScript.js" />
+     <Compile Include="Assets\scripts\displayInfo.js" />
      <Compile Include="Assets\scripts\enemyBehavior.js" />
      <Compile Include="Assets\scripts\introScript.js" />
      <Compile Include="Assets\scripts\menuScript.js" />

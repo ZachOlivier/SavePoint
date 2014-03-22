@@ -120,15 +120,15 @@ function OnMouseExit () {
 		decisionOne = false;
 	}
 	
-	else if (this.gameObject.name == "decision2Box" && canClick) {
+	if (this.gameObject.name == "decision2Box" && canClick) {
 		decisionTwo = false;
 	}
 	
-	else if (this.gameObject.name == "decision3Box" && canClick) {
+	if (this.gameObject.name == "decision3Box" && canClick) {
 		decisionThree = false;
 	}
 	
-	else if (this.gameObject.name == "decision4Box" && canClick) {
+	if (this.gameObject.name == "decision4Box" && canClick) {
 		decisionFour = false;
 	}
 }
