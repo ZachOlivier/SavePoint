@@ -28,7 +28,7 @@ function OnMouseEnter () {
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	if (this.gameObject.name == "Security Guard" && canDisplay) {
-		message.displayInfo("Security Guard", 3);
+		message.displayInfo("Security Guard William Hebb", 3);
 	}
 	
 	if (this.gameObject.name == "Enemy" && canDisplay) {
@@ -38,7 +38,7 @@ function OnMouseEnter () {
 	if (this.gameObject.tag == "Collider" && canDisplay) {
 		this.gameObject.collider.enabled = false;
 		
-		timer = .5;
+		timer = .2;
 	}
 }
 

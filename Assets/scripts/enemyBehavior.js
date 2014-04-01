@@ -44,7 +44,7 @@ function Start () {
 	// Set the first timer for how long the enemy should be idle to a random number between 3 and 6
 	timeIdle = Time.time + Random.Range(3, 6);
 	
-	waypointTarget = 0;
+	waypointTarget = 1;
 }
 
 // This function fires over and over again throughout the life of this script
@@ -70,9 +70,9 @@ function Update () {
 			//timeWander = Time.time + Random.Range(4, 9);
 			
 			// Set the waypoint or direction for the enemy to go
-			waypointTarget++;
-			//waypointTarget = Random.Range(1, 5);
-			//direction = Random.Range(1, 4);
+			if (this.transform.position.x == waypointTargeted.transform.position.x && this.transform.position.z == waypointTargeted.transform.position.z) {
+				waypointTarget++;
+			}
 			
 			// If the set waypoint is waypoint 1 and the last waypoint was not waypoint 1
 			if (waypointTarget == 1) {
@@ -98,41 +98,6 @@ function Update () {
 				
 				waypointTarget = 0;
 			}
-		
-			/*// Set a timer for how long the enemy will wander
-			timeWander = Time.time + Random.Range(4, 9);
-			
-			// Set the waypoint or direction for the enemy to go
-			waypointTarget = Random.Range(1, 5);
-			//direction = Random.Range(1, 4);
-			
-			// If the set waypoint is waypoint 1 and the last waypoint was not waypoint 1
-			if (waypointTarget == 1 && waypointTargeted != waypointOne) {
-			
-				// Set the waypoint to waypoint one
-				waypointTargeted = waypointOne;
-			}
-			
-			else if (waypointTarget == 2 && waypointTargeted != waypointTwo) {
-				waypointTargeted = waypointTwo;
-			}
-			
-			else if (waypointTarget == 3 && waypointTargeted != waypointThree) {
-				waypointTargeted = waypointThree;
-			}
-			
-			else if (waypointTarget == 4 && waypointTargeted != waypointFour) {
-				waypointTargeted = waypointFour;
-			}
-			
-			else if (waypointTarget == 5 && waypointTargeted != waypointFive) {
-				waypointTargeted = waypointFive;
-			}
-			
-			// If the waypoint that was picked was the last waypoint picked
-			else {
-				waypointTarget = Random.Range(1, 5);
-			}*/
 			
 			// Set the current state to wandering
 			state = WANDERING;
@@ -140,25 +105,6 @@ function Update () {
 	}
 	
 	else if (state == WANDERING) {
-		/*if (direction == 1) {
-			this.transform.position.x += 5 * Time.deltaTime;
-		}
-		
-		else if (direction == 2) {
-			this.transform.position.x -= 5 * Time.deltaTime;
-		}
-		
-		else if (direction == 3) {
-			this.transform.position.z += 5 * Time.deltaTime;
-		}
-		
-		else if (direction == 4) {
-			this.transform.position.z -= 5 * Time.deltaTime;
-		}
-		
-		else {
-			direction = Random.Range(1, 4);
-		}*/
 		
 		// If the waypoint picked was waypoint 1
 		if (waypointTargeted == waypointOne) {
