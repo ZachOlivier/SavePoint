@@ -114,6 +114,10 @@ function Update () {
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	if (Input.GetButtonDown("Fire1") && decisionOne && this.gameObject.name == "decision1Box") {
+	
+		talk.hasDisplayed = false;
+		talk.talkSection++;
+	
 		if (talk.path == 0) {
 			talk.path = path1;
 		}
@@ -198,8 +202,6 @@ function Update () {
 			talk.path = path441;
 		}
 		
-		talk.time = 1;
-		
 		canClick = false;
 		decisionOne = false;
 		
@@ -210,6 +212,10 @@ function Update () {
 	}
 	
 	if (Input.GetButtonDown("Fire1") && decisionTwo && this.gameObject.name == "decision2Box") {
+	
+		talk.hasDisplayed = false;
+		talk.talkSection++;
+	
 		if (talk.path == 0) {
 			talk.path = path2;
 		}
@@ -294,8 +300,6 @@ function Update () {
 			talk.path = path442;
 		}
 		
-		talk.time = 1;
-		
 		canClick = false;
 		decisionTwo = false;
 		
@@ -306,6 +310,10 @@ function Update () {
 	}
 	
 	if (Input.GetButtonDown("Fire1") && decisionThree && this.gameObject.name == "decision3Box") {
+	
+		talk.hasDisplayed = false;
+		talk.talkSection++;
+	
 		if (talk.path == 0) {
 			talk.path = path3;
 		}
@@ -390,8 +398,6 @@ function Update () {
 			talk.path = path443;
 		}
 		
-		talk.time = 1;
-		
 		canClick = false;
 		decisionThree = false;
 		
@@ -402,6 +408,10 @@ function Update () {
 	}
 	
 	if (Input.GetButtonDown("Fire1") && decisionFour && this.gameObject.name == "decision4Box") {
+	
+		talk.hasDisplayed = false;
+		talk.talkSection++;
+	
 		if (talk.path == 0) {
 			talk.path = path4;
 		}
@@ -485,8 +495,6 @@ function Update () {
 		else if (talk.path == 44) {
 			talk.path = path444;
 		}
-		
-		talk.time = 1;
 		
 		canClick = false;
 		decisionFour = false;

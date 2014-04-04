@@ -7,8 +7,8 @@ var state												: int = 0;
 var IDLE												: int = 0;
 var WANDERING											: int = 1;
 var AWARE												: int = 2;
-var CHASING												: int = 4;
-var LOST												: int = 5;
+var CHASING												: int = 3;
+var LOST												: int = 4;
 
 // Variable for holding the time since last detection
 var lastDetect											: int = 0;

@@ -38,7 +38,7 @@ function OnMouseEnter () {
 	if (this.gameObject.tag == "Collider" && canDisplay) {
 		this.gameObject.collider.enabled = false;
 		
-		timer = .2;
+		timer = .05;
 	}
 }
 

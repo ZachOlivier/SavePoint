@@ -40,7 +40,7 @@ function OnTriggerEnter (other : Collider) {
 			audio.PlayOneShot(reject);
 			
 			message.displaySubtitle("I have a new key card for you sir", 10);
-			message.displayInfo("William Hobb", 10);
+			message.displayInfo("Security Guard William Hobb", 10);
 			message.displayWarning("Door access denied", 10);
 		}
 	}

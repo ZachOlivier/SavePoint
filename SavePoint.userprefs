@@ -1,13 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\doorScript.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\decisionScript.js">
     <Files>
-      <File FileName="Assets\scripts\npcBehavior.js" Line="113" Column="1" />
-      <File FileName="Assets\scripts\decisionScript.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\uiSystem.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\displayInfo.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\doorScript.js" Line="23" Column="27" />
-      <File FileName="Assets\scripts\introScript.js" Line="398" Column="1" />
+      <File FileName="Assets\scripts\npcBehavior.js" Line="861" Column="5" />
+      <File FileName="Assets\scripts\decisionScript.js" Line="125" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

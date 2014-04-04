@@ -6,18 +6,20 @@ var isTalking											: boolean = false;
 
 var canSkip												: boolean = false;
 
-// Variable to hold the current part of the conversation
-var talkSection											: int = 0;
-var talkCount											: int = 0;
-
-// Variable to hold which path the player is on from the decisions they've made
-var path												: int = 0;
+var hasDisplayed										: boolean = false;
 
 // Variable to hold how much time has gone by in a conversation
 var timer												: float = 0.0;
 
 // Variable to hold how much time is allowed before moving on in conversation
 var time												: float = 0.0;
+
+// Variable to hold the current part of the conversation
+var talkSection											: int = 0;
+var talkCount											: int = 0;
+
+// Variable to hold which path the player is on from the decisions they've made
+var path												: int = 0;
 
 // Variables to hold the decisions the player can make
 var path1												: int = 1;
@@ -143,761 +145,724 @@ function Update () {
 	// If the player pressed the E key and the NPC can talk, and the game isn't paused
 	if (Input.GetButtonDown("Talk") && canTalk && cam.cameraMode == 0) {
 	
-		// Make it so the NPC can't talk again and the game can't pause
-		canTalk = false;
-		cam.canChange = false;
-		menu.canMenu = false;
+		if (talkCount != 2) {
 		
-		look.enabled = false;
-		mouse.enabled = false;
+			if (isTalking) {
+				isTalking = false;
+			
+				// Let the player know they can't talk right now and let the game be able to pause
+				cam.canChange = true;
+				menu.canMenu = true;
 		
-		movement.enabled = false;
+				look.enabled = true;
+				mouse.enabled = true;
 		
-		// Make sure the conversation starts at the beginning
-		talkSection = 0;
+				movement.enabled = true;
 		
-		if (talkCount == 0) {
-			path = 0;
+				info.canDisplay = true;
+			
+				message.displayWarning("Conversation Ended..", 4);
+			}
+		
+			else if (!isTalking) {
+				// Set the NPC to currently talking
+				isTalking = true;
+			
+				// Make it so the NPC can't talk again and the game can't pause
+				cam.canChange = false;
+				menu.canMenu = false;
+		
+				look.enabled = false;
+				mouse.enabled = false;
+		
+				movement.enabled = false;
+			
+				info.canDisplay = false;
+				
+				hasDisplayed = false;
+		
+				// Make sure the conversation starts at the beginning
+				talkSection = 0;
+		
+				// Set the first allowed amount of time for that section of the conversation
+				time = .5;
+		
+				if (talkCount == 0) {
+					path = 0;
+				}
+			}
 		}
 		
-		// Set the first allowed amount of time for that section of the conversation
-		time = .5;
-		
-		// Set the NPC to currently talking
-		isTalking = true;
-		
-		//Time.timeScale = 0.0;
+		else {
+			message.displayWarning("Nothing more to say..", 4);
+		}
 	}
 	
 	// Else if the player pressed the E key and the NPC can't talk, and the game isn't paused
 	else if (Input.GetButtonDown("Talk") && !canTalk && cam.cameraMode == 0) {
-		//Time.timeScale = 1.0;
-		
-		// Let the player know they can't talk right now and let the game be able to pause
-		cam.canChange = true;
-		menu.canMenu = true;
-		
-		look.enabled = true;
-		mouse.enabled = true;
-		
-		movement.enabled = true;
-		
-		info.canDisplay = true;
 		
 		message.displayWarning("Can't talk right now..", 4);
 	}
 	
 	if (isTalking) {
-		timer += Time.deltaTime;
-		
-		if (info.canDisplay) {
-			info.canDisplay = false;
-		}
+	
+		//timer += Time.deltaTime;
 		
 		if (canSkip) {
 			if (Input.GetButtonDown("Fire2")) {
-				time = 0.0;
+			
+				talkSection ++;
+				hasDisplayed = false;
 			}
 		}
 		
 		if (talkCount == 0) {
-			if (timer > time && talkSection == 0) {
-				TalkInitiated("It sure is nice seeing you again sir. It's been too long.", 10);
-			
-				dec1.canClick = true;
-				dec2.canClick = true;
-				dec3.canClick = true;
-				dec4.canClick = true;
+			if (talkSection == 0 && !hasDisplayed) {
 			
 				canSkip = false;
 			
-				message.displayDecision("Honest/Apologetic", "Evasive", "Defensive", "Direct/Dismissive", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 1 && path == path1) {
-				TalkInitiated("I know it has. I.. home had to come first.", 10);
-		
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
+				message.displaySubtitle("It sure is nice seeing you again sir. It's been too long.", 100);
+				message.displayWarning("Click a decision to continue", 100);
+				message.displayInfo("William Hobb", 100);
 				
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 2 && path == path1) {
-				TalkInitiated("Of course it did. You’re absolutely right. I’m sorry if it sounded like I meant anything else. \n I was just trying to tell you how much you’ve been missed.", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 3 && path == path1) {
-				TalkInitiated("No, it’s fine. It’s just.. It’s been tough, with Angie.", 10);
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 4 && path == path1) {
-				TalkInitiated("I really am sorry, Doctor. How is she doing?", 10);
-		
-				dec1.canClick = true;
-				dec3.canClick = true;
-			
-				canSkip = false;
-		
-				message.displayDecision("Confide", "", "Don't Confide", "", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 5 && path == path11) {
-				TalkInitiated("This morning at breakfast.. she’s sitting there in her wheelchair, at the kitchen table, \n and she’s making a mess, this huge mess, trying to lift her spoon to her mouth. \n So I go to take the spoon, to help her, and she says “Daddy I can do it myself!” \n Just like when she was four and learning to ride her bike. And for a split second I almost laugh. \n But then I remember-- she’s not four, she’s fifteen. At four she could still pedal a bike. \n At four she wasn’t wearing diapers. At four she didn’t.. she didn’t sound like a damn moron! \n And I think all this, right there, with her staring straight at me, and it takes everything \n I have in me not to just start bawling there on the spot. \n And somehow, somehow I don’t because I know it would only hurt her more, \n but my God it kills me inside.", 20);
-		
-				dec1.canClick = false;
-				dec3.canClick = false;
-			
-				canSkip = true;
-			
-				message.displayInfo("Greg Clemens", 20);
-				message.displayWarning("Right click to continue", 20);
-			}
-		
-			else if (timer > time && talkSection == 6 && path == path11) {
-				TalkInitiated("Jesus..", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path11) {
-				TalkInitiated("Jill had been standing at the counter, chopping vegetables for lunch later. She didn’t say anything. \n But after what Angie said the chopping stopped. We never looked at each other. \n We deliberately avoided looking at each other. I think we both knew what \n would happen if we did. So I just stared down at my cereal \n and swirled the flakes around the bowl. That’s how things have been of late.", 20);
-				message.displayInfo("Greg Clemens", 20);
-				message.displayWarning("Right click to continue", 20);
-			}
-		
-			else if (timer > time && talkSection == 8 && path == path11) {
-				TalkInitiated("I’m so sorry Greg. I don’t know what to say.", 10);
-			
-				dec1.canClick = true;
-				dec2.canClick = true;
-				dec3.canClick = true;
-				dec4.canClick = true;
-			
-				canSkip = false;
-			
-				message.displayDecision("Optimistic", "Pessimistic", "Determined", "Desperate", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 9 && path == path111) {
-				TalkInitiated("There’s nothing to say, really. She’s alive-- that’s the most important part. \n The rest will come with time.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 9 && path == path112) {
-				TalkInitiated("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. \n She’s beyond their help, now.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 9 && path == path113) {
-				TalkInitiated("There’s nothing to say, really. She’s going to get better. \n Whatever it takes, she’s going to get better.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 9 && path == path114) {
-				TalkInitiated("There’s nothing to say, really. She has to get better. There has to be something, \n some way for her to get better. There has to.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-				
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 10 && path == path111 || path == path112 || path == path113 || path == path114) {
-				
-				timer = 0;
-				
-				talkSection = 0;
-				path = 1;
-				talkCount = 1;
-				
-				canSkip = false;
-			}
-		
-			else if (timer > time && talkSection == 5 && path == path13) {
-				TalkInitiated("It’s life, you know? Some days are better than others.", 10);
-		
-				dec1.canClick = false;
-				dec3.canClick = false;
-			
-				canSkip = true;
-			
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 6 && path == path13) {
-				TalkInitiated("I’m so sorry Greg. I don’t know what to say.", 10);
+				message.displayDecision("Apologetic", "Evasive", "Defensive", "Dismissive", 100);
 			
 				dec1.canClick = true;
 				dec2.canClick = true;
 				dec3.canClick = true;
 				dec4.canClick = true;
 				
-				canSkip = false;
+				hasDisplayed = true;
+			}
+			
+			else if (talkSection == 1) {
+				if (path == path1 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("I know it has. I.. home had to come first.", 100);
+					message.displayWarning("Right click to continue", 100);
+					message.displayInfo("Greg Clemens", 100);
+		
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
 					
-				message.displayDecision("Optimistic", "Pessimistic", "Determined", "Desperate", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path131) {
-				TalkInitiated("There’s nothing to say, really. She’s alive-- that’s the most important part. \n The rest will come with time.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path132) {
-				TalkInitiated("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. \n She’s beyond their help, now.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path133) {
-				TalkInitiated("There’s nothing to say, really. She’s going to get better. \n Whatever it takes, she’s going to get better.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
+					hasDisplayed = true;
+				}
 				
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path134) {
-				TalkInitiated("There’s nothing to say, really. She has to get better. There has to be something, \n some way for her to get better. There has to.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 8 && path == path131 || path == path132 || path == path133 || path == path134) {
+				else if (path == path2 && !hasDisplayed) {
 				
-				timer = 0;
+					canSkip = true;
 				
-				talkSection = 0;
-				path = 1;
-				talkCount = 1;
-				
-				canSkip = false;
-			}
-			
-			else if (timer > time && talkSection == 1 && path == path2) {
-				TalkInitiated("Thanks, William. It’s nice to see you too. How’ve you been?", 10);
+					message.displaySubtitle("Thanks, William. It’s nice to see you too. How’ve you been?", 100);
+					message.displayWarning("Right click to continue", 100);
+					message.displayInfo("Greg Clemens", 100);
 		
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-				
-				canSkip = true;
-			
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 2 && path == path2) {
-				
-				timer = 0;
-				
-				talkSection = 0;
-				path = 2;
-				talkCount = 1;
-				
-				canSkip = false;
-			}
-			
-			else if (timer > time && talkSection == 1 && path == path3) {
-				TalkInitiated("I have a daughter at home that might disagree.", 10);
-		
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-			
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 2 && path == path3) {
-				TalkInitiated("Of course you do! I’m sorry if it sounded like I meant anything else. I was just trying to \n tell you how much you’ve been missed.", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 3 && path == path3) {
-				TalkInitiated("No, it’s fine. It’s just.. It’s been tough, with Angie.", 10);
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 4 && path == path3) {
-				TalkInitiated("I really am sorry, Doctor. How is she doing?", 10);
-		
-				dec1.canClick = true;
-				dec3.canClick = true;
-			
-				canSkip = false;
-		
-				message.displayDecision("Confide", "", "Don't Confide", "", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 5 && path == path31) {
-				TalkInitiated("This morning at breakfast.. she’s sitting there in her wheelchair, at the kitchen table, \n and she’s making a mess, this huge mess, trying to lift her spoon to her mouth. \n So I go to take the spoon, to help her, and she says “Daddy I can do it myself!” \n Just like when she was four and learning to ride her bike. And for a split second I almost laugh. \n But then I remember-- she’s not four, she’s fifteen. At four she could still pedal a bike. \n At four she wasn’t wearing diapers. At four she didn’t.. she didn’t sound like a damn moron! \n And I think all this, right there, with her staring straight at me, and it takes everything \n I have in me not to just start bawling there on the spot. \n And somehow, somehow I don’t because I know it would only hurt her more, \n but my God it kills me inside.", 20);
-		
-				dec1.canClick = false;
-				dec3.canClick = false;
-			
-				canSkip = true;
-			
-				message.displayInfo("Greg Clemens", 20);
-				message.displayWarning("Right click to continue", 20);
-			}
-		
-			else if (timer > time && talkSection == 6 && path == path31) {
-				TalkInitiated("Jesus..", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path31) {
-				TalkInitiated("Jill had been standing at the counter, chopping vegetables for lunch later. She didn’t say anything. \n But after what Angie said the chopping stopped. We never looked at each other. \n We deliberately avoided looking at each other. I think we both knew what \n would happen if we did. So I just stared down at my cereal \n and swirled the flakes around the bowl. That’s how things have been of late.", 20);
-				message.displayInfo("Greg Clemens", 20);
-				message.displayWarning("Right click to continue", 20);
-			}
-		
-			else if (timer > time && talkSection == 8 && path == path31) {
-				TalkInitiated("I’m so sorry Greg. I don’t know what to say.", 10);
-			
-				dec1.canClick = true;
-				dec2.canClick = true;
-				dec3.canClick = true;
-				dec4.canClick = true;
-			
-				canSkip = false;
-			
-				message.displayDecision("Optimistic", "Pessimistic", "Determined", "Desperate", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 9 && path == path311) {
-				TalkInitiated("There’s nothing to say, really. She’s alive-- that’s the most important part. \n The rest will come with time.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 9 && path == path312) {
-				TalkInitiated("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. \n She’s beyond their help, now.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 9 && path == path313) {
-				TalkInitiated("There’s nothing to say, really. She’s going to get better. \n Whatever it takes, she’s going to get better.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 9 && path == path314) {
-				TalkInitiated("There’s nothing to say, really. She has to get better. There has to be something, \n some way for her to get better. There has to.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-				
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 10 && path == path311 || path == path312 || path == path313 || path == path314) {
-				
-				timer = 0;
-				
-				talkSection = 0;
-				path = 3;
-				talkCount = 1;
-				
-				canSkip = false;
-			}
-		
-			else if (timer > time && talkSection == 5 && path == path33) {
-				TalkInitiated("It’s life, you know? Some days are better than others.", 10);
-		
-				dec1.canClick = false;
-				dec3.canClick = false;
-			
-				canSkip = true;
-			
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 6 && path == path33) {
-				TalkInitiated("I’m so sorry Greg. I don’t know what to say.", 10);
-			
-				dec1.canClick = true;
-				dec2.canClick = true;
-				dec3.canClick = true;
-				dec4.canClick = true;
-				
-				canSkip = false;
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
 					
-				message.displayDecision("Optimistic", "Pessimistic", "Determined", "Desperate", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path331) {
-				TalkInitiated("There’s nothing to say, really. She’s alive-- that’s the most important part. \n The rest will come with time.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path332) {
-				TalkInitiated("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. \n She’s beyond their help, now.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path333) {
-				TalkInitiated("There’s nothing to say, really. She’s going to get better. \n Whatever it takes, she’s going to get better.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
+					hasDisplayed = true;
+				}
 				
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-		
-			else if (timer > time && talkSection == 7 && path == path334) {
-				TalkInitiated("There’s nothing to say, really. She has to get better. There has to be something, \n some way for her to get better. There has to.", 10);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canSkip = true;
-
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 8 && path == path331 || path == path332 || path == path333 || path == path334) {
-	
-				timer = 0;
-	
-				talkSection = 0;
-				path = 3;
-				talkCount = 1;
+				else if (path == path3 && !hasDisplayed) {
 				
-				canSkip = false;
+					canSkip = true;
+				
+					message.displaySubtitle("I have a daughter at home that might disagree.", 100);
+					message.displayWarning("Right click to continue", 100);
+					message.displayInfo("Greg Clemens", 100);
+		
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path4 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("I know. But I’m back now.", 100);
+					message.displayWarning("Right click to continue", 100);
+					message.displayInfo("Greg Clemens", 100);
+		
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
 			}
-		
-			else if (timer > time && talkSection == 1 && path == path4) {
-				TalkInitiated("I know. But I’m back now.", 10);
-		
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
 			
-				canSkip = true;
-			
-				message.displayInfo("Greg Clemens", 10);
-				message.displayWarning("Right click to continue", 10);
+			else if (talkSection == 2) {
+				if (path == path1 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("Of course it did. You’re absolutely right. I’m sorry if it sounded like I meant anything else. \n I was just trying to tell you how much you’ve been missed.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path2) {
+				
+					talkSection = 0;
+					path = path2;
+					talkCount = 1;
+				}
+				
+				else if (path == path3 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("Of course you do! I’m sorry if it sounded like I meant anything else. I was just trying to \n tell you how much you’ve been missed.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path4) {
+				
+					talkSection = 0;
+					path = path4;
+					talkCount = 1;
+				}
 			}
+			
+			else if (talkSection == 3) {
+				if (path == path1 || path == path3 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("No, it’s fine. It’s just.. It’s been tough, with Angie.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+					
+					hasDisplayed = true;
+				}
+			}
+			
+			else if (talkSection == 4) {
+				if (path == path1 || path == path3 && !hasDisplayed) {
+				
+					canSkip = false;
+				
+					message.displaySubtitle("I really am sorry, Doctor. How is she doing?", 10);
+					message.displayWarning("Click a decision to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					message.displayDecision("Confide", "", "Don't Confide", "", 10);
 		
-			else if (timer > time && talkSection == 2 && path == path4) {
+					dec1.canClick = true;
+					dec3.canClick = true;
+					
+					hasDisplayed = true;
+				}
+			}
+			
+			else if (talkSection == 5) {
+				if (path == path11 || path == path31 && !hasDisplayed) {
 				
-				timer = 0;
+					canSkip = true;
 				
-				talkSection = 0;
-				path = 4;
-				talkCount = 1;
+					message.displaySubtitle("This morning at breakfast.. she’s sitting there in her wheelchair, at the kitchen table, \n and she’s making a mess, this huge mess, trying to lift her spoon to her mouth. \n So I go to take the spoon, to help her, and she says “Daddy I can do it myself!” \n Just like when she was four and learning to ride her bike. And for a split second I almost laugh. \n But then I remember-- she’s not four, she’s fifteen. At four she could still pedal a bike. \n At four she wasn’t wearing diapers. At four she didn’t.. she didn’t sound like a damn moron! \n And I think all this, right there, with her staring straight at me, and it takes everything \n I have in me not to just start bawling there on the spot. \n And somehow, somehow I don’t because I know it would only hurt her more, \n but my God it kills me inside.", 20);
+					message.displayWarning("Right click to continue", 20);
+					message.displayInfo("Greg Clemens", 20);
+		
+					dec1.canClick = false;
+					dec3.canClick = false;
+					
+					hasDisplayed = true;
+				}
 				
-				canSkip = false;
+				else if (path == path13 || path == path33 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("It’s life, you know? Some days are better than others.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+		
+					dec1.canClick = false;
+					dec3.canClick = false;
+					
+					hasDisplayed = true;
+				}
+			}
+			
+			else if (talkSection == 6) {
+				if (path == path11 || path == path31 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("Jesus..", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path13 || path == path33 && !hasDisplayed) {
+				
+					canSkip = false;
+				
+					message.displaySubtitle("I’m so sorry Greg. I don’t know what to say.", 100);
+					message.displayWarning("Click a decision to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					message.displayDecision("Optimistic", "Pessimistic", "Determined", "Desperate", 10);
+			
+					dec1.canClick = true;
+					dec2.canClick = true;
+					dec3.canClick = true;
+					dec4.canClick = true;
+					
+					hasDisplayed = true;
+				}
+			}
+			
+			else if (talkSection == 7) {
+				if (path == path11 || path == path31 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("Jill had been standing at the counter, chopping vegetables for lunch later. She didn’t say anything. \n But after what Angie said the chopping stopped. We never looked at each other. \n We deliberately avoided looking at each other. I think we both knew what \n would happen if we did. So I just stared down at my cereal \n and swirled the flakes around the bowl. That’s how things have been of late.", 20);
+					message.displayWarning("Right click to continue", 20);
+					message.displayInfo("Greg Clemens", 20);
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path131 || path == path331 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. \n The rest will come with time.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path132 || path == path332 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. \n She’s beyond their help, now.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path133 || path == path333 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("There’s nothing to say, really. She’s going to get better. \n Whatever it takes, she’s going to get better.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path134 || path == path334 && !hasDisplayed) {
+				
+					canSkip = true;
+					
+					message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, \n some way for her to get better. There has to.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+			}
+			
+			else if (talkSection == 8) {
+				if (path == path11 || path == path31 && !hasDisplayed) {
+				
+					canSkip = false;
+				
+					message.displaySubtitle("I’m so sorry Greg. I don’t know what to say.", 10);
+					message.displayWarning("Click a decision to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					message.displayDecision("Optimistic", "Pessimistic", "Determined", "Desperate", 10);
+			
+					dec1.canClick = true;
+					dec2.canClick = true;
+					dec3.canClick = true;
+					dec4.canClick = true;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path131 || path == path132 || path == path133 || path == path134) {
+				
+					talkSection = 0;
+					path = path1;
+					talkCount = 1;
+				}
+				
+				else if (path == path331 || path == path332 || path == path333 || path == path334) {
+				
+					talkSection = 0;
+					path = path3;
+					talkCount = 1;
+				}
+			}
+			
+			else if (talkSection == 9) {
+				if (path == path111 || path == path311 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. \n The rest will come with time.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path112 || path == path312 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. \n She’s beyond their help, now.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path113 || path == path313 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("There’s nothing to say, really. She’s going to get better. \n Whatever it takes, she’s going to get better.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path114 || path == path314 && !hasDisplayed) {
+				
+					canSkip = true;
+				
+					message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, \n some way for her to get better. There has to.", 10);
+					message.displayWarning("Right click to continue", 10);
+					message.displayInfo("Greg Clemens", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+					
+					hasDisplayed = true;
+				}
+			}
+			
+			else if (talkSection == 10) {
+				if (path == path111 || path == path112 || path == path113 || path == path114) {
+				
+					talkSection = 0;
+					path = path1;
+					talkCount = 1;
+				}
+				
+				else if (path == path311 || path == path312 || path == path313 || path == path314) {
+				
+					talkSection = 0;
+					path = path3;
+					talkCount = 1;
+				}
 			}
 		}
 		
-		else if (talkCount == 1) {
-			if (timer > time && talkSection == 0 && path == path1 || path == path3 || path == path4) {
-				TalkInitiated("Is there anything I can do for you?", 10);
+		if (talkCount == 1) {
+			if (talkSection == 0) {
+				if (path == path1 || path == path3 || path == path4 && !hasDisplayed) {
+				
+					canSkip = false;
+				
+					message.displaySubtitle("Is there anything I can do for you?", 10);
+					message.displayWarning("Click a decision to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					message.displayDecision("News", "", "How are you?", "End Conversation", 10);
 			
-				dec1.canClick = true;
-				dec3.canClick = true;
-				dec4.canClick = true;
+					dec1.canClick = true;
+					dec3.canClick = true;
+					dec4.canClick = true;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path2 && !hasDisplayed) {
+				
+					canSkip = false;
+				
+					message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. \n Is there anything I can do for you?", 10);
+					message.displayWarning("Click a decision to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					message.displayDecision("News", "", "", "End Conversation", 10);
 			
-				canSkip = false;
-			
-				message.displayDecision("News", "", "How are you?", "End Conversation", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
+					dec1.canClick = true;
+					dec4.canClick = true;
+					
+					hasDisplayed = true;
+				}
 			}
 			
-			else if (timer > time && talkSection == 1 && path == path11 || path == path21) {
-				TalkInitiated("You know how this place is. The technology may be always changing but nothing else is.", 5);
+			if (talkSection == 1) {
+				if (path == path11 || path == path31 || path == path41 && !hasDisplayed) {
+				
+					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
+					message.displayWarning("Conversation Ended..", 5);
+					message.displayInfo("William Hobb", 5);
 			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+		
+					cam.canChange = true;
+					menu.canMenu = true;
+		
+					look.enabled = true;
+					mouse.enabled = true;
+		
+					movement.enabled = true;
+				
+					info.canDisplay = true;
+					
+					talkSection = 0;
+					path = path1;
+					
+					canTalk = true;
+					isTalking = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path21 && !hasDisplayed) {
+					
+					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
+					message.displayWarning("Conversation Ended..", 5);
+					message.displayInfo("William Hobb", 5);
 			
-				canTalk = true;
-				isTalking = false;
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
 		
-				cam.canChange = true;
-				menu.canMenu = true;
+					cam.canChange = true;
+					menu.canMenu = true;
 		
-				look.enabled = true;
-				mouse.enabled = true;
+					look.enabled = true;
+					mouse.enabled = true;
 		
-				movement.enabled = true;
+					movement.enabled = true;
 				
-				info.canDisplay = true;
+					info.canDisplay = true;
+					
+					talkCount = 2;
+					
+					canTalk = true;
+					isTalking = false;
+					
+					hasDisplayed = true;
+				}
 				
-				canSkip = false;
+				else if (path == path13 || path == path33 || path == path43 && !hasDisplayed) {
 				
-				message.displayInfo("William Hobb", 5);
-				message.displayWarning("Conversation Ended..", 5);
+					canSkip = false;
+				
+					message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. \n Is there anything I can do for you?", 10);
+					message.displayWarning("Click a decision to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					message.displayDecision("News", "", "", "End Conversation", 10);
+			
+					dec1.canClick = true;
+					dec3.canClick = false;
+					dec4.canClick = true;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path14 || path == path34 || path == path44 && !hasDisplayed) {
+				
+					message.displaySubtitle("I'll see you later.", 5);
+					message.displayWarning("Conversation Ended..", 5);
+					message.displayInfo("William Hobb", 5);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+		
+					cam.canChange = true;
+					menu.canMenu = true;
+		
+					look.enabled = true;
+					mouse.enabled = true;
+		
+					movement.enabled = true;
+				
+					info.canDisplay = true;
+					
+					talkSection = 0;
+					path = path1;
+					
+					canTalk = true;
+					isTalking = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path24) {
+					
+					message.displaySubtitle("I'll see you later.", 5);
+					message.displayWarning("Conversation Ended..", 5);
+					message.displayInfo("William Hobb", 5);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+		
+					cam.canChange = true;
+					menu.canMenu = true;
+		
+					look.enabled = true;
+					mouse.enabled = true;
+		
+					movement.enabled = true;
+				
+					info.canDisplay = true;
+					
+					talkCount = 2;
+					
+					canTalk = true;
+					isTalking = false;
+					
+					hasDisplayed = true;
+				}
 			}
 			
-			else if (timer > time && talkSection == 1 && path == path13) {
-				TalkInitiated("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. \n Is there anything I can do for you?", 10);
-			
-				dec1.canClick = true;
-				dec3.canClick = false;
-				dec4.canClick = true;
-			
-				canSkip = false;
+			if (talkSection == 2) {
+				if (path == path131 || path == path331 || path == path431 && !hasDisplayed) {
 				
-				message.displayDecision("News", "", "", "End Conversation", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
+					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
+					message.displayWarning("Conversation Ended..", 5);
+					message.displayInfo("William Hobb", 5);
 			
-			else if (timer > time && talkSection == 2 && path == path131) {
-				TalkInitiated("You know how this place is. The technology may be always changing but nothing else is.", 5);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-			
-				canTalk = true;
-				isTalking = false;
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
 		
-				cam.canChange = true;
-				menu.canMenu = true;
+					cam.canChange = true;
+					menu.canMenu = true;
 		
-				look.enabled = true;
-				mouse.enabled = true;
+					look.enabled = true;
+					mouse.enabled = true;
 		
-				movement.enabled = true;
+					movement.enabled = true;
 				
-				info.canDisplay = true;
+					info.canDisplay = true;
+					
+					talkCount = 2;
+					
+					canTalk = true;
+					isTalking = false;
+					
+					hasDisplayed = true;
+				}
 				
-				canSkip = false;
+				else if (path == path134 || path == path334 || path == path434 && !hasDisplayed) {
 				
-				message.displayInfo("William Hobb", 5);
-				message.displayWarning("Conversation Ended..", 5);
-			}
+					message.displaySubtitle("I'll see you later.", 5);
+					message.displayWarning("Conversation Ended..", 5);
+					message.displayInfo("William Hobb", 5);
 			
-			else if (timer > time && talkSection == 2 && path == path134) {
-				TalkInitiated("I'll see you later.", 5);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-				
-				canTalk = true;
-				isTalking = false;
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
 		
-				cam.canChange = true;
-				menu.canMenu = true;
+					cam.canChange = true;
+					menu.canMenu = true;
 		
-				look.enabled = true;
-				mouse.enabled = true;
+					look.enabled = true;
+					mouse.enabled = true;
 		
-				movement.enabled = true;
+					movement.enabled = true;
 				
-				info.canDisplay = true;
+					info.canDisplay = true;
+					
+					talkCount = 2;
 				
-				canSkip = false;
-				
-				message.displayInfo("William Hobb", 5);
-				message.displayWarning("Conversation Ended..", 5);
-			}
-			
-			else if (timer > time && talkSection == 0 && path == path2) {
-				TalkInitiated("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. \n Is there anything I can do for you?", 10);
-			
-				dec1.canClick = true;
-				dec4.canClick = true;
-			
-				canSkip = false;
-			
-				message.displayDecision("News", "", "", "End Conversation", 10);
-				message.displayInfo("William Hobb", 10);
-				message.displayWarning("Click a decision to continue", 10);
-			}
-			
-			else if (timer > time && talkSection == 1 && path == path14 || path == path24 || path == path34 || path == path44) {
-				TalkInitiated("I'll see you later.", 5);
-			
-				dec1.canClick = false;
-				dec2.canClick = false;
-				dec3.canClick = false;
-				dec4.canClick = false;
-				
-				canTalk = true;
-				isTalking = false;
-		
-				cam.canChange = true;
-				menu.canMenu = true;
-		
-				look.enabled = true;
-				mouse.enabled = true;
-		
-				movement.enabled = true;
-				
-				info.canDisplay = true;
-				
-				canSkip = false;
-				
-				message.displayInfo("William Hobb", 5);
-				message.displayWarning("Conversation Ended..", 5);
+					canSkip = false;
+					
+					canTalk = true;
+					isTalking = false;
+					
+					hasDisplayed = true;
+				}
 			}
 		}
 	}
 }
-
+		
 // This function tells whether another collider has entered a game object's collider attached to this script
 function OnTriggerEnter (other : Collider) {
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
@@ -909,34 +874,28 @@ function OnTriggerEnter (other : Collider) {
 		canTalk = true;
 		
 		if (talkCount == 0) {
+		
 			message.displaySubtitle("Good evening Dr. Clemens.", 10);
+			message.displayInfo("William Hebb - Press E To Talk", 100);
 		}
 		
 		else if (talkCount == 1) {
-			var number = Random.Range(1, 2);
-			
-			if (number == 1) {
-				message.displaySubtitle("Yes Sir?", 5);
-			}
-		
-			else if (number == 2) {
-				message.displaySubtitle("You take care of yourself.", 5);
-			}
+
+			message.displaySubtitle("Yes Sir?", 5);
+			message.displayInfo("William Hebb - Press E To Talk", 100);
 		}
 		
-		message.displayInfo("William Hebb - Can Talk", 100);
+		else if (talkCount == 2) {
+		
+			message.displaySubtitle("You take care of yourself.", 5);
+			message.info.enabled = false;
+		}
 	}
 }
 
 // This function tells whether another collider has exited a game object's collider attached to this script
 function OnTriggerExit (other : Collider) {
 
-	//var player : playerScript = gameObject.GetComponent(playerScript);
-	var cam : cameraMode = holder.gameObject.GetComponent(cameraMode);
-	var menu : menuScript = holder.gameObject.GetComponent(menuScript);
-	var mouse : MouseLook = pc.gameObject.GetComponent(MouseLook);
-	var look : MouseLook = Camera.main.GetComponent(MouseLook);
-	var movement : CharacterMotor = pc.gameObject.GetComponent(CharacterMotor);
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 	var info : displayInfo = npc.gameObject.GetComponent(displayInfo);
 
@@ -947,25 +906,8 @@ function OnTriggerExit (other : Collider) {
 		canTalk = false;
 		isTalking = false;
 		
-		cam.canChange = true;
-		menu.canMenu = true;
-		
-		look.enabled = true;
-		mouse.enabled = true;
-		
-		movement.enabled = true;
-		
 		info.canDisplay = true;
 		
 		message.info.enabled = false;
 	}
-}
-
-function TalkInitiated (subtitle : String, setTime : int) {
-	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
-	
-	timer = 0.0;
-	time = setTime;
-	talkSection++;
-	message.displaySubtitle(subtitle, setTime);
 }
