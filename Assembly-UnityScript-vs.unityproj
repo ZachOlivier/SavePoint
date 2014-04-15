@@ -46,20 +46,23 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\cameraMode.js" />
+     <Compile Include="Assets\scripts\cameraScript.js" />
      <Compile Include="Assets\scripts\decisionScript.js" />
+     <Compile Include="Assets\scripts\decisionScript1.js" />
      <Compile Include="Assets\scripts\displayInfo.js" />
      <Compile Include="Assets\scripts\doorScript.js" />
      <Compile Include="Assets\scripts\enemyBehavior.js" />
+     <Compile Include="Assets\scripts\guiSystem.js" />
      <Compile Include="Assets\scripts\introScript.js" />
+     <Compile Include="Assets\scripts\mariaBehavior.js" />
      <Compile Include="Assets\scripts\menuScript.js" />
-     <Compile Include="Assets\scripts\npcBehavior.js" />
      <Compile Include="Assets\scripts\npcBehaviorOriginal.js" />
      <Compile Include="Assets\scripts\playerScript.js" />
+     <Compile Include="Assets\scripts\rotateScript.js" />
+     <Compile Include="Assets\scripts\securityBehavior.js" />
      <Compile Include="Assets\scripts\soundScript.js" />
      <Compile Include="Assets\scripts\timeChanger.js" />
      <Compile Include="Assets\scripts\uiSystem.js" />
-     <Compile Include="Assets\scripts\zoneScript.js" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />

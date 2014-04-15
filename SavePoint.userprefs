@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\decisionScript.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\guiSystem.js">
     <Files>
-      <File FileName="Assets\scripts\npcBehavior.js" Line="861" Column="5" />
-      <File FileName="Assets\scripts\decisionScript.js" Line="125" Column="29" />
+      <File FileName="Assets\scripts\guiSystem.js" Line="37" Column="2" />
+      <File FileName="Assets\scripts\mariaBehavior.js" Line="372" Column="54" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

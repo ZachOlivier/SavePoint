@@ -23,8 +23,8 @@ function Update () {
 	var mouse : MouseLook = pc.gameObject.GetComponent(MouseLook);
 	var movement : CharacterMotor = pc.gameObject.GetComponent(CharacterMotor);
 	var cam : MouseLook = Camera.main.GetComponent(MouseLook);
-	var talk : npcBehavior = npc.gameObject.GetComponent(npcBehavior);
-	var inventory : cameraMode = this.gameObject.GetComponent(cameraMode);
+	var talk : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
+	var inventory : cameraScript = this.gameObject.GetComponent(cameraScript);
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	// If the player pressed the escape key and the menu is currently not open and can change

@@ -16,27 +16,46 @@ var lastDetect											: int = 0;
 // Variables for holding how long the enemy should be idle and wander
 var timeIdle											: int = 0;
 var timeWander											: int = 0;
+var timeAware											: int = 0;
 
 // Variables for holding which place the enemy is going to go
 var direction											: int = 0;
 var waypointTarget										: int = 0;
 
+var SnapDist											: float = 0.1;
+var MinDist												: int = 1;
+var zone1												: int = 2;
+var zone2												: int = 8;
+var zone3												: int = 15;
+var MaxDist												: int = 15;
+
+var Damping												: int = 0;
+
+var MoveSpeed											: int = 0;
+
+var lookAtTime											: float = 0.0;
+var lookAtTimer											: float = 0.0;
+
 // Variables for holding where the enemy is when it detects someone
-var detectedPosition									: Vector3;
-var enemyPosition										: Vector3;
+var detectedPosition									: Transform;
+var enemyPosition										: Transform;
+
+var rotation											: Quaternion;
 
 // Variable for holding the player game object
 var PC													: GameObject;
 
+var Player												: Transform;
+
 // Variable for holding which waypoint is currently picked
-var waypointTargeted									: GameObject;
+var waypointTargeted									: Transform;
 
 // Variables for holding the waypoint game objects
-var waypointOne											: GameObject;
-var waypointTwo											: GameObject;
-var waypointThree										: GameObject;
-var waypointFour										: GameObject;
-var waypointFive										: GameObject;
+var waypointOne											: Transform;
+var waypointTwo											: Transform;
+var waypointThree										: Transform;
+var waypointFour										: Transform;
+var waypointFive										: Transform;
 
 // This function only fires once during the start of this script
 function Start () {
@@ -44,39 +63,118 @@ function Start () {
 	// Set the first timer for how long the enemy should be idle to a random number between 3 and 6
 	timeIdle = Time.time + Random.Range(3, 6);
 	
-	waypointTarget = 1;
+	waypointTarget = 0;
+	
+	enemyPosition.position = transform.position;
+	detectedPosition.position = transform.position;
+	waypointTargeted.position = waypointFive.position;
 }
 
 // This function fires over and over again throughout the life of this script
 function Update () {
 
+	var player : playerScript = PC.gameObject.GetComponent(playerScript);
+
+	if (Vector3.Distance(transform.position, Player.position) <= zone3)
+	{
+		if (player.isRunning || player.isJump) {
+		
+			// If the enemy's state is currently chasing
+			if (state == CHASING) {
+				// We need this in here to have the enemy not change states if it is already chasing
+			}
+		
+			// If the enemy's state is not currently chasing
+			else {
+			
+			// Set the timer for how long the enemy will remain aware, currently set to 4 seconds
+			timeAware = 4;
+			lastDetect = timeAware + Time.time;
+			
+			// Keep track of the enemy's current x, y and z coordinates
+			detectedPosition.position = transform.position;
+			
+			// Set the enemy's state to aware
+			state = AWARE;
+			}
+		}
+		
+		if (Vector3.Distance(transform.position, Player.position) <= zone2)
+		{
+			// If the player is currently walking, do the same as above
+			if (player.isWalking) {
+		
+				if (state == CHASING) {
+				
+				}
+		
+				else {
+				timeAware = 4;
+				lastDetect = timeAware + Time.time;
+			
+				detectedPosition.position = transform.position;
+			
+				state = AWARE;
+				}
+			}
+		
+			else if (player.isRunning || player.isJump) {
+		
+				if (state == CHASING) {
+				
+				}
+		
+				else {
+				timeAware = 6;
+				lastDetect = timeAware + Time.time;
+			
+				detectedPosition.position = transform.position;
+			
+				// Set the enemy's state to chasing
+				state = CHASING;
+				}
+			}
+			
+			if (Vector3.Distance(transform.position, Player.position) <= zone1)
+			{
+				if (player.isWalking || player.isRunning || player.isJump) {
+		
+					if (state == CHASING) {
+				
+					}
+		
+					else {
+					timeAware = 8;
+					lastDetect = timeAware + Time.time;
+			
+					detectedPosition.position = transform.position;
+			
+					state = CHASING;
+					}
+				}	
+			}
+		}
+	}
+
 	// If the current state is idle
 	if (state == IDLE) {
 		
 		// Set the enemy's position variables to its current position
-		enemyPosition.x = this.transform.position.x;
-		enemyPosition.y = this.transform.position.y;
-		enemyPosition.z = this.transform.position.z;
+		enemyPosition.position = transform.position;
 		
 		// This makes sure the enemy isn't moving
-		this.transform.position.x = enemyPosition.x;
-		this.transform.position.y = enemyPosition.y;
-		this.transform.position.z = enemyPosition.z;
+		transform.position = enemyPosition.position;
 		
 		// If the time set has passed by
 		if (Time.time > timeIdle) {
-		
-			// Set a timer for how long the enemy will wander
-			//timeWander = Time.time + Random.Range(4, 9);
 			
-			// Set the waypoint or direction for the enemy to go
-			if (this.transform.position.x == waypointTargeted.transform.position.x && this.transform.position.z == waypointTargeted.transform.position.z) {
+			if (transform.position == waypointTargeted.position)
+			{
 				waypointTarget++;
 			}
 			
 			// If the set waypoint is waypoint 1 and the last waypoint was not waypoint 1
 			if (waypointTarget == 1) {
-			
 				// Set the waypoint to waypoint one
 				waypointTargeted = waypointOne;
 			}
@@ -105,344 +203,136 @@ function Update () {
 	}
 	
 	else if (state == WANDERING) {
-		
+	
 		// If the waypoint picked was waypoint 1
 		if (waypointTargeted == waypointOne) {
 		
-			// If the enemy's current x position is greater than the waypoint's x position
-			if (this.transform.position.x > waypointOne.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by decreasing it
-				this.transform.position.x -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.x - waypointOne.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointOne.transform.position.x;
-				}
+			rotation = Quaternion.LookRotation(waypointOne.position - transform.position);
+   			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
+
+			if (Vector3.Distance(transform.position, waypointOne.position) > SnapDist)
+			{
+		 		transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+		 		
+		 		//animation.CrossFade(animal_walk.name);
 			}
-		
-			// Else if the enemy's current x position is less than the waypoint's x position
-			else if (this.transform.position.x < waypointOne.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by increasing it
-				this.transform.position.x += 4 * Time.deltaTime;
 				
-				if (waypointOne.transform.position.x - this.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointOne.transform.position.x;
-				}
-			}
-		
-			/*if (this.transform.position.y > waypointOne.transform.position.y) {
-				this.transform.position.y -= 2 * Time.deltaTime;
-			}
-		
-			else if (this.transform.position.y < waypointOne.transform.position.y) {
-				this.transform.position.y += 2 * Time.deltaTime;
-			}*/
-		
-			// Same as above only for the enemy's z position compared to the waypoint's z position
-			if (this.transform.position.z > waypointOne.transform.position.z) {
-				this.transform.position.z -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.z - waypointOne.transform.position.z < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.z = waypointOne.transform.position.z;
-				}
-			}
-		
-			else if (this.transform.position.z < waypointOne.transform.position.z) {
-				this.transform.position.z += 4 * Time.deltaTime;
-				
-				if (waypointOne.transform.position.z - this.transform.position.z < .1) {
-			
-					// Set the enemy's z position to the detected object's z position
-					this.transform.position.z = waypointOne.transform.position.z;
-				}
+			if (Vector3.Distance(transform.position, waypointOne.position) <= SnapDist)
+			{
+				transform.position = waypointOne.position;
 			}
 		}
 		
 		else if (waypointTargeted == waypointTwo) {
 		
-			// If the enemy's current x position is greater than the waypoint's x position
-			if (this.transform.position.x > waypointTwo.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by decreasing it
-				this.transform.position.x -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.x - waypointTwo.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointTwo.transform.position.x;
-				}
+			rotation = Quaternion.LookRotation(waypointTwo.position - transform.position);
+   			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
+
+			if (Vector3.Distance(transform.position, waypointTwo.position) > SnapDist)
+			{
+		 		transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+		 		
+		 		//animation.CrossFade(animal_walk.name);
 			}
-		
-			// Else if the enemy's current x position is less than the waypoint's x position
-			else if (this.transform.position.x < waypointTwo.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by increasing it
-				this.transform.position.x += 4 * Time.deltaTime;
 				
-				if (waypointTwo.transform.position.x - this.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointTwo.transform.position.x;
-				}
-			}
-		
-			/*if (this.transform.position.y > waypointTwo.transform.position.y) {
-				this.transform.position.y -= 4 * Time.deltaTime;
-			}
-		
-			else if (this.transform.position.y < waypointTwo.transform.position.y) {
-				this.transform.position.y += 4 * Time.deltaTime;
-			}*/
-		
-			// Same as above only for the enemy's z position compared to the waypoint's z position
-			if (this.transform.position.z > waypointTwo.transform.position.z) {
-				this.transform.position.z -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.z - waypointTwo.transform.position.z < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.z = waypointTwo.transform.position.z;
-				}
-			}
-		
-			else if (this.transform.position.z < waypointTwo.transform.position.z) {
-				this.transform.position.z += 4 * Time.deltaTime;
-				
-				if (waypointTwo.transform.position.z - this.transform.position.z < .1) {
-			
-					// Set the enemy's z position to the detected object's z position
-					this.transform.position.z = waypointTwo.transform.position.z;
-				}
+			if (Vector3.Distance(transform.position, waypointTwo.position) <= SnapDist)
+			{
+				transform.position = waypointTwo.position;
 			}
 		}
 		
-		if (waypointTargeted == waypointThree) {
+		else if (waypointTargeted == waypointThree) {
 		
-			// If the enemy's current x position is greater than the waypoint's x position
-			if (this.transform.position.x > waypointThree.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by decreasing it
-				this.transform.position.x -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.x - waypointThree.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointThree.transform.position.x;
-				}
+			rotation = Quaternion.LookRotation(waypointThree.position - transform.position);
+   			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
+
+			if (Vector3.Distance(transform.position, waypointThree.position) > SnapDist)
+			{
+		 		transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+		 		
+		 		//animation.CrossFade(animal_walk.name);
 			}
-		
-			// Else if the enemy's current x position is less than the waypoint's x position
-			else if (this.transform.position.x < waypointThree.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by increasing it
-				this.transform.position.x += 4 * Time.deltaTime;
 				
-				if (waypointThree.transform.position.x - this.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointThree.transform.position.x;
-				}
-			}
-		
-			/*if (this.transform.position.y > waypointThree.transform.position.y) {
-				this.transform.position.y -= 4 * Time.deltaTime;
-			}
-		
-			else if (this.transform.position.y < waypointThree.transform.position.y) {
-				this.transform.position.y += 4 * Time.deltaTime;
-			}*/
-		
-			// Same as above only for the enemy's z position compared to the waypoint's z position
-			if (this.transform.position.z > waypointThree.transform.position.z) {
-				this.transform.position.z -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.z - waypointThree.transform.position.z < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.z = waypointThree.transform.position.z;
-				}
-			}
-		
-			else if (this.transform.position.z < waypointThree.transform.position.z) {
-				this.transform.position.z += 4 * Time.deltaTime;
-				
-				if (waypointThree.transform.position.z - this.transform.position.z < .1) {
-			
-					// Set the enemy's z position to the detected object's z position
-					this.transform.position.z = waypointThree.transform.position.z;
-				}
+			if (Vector3.Distance(transform.position, waypointThree.position) <= SnapDist)
+			{
+				transform.position = waypointThree.position;
 			}
 		}
 		
-		if (waypointTargeted == waypointFour) {
+		else if (waypointTargeted == waypointFour) {
 		
-			// If the enemy's current x position is greater than the waypoint's x position
-			if (this.transform.position.x > waypointFour.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by decreasing it
-				this.transform.position.x -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.x - waypointFour.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointFour.transform.position.x;
-				}
+			rotation = Quaternion.LookRotation(waypointFour.position - transform.position);
+   			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
+		
+			if (Vector3.Distance(transform.position, waypointFour.position) > SnapDist)
+			{
+		 		transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+		 		
+		 		//animation.CrossFade(animal_walk.name);
 			}
-		
-			// Else if the enemy's current x position is less than the waypoint's x position
-			else if (this.transform.position.x < waypointFour.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by increasing it
-				this.transform.position.x += 4 * Time.deltaTime;
 				
-				if (waypointFour.transform.position.x - this.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointFour.transform.position.x;
-				}
-			}
-		
-			/*if (this.transform.position.y > waypointFour.transform.position.y) {
-				this.transform.position.y -= 4 * Time.deltaTime;
-			}
-		
-			else if (this.transform.position.y < waypointFour.transform.position.y) {
-				this.transform.position.y += 4 * Time.deltaTime;
-			}*/
-		
-			// Same as above only for the enemy's z position compared to the waypoint's z position
-			if (this.transform.position.z > waypointFour.transform.position.z) {
-				this.transform.position.z -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.z - waypointFour.transform.position.z < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.z = waypointFour.transform.position.z;
-				}
-			}
-		
-			else if (this.transform.position.z < waypointFour.transform.position.z) {
-				this.transform.position.z += 4 * Time.deltaTime;
-				
-				if (waypointFour.transform.position.z - this.transform.position.z < .1) {
-			
-					// Set the enemy's z position to the detected object's z position
-					this.transform.position.z = waypointFour.transform.position.z;
-				}
+			if (Vector3.Distance(transform.position, waypointFour.position) <= SnapDist)
+			{
+				transform.position = waypointFour.position;
 			}
 		}
 		
-		if (waypointTargeted == waypointFive) {
+		else if (waypointTargeted == waypointFive) {
 		
-			// If the enemy's current x position is greater than the waypoint's x position
-			if (this.transform.position.x > waypointFive.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by decreasing it
-				this.transform.position.x -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.x - waypointFive.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointFive.transform.position.x;
-				}
+			rotation = Quaternion.LookRotation(waypointFive.position - transform.position);
+   			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
+		
+			if (Vector3.Distance(transform.position, waypointFive.position) > SnapDist)
+			{
+		 		transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+		 		
+		 		//animation.CrossFade(animal_walk.name);
 			}
-		
-			// Else if the enemy's current x position is less than the waypoint's x position
-			else if (this.transform.position.x < waypointFive.transform.position.x) {
-			
-				// Move the enemy's x position towards the waypoint by increasing it
-				this.transform.position.x += 4 * Time.deltaTime;
 				
-				if (waypointFive.transform.position.x - this.transform.position.x < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.x = waypointFive.transform.position.x;
-				}
-			}
-		
-			/*if (this.transform.position.y > waypointFive.transform.position.y) {
-				this.transform.position.y -= 4 * Time.deltaTime;
-			}
-		
-			else if (this.transform.position.y < waypointFive.transform.position.y) {
-				this.transform.position.y += 4 * Time.deltaTime;
-			}*/
-		
-			// Same as above only for the enemy's z position compared to the waypoint's z position
-			if (this.transform.position.z > waypointFive.transform.position.z) {
-				this.transform.position.z -= 4 * Time.deltaTime;
-				
-				if (this.transform.position.z - waypointFive.transform.position.z < .1) {
-			
-					// Set the enemy's x position to the detected object's x position
-					this.transform.position.z = waypointFive.transform.position.z;
-				}
-			}
-		
-			else if (this.transform.position.z < waypointFive.transform.position.z) {
-				this.transform.position.z += 4 * Time.deltaTime;
-				
-				if (waypointFive.transform.position.z - this.transform.position.z < .1) {
-			
-					// Set the enemy's z position to the detected object's z position
-					this.transform.position.z = waypointFive.transform.position.z;
-				}
+			if (Vector3.Distance(transform.position, waypointFive.position) <= SnapDist)
+			{
+				transform.position = waypointFive.position;
 			}
 		}
 		
-		if (this.transform.position.x == waypointOne.transform.position.x && this.transform.position.z == waypointOne.transform.position.z) {
+		if (transform.position == waypointOne.position) {
 		 	timeIdle = Time.time + Random.Range(3, 6);
 		 	
 		 	state = IDLE;
 		 }
 		 
-		 if (this.transform.position.x == waypointTwo.transform.position.x && this.transform.position.z == waypointTwo.transform.position.z) {
+		 else if (transform.position == waypointTwo.position) {
 		 	timeIdle = Time.time + Random.Range(3, 6);
 		 	
 		 	state = IDLE;
 		 }
 		 
-		 if (this.transform.position.x == waypointThree.transform.position.x && this.transform.position.z == waypointThree.transform.position.z) {
+		 else if (transform.position == waypointThree.position) {
 		 	timeIdle = Time.time + Random.Range(3, 6);
 		 	
 		 	state = IDLE;
 		 }
 		 
-		 if (this.transform.position.x == waypointFour.transform.position.x && this.transform.position.z == waypointFour.transform.position.z) {
+		 else if (transform.position == waypointFour.position) {
 		 	timeIdle = Time.time + Random.Range(3, 6);
 		 	
 		 	state = IDLE;
 		 }
 		 
-		 if (this.transform.position.x == waypointFive.transform.position.x && this.transform.position.z == waypointFive.transform.position.z) {
+		 else if (transform.position == waypointFive.position) {
 		 	timeIdle = Time.time + Random.Range(3, 6);
 		 	
 		 	state = IDLE;
 		 }
-		
-		 /*if (Time.time > timeWander) {
-		 	timeIdle = Time.time + Random.Range(3, 6);
-		 	
-		 	state = IDLE;
-		 }*/
 	}
 	
 	else if (state == AWARE) {
 	
-		enemyPosition.x = this.transform.position.x;
-		enemyPosition.y = this.transform.position.y;
-		enemyPosition.z = this.transform.position.z;
-	
-		this.transform.position.x = enemyPosition.x;
-		this.transform.position.y = enemyPosition.y;
-		this.transform.position.z = enemyPosition.z;
+		// Set the enemy's position variables to its current position
+		enemyPosition.position = transform.position;
+		
+		// This makes sure the enemy isn't moving
+		transform.position = enemyPosition.position;
 		
 		// If too much time has passed by since last detection
 		if (Time.time > lastDetect) {
@@ -454,28 +344,12 @@ function Update () {
 	
 	else if (state == CHASING) {
 	
-		if (this.transform.position.x > PC.transform.position.x) {
-			this.transform.position.x -= 2 * Time.deltaTime;
-		}
-		
-		else if (this.transform.position.x < PC.transform.position.x) {
-			this.transform.position.x += 2 * Time.deltaTime;
-		}
-		
-		/*if (this.transform.position.y > PC.transform.position.y) {
-			this.transform.position.y -= 2 * Time.deltaTime;
-		}
-		
-		else if (this.transform.position.y < PC.transform.position.y) {
-			this.transform.position.y += 2 * Time.deltaTime;
-		}*/
-		
-		if (this.transform.position.z > PC.transform.position.z) {
-			this.transform.position.z -= 2 * Time.deltaTime;
-		}
-		
-		else if (this.transform.position.z < PC.transform.position.z) {
-			this.transform.position.z += 2 * Time.deltaTime;
+		rotation = Quaternion.LookRotation(Player.position - transform.position);
+   		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
+	
+		if (Vector3.Distance(transform.position, Player.position) > MinDist)
+		{
+		 	transform.position += transform.forward * MoveSpeed * Time.deltaTime;
 		}
 		
 		if (Time.time > lastDetect) {
@@ -487,65 +361,23 @@ function Update () {
 	
 	else if (state == LOST) {
 	
-		if (this.transform.position.x > detectedPosition.x) {
-		
-			this.transform.position.x -= 2 * Time.deltaTime;
-			
-			// If the enemy's x position is close to the detected object's x position
-			if (this.transform.position.x - detectedPosition.x < .1) {
-			
-				// Set the enemy's x position to the detected object's x position
-				this.transform.position.x = detectedPosition.x;
-			}
+		rotation = Quaternion.LookRotation(detectedPosition.position - transform.position);
+   		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
+	
+		if (Vector3.Distance(transform.position, detectedPosition.position) > SnapDist)
+		{
+		 	transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+		 		
+		 	//animation.CrossFade(animal_walk.name);
 		}
-		
-		else if (this.transform.position.x < detectedPosition.x) {
-		
-			this.transform.position.x += 2 * Time.deltaTime;
-			
-			if (detectedPosition.x - this.transform.position.x < .1) {
-				this.transform.position.x = detectedPosition.x;
-			}
-		}
-		
-		/*if (this.transform.position.y > detectedPosition.y) {
-			this.transform.position.y -= 2 * Time.deltaTime;
-			
-			if (this.transform.position.y - detectedPosition.y < .1) {
-				this.transform.position.y = detectedPosition.y;
-			}
-		}
-		
-		else if (this.transform.position.y < detectedPosition.y) {
-			this.transform.position.y += 2 * Time.deltaTime;
-			
-			if (detectedPosition.y - this.transform.position.y < .1) {
-				this.transform.position.y = detectedPosition.y;
-			}
-		}*/
-		
-		if (this.transform.position.z > detectedPosition.z) {
-		
-			this.transform.position.z -= 2 * Time.deltaTime;
-			
-			// Do the same as above only for the enemy's z position
-			if (this.transform.position.z - detectedPosition.z < .1) {
-				this.transform.position.z = detectedPosition.z;
-			}
-		}
-		
-		else if (this.transform.position.z < detectedPosition.z) {
-		
-			this.transform.position.z += 2 * Time.deltaTime;
-			
-			if (detectedPosition.z - this.transform.position.z < .1) {
-				this.transform.position.z = detectedPosition.z;
-			}
+				
+		if (Vector3.Distance(transform.position, detectedPosition.position) <= SnapDist)
+		{
+			transform.position = detectedPosition.position;
 		}
 		
 		// If the enemy's current position is the detected object's current position
-		//if (this.transform.position.x == detectedPosition.x && this.transform.position.y == detectedPosition.y && this.transform.position.z == detectedPosition.z) {
-		if (this.transform.position.x == detectedPosition.x && this.transform.position.z == detectedPosition.z) {
+		if (transform.position == detectedPosition.position) {
 			timeIdle = Time.time + Random.Range(3, 6);
 		
 			state = IDLE;

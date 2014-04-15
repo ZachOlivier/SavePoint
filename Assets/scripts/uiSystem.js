@@ -21,6 +21,16 @@ var info												: GUIText;
 var subtitle											: GUIText;
 var warning												: GUIText;
 
+var decision1Box										: GUITexture;
+var decision2Box										: GUITexture;
+var decision3Box										: GUITexture;
+var decision4Box										: GUITexture;
+var infoBox												: GUITexture;
+var subtitleBox											: GUITexture;
+var warningBox											: GUITexture;
+
+
+
 // This function only fires once during the start of this script
 function Start () {
 	
@@ -28,6 +38,42 @@ function Start () {
 
 // This function fires over and over again throughout the life of this script
 function Update () {
+
+	if (!info.enabled)
+	{
+		infoBox.enabled = false;
+	}
+	
+	if (!warning.enabled)
+	{
+		warningBox.enabled = false;
+	}
+	
+	if (!subtitle.enabled)
+	{
+		subtitleBox.enabled = false;
+	}
+	
+	if (!decision1.enabled)
+	{
+		decision1Box.enabled = false;
+	}
+	
+	if (!decision2.enabled)
+	{
+		decision2Box.enabled = false;
+	}
+	
+	if (!decision3.enabled)
+	{
+		decision3Box.enabled = false;
+	}
+	
+	if (!decision4.enabled)
+	{
+		decision4Box.enabled = false;
+	}
+	
 
 	// If warning text is enabled and the amount of time that the text should be shown for is set
 	if (warning.enabled && warningTime != 0.0) {
@@ -40,6 +86,7 @@ function Update () {
 		
 			// Disable the text, clearing it from the screen
 			warning.enabled = false;
+			warningBox.enabled = false;
 		
 			// Reset the timer
 			warningTimer = 0.0;
@@ -51,6 +98,7 @@ function Update () {
 		
 		if (subtitleTimer > subtitleTime) {
 			subtitle.enabled = false;
+			//subtitleBox.enabled = false;
 		
 			subtitleTimer = 0.0;
 		}
@@ -64,6 +112,11 @@ function Update () {
 			decision2.enabled = false;
 			decision3.enabled = false;
 			decision4.enabled = false;
+			
+			decision1Box.enabled = false;
+			decision2Box.enabled = false;
+			decision3Box.enabled = false;
+			decision4Box.enabled = false;
 		
 			decisionTimer = 0.0;
 		}
@@ -74,6 +127,7 @@ function Update () {
 		
 		if (infoTimer > infoTime) {
 			info.enabled = false;
+			infoBox.enabled = false;
 		
 			infoTimer = 0.0;
 		}
@@ -95,6 +149,7 @@ function displayWarning (message : String, time : float) {
 	// If the text isnt already enabled
 	if (!warning.enabled) {
 		warning.enabled = true;
+		warningBox.enabled = true;
 	}
 }
 
@@ -108,6 +163,7 @@ function displaySubtitle (message : String, time : float) {
 	
 	if (!subtitle.enabled) {
 		subtitle.enabled = true;
+		//subtitleBox.enabled = true;
 	}
 }
 
@@ -124,18 +180,22 @@ function displayDecision (message1 : String, message2 : String, message3 : Strin
 	
 	if (!decision1.enabled) {
 		decision1.enabled = true;
+		decision1Box.enabled = true;
 	}
 	
 	if (!decision2.enabled) {
 		decision2.enabled = true;
+		decision2Box.enabled = true;
 	}
 	
 	if (!decision3.enabled) {
 		decision3.enabled = true;
+		decision3Box.enabled = true;
 	}
 	
 	if (!decision4.enabled) {
 		decision4.enabled = true;
+		decision4Box.enabled = true;
 	}
 }
 
@@ -149,5 +209,6 @@ function displayInfo (message : String, time : float) {
 	
 	if (!info.enabled) {
 		info.enabled = true;
+		infoBox.enabled = true;
 	}
 }

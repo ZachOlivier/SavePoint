@@ -28,11 +28,15 @@ function OnMouseEnter () {
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	if (this.gameObject.name == "Security Guard" && canDisplay) {
-		message.displayInfo("Security Guard William Hebb", 3);
+		message.displayInfo("Security Guard William Hebb", 4);
+	}
+	
+	if (this.gameObject.name == "Maria" && canDisplay) {
+		message.displayInfo("Head of Security Maria Figueroa", 4);
 	}
 	
 	if (this.gameObject.name == "Enemy" && canDisplay) {
-		message.displayInfo("Enemy Patrol", 3);
+		message.displayInfo("Enemy Patrol", 4);
 	}
 	
 	if (this.gameObject.tag == "Collider" && canDisplay) {
@@ -46,6 +50,10 @@ function OnMouseExit () {
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	if (this.gameObject.name == "securityGuard" && canDisplay) {
+		message.info.enabled = false;
+	}
+	
+	if (this.gameObject.name == "Maria" && canDisplay) {
 		message.info.enabled = false;
 	}
 	

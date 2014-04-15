@@ -110,7 +110,7 @@ function Start () {
 
 // This function fires over and over again throughout the life of this script
 function Update () {
-	var talk : npcBehavior = npc.gameObject.GetComponent(npcBehavior);
+	var talk : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	if (Input.GetButtonDown("Fire1") && decisionOne && this.gameObject.name == "decision1Box") {

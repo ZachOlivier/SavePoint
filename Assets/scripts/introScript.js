@@ -375,14 +375,16 @@ function Update () {
 		message.info.enabled = false;
 		message.decision1.enabled = false;
 		message.decision2.enabled = false;
+		message.decision3.enabled = false;
+		message.decision4.enabled = false;
 
-		savePoint.transform.position.z = -4;
+		savePoint.transform.position.z = -2;
 	}
 	
 	if (part == 49) {
 
 		Destroy(savePoint.gameObject);
-		episodeText.transform.position.z = 8;
+		episodeText.transform.position.z = 12;
 	}
 	
 	// After the last scene has played

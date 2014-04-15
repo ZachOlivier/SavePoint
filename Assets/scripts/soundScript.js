@@ -6,7 +6,7 @@ var music3												: AudioClip;
 var music4												: AudioClip;
 
 function Start () {
-	audio.clip = music4;
+	audio.clip = music1;
 	audio.loop = true;
 	audio.Play();
 }

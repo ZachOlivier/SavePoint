@@ -3,6 +3,8 @@
 var walkSound											: AudioClip;
 var runSound											: AudioClip;
 
+var health												: int = 5;
+
 // Variables to tell what the player is currently doing
 var isIdle												: boolean = false;
 var isWalking											: boolean = false;
@@ -16,6 +18,8 @@ var canSound											: boolean = true;
 function Start () {
 	audio.clip = walkSound;
 	audio.loop = true;
+	
+	health = 5;
 }
 
 // This function fires over and over again throughout the life of this script

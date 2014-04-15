@@ -127,7 +127,7 @@ function Start () {
 function Update () {
 	
 	// Variables to hold the scripts on other game objects so that we can manipulate them from this script
-	var cam : cameraMode = holder.gameObject.GetComponent(cameraMode);
+	var cam : cameraScript = holder.gameObject.GetComponent(cameraScript);
 	var chosen : timeChanger = holder.gameObject.GetComponent(timeChanger);
 	var menu : menuScript = holder.gameObject.GetComponent(menuScript);
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
@@ -935,7 +935,7 @@ function OnTriggerEnter (other : Collider) {
 function OnTriggerExit (other : Collider) {
 
 	//var player : playerScript = gameObject.GetComponent(playerScript);
-	var cam : cameraMode = holder.gameObject.GetComponent(cameraMode);
+	var cam : cameraScript = holder.gameObject.GetComponent(cameraScript);
 	var menu : menuScript = holder.gameObject.GetComponent(menuScript);
 	var mouse : MouseLook = pc.gameObject.GetComponent(MouseLook);
 	var look : MouseLook = Camera.main.GetComponent(MouseLook);
