@@ -63,7 +63,7 @@ function Start () {
 	// Set the first timer for how long the enemy should be idle to a random number between 3 and 6
 	timeIdle = Time.time + Random.Range(3, 6);
 	
-	waypointTarget = 0;
+	waypointTarget = 1;
 	
 	enemyPosition.position = transform.position;
 	detectedPosition.position = transform.position;

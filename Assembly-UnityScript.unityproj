@@ -47,8 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\cameraScript.js" />
+     <Compile Include="Assets\scripts\coreSpin.js" />
      <Compile Include="Assets\scripts\decisionScript.js" />
      <Compile Include="Assets\scripts\decisionScript1.js" />
+     <Compile Include="Assets\scripts\decisionScript2.js" />
      <Compile Include="Assets\scripts\displayInfo.js" />
      <Compile Include="Assets\scripts\doorScript.js" />
      <Compile Include="Assets\scripts\enemyBehavior.js" />
@@ -58,6 +60,8 @@
      <Compile Include="Assets\scripts\menuScript.js" />
      <Compile Include="Assets\scripts\npcBehaviorOriginal.js" />
      <Compile Include="Assets\scripts\playerScript.js" />
+     <Compile Include="Assets\scripts\richardBehavior.js" />
+     <Compile Include="Assets\scripts\richardCutscene.js" />
      <Compile Include="Assets\scripts\rotateScript.js" />
      <Compile Include="Assets\scripts\securityBehavior.js" />
      <Compile Include="Assets\scripts\soundScript.js" />
@@ -68,6 +72,7 @@
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Standard Assets\Tessellation Shaders\BumpedSpecularSmooth.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\Resources\3D Text Shader.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />

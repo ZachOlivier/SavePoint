@@ -99,7 +99,7 @@ var path443												: int = 443;
 var path444												: int = 444;
 
 // Variable to hold the holder and npc game objects so that we can access its scripts
-var npc													: GameObject;
+var william												: GameObject;
 var holder												: GameObject;
 var text												: GameObject;
 
@@ -110,7 +110,7 @@ function Start () {
 
 // This function fires over and over again throughout the life of this script
 function Update () {
-	var talk : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
+	var talk : securityBehavior = william.gameObject.GetComponent(securityBehavior);
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
 	if (Input.GetButtonDown("Fire1") && decisionOne && this.gameObject.name == "decision1Box") {

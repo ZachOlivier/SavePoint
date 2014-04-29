@@ -148,6 +148,8 @@ function Update () {
 	
 	if (Vector3.Distance(transform.position, Player.position) <= talkDistance)
 	{
+		transform.LookAt(Player);
+		
 		// Set can talk to true, this lets the player be able to use the E key to start a conversation
 		if (!canTalk)
 		{

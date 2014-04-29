@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\guiSystem.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\securityBehavior.js">
     <Files>
-      <File FileName="Assets\scripts\guiSystem.js" Line="37" Column="2" />
-      <File FileName="Assets\scripts\mariaBehavior.js" Line="372" Column="54" />
+      <File FileName="Assets\scripts\mariaBehavior.js" Line="151" Column="4" />
+      <File FileName="Assets\scripts\richardBehavior.js" Line="151" Column="4" />
+      <File FileName="Assets\scripts\securityBehavior.js" Line="151" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
