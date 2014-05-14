@@ -23,7 +23,7 @@ function Update () {
 	var mouse : MouseLook = pc.gameObject.GetComponent(MouseLook);
 	var movement : CharacterMotor = pc.gameObject.GetComponent(CharacterMotor);
 	var cam : MouseLook = Camera.main.GetComponent(MouseLook);
-	var talk : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
+	var talk : playerScript = pc.gameObject.GetComponent(playerScript);
 	var menu : menuScript = this.gameObject.GetComponent(menuScript);
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 

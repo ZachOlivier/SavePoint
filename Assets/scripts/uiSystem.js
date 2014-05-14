@@ -98,7 +98,7 @@ function Update () {
 		
 		if (subtitleTimer > subtitleTime) {
 			subtitle.enabled = false;
-			//subtitleBox.enabled = false;
+			subtitleBox.enabled = false;
 		
 			subtitleTimer = 0.0;
 		}
@@ -163,7 +163,7 @@ function displaySubtitle (message : String, time : float) {
 	
 	if (!subtitle.enabled) {
 		subtitle.enabled = true;
-		//subtitleBox.enabled = true;
+		subtitleBox.enabled = true;
 	}
 }
 

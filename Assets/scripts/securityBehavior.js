@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 // Variables to tell if the NPC can talk, or is talking
-var canTalk												: boolean = false;
+//var talk.canTalk												: boolean = false;
 var isTalking											: boolean = false;
 
 var canSkip												: boolean = false;
@@ -145,15 +145,16 @@ function Update () {
 	var dec4 : decisionScript = decide4.gameObject.GetComponent(decisionScript);
 	var movement : CharacterMotor = pc.gameObject.GetComponent(CharacterMotor);
 	var info : displayInfo = this.gameObject.GetComponent(displayInfo);
+	var talk : playerScript = pc.gameObject.GetComponent(playerScript);
 	
 	if (Vector3.Distance(transform.position, Player.position) <= talkDistance)
 	{
 		transform.LookAt(Player);
 		
 		// Set can talk to true, this lets the player be able to use the E key to start a conversation
-		if (!canTalk)
+		if (!talk.canTalk)
 		{
-			canTalk = true;
+			talk.canTalk = true;
 		}
 		
 		if (talkCount == 0 && !hasDisplayed && !isTalking) {
@@ -184,9 +185,9 @@ function Update () {
 	if (Vector3.Distance(transform.position, Player.position) > talkDistance)
 	{
 		// Set can talk to false and end the conversation
-		if (canTalk)
+		if (talk.canTalk)
 		{
-			canTalk = false;
+			talk.canTalk = false;
 		}
 		
 		if (isTalking)
@@ -209,7 +210,7 @@ function Update () {
 	}
 
 	// If the player pressed the E key and the NPC can talk, and the game isn't paused
-	if (Input.GetButtonDown("Talk") && canTalk && cam.cameraMode == 0) {
+	if (Input.GetButtonDown("Talk") && talk.canTalk && cam.cameraMode == 0 && menu.menuMode == 0) {
 	
 		if (talkCount != 2) {
 		
@@ -279,7 +280,7 @@ function Update () {
 	}
 	
 	// Else if the player pressed the E key and the NPC can't talk, and the game isn't paused
-	else if (Input.GetButtonDown("Talk") && !canTalk && cam.cameraMode == 0) {
+	else if (Input.GetButtonDown("Talk") && !talk.canTalk && cam.cameraMode == 0 && menu.menuMode == 0) {
 		
 		message.displayWarning("Can't talk right now..", 4);
 	}
@@ -745,7 +746,7 @@ function Update () {
 				if (path == path11 || path == path31 || path == path41 && !hasDisplayed) {
 				
 					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
-					message.displayWarning("Key Card Obtained", 10);
+					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -766,7 +767,7 @@ function Update () {
 					talkSection = 0;
 					path = path1;
 					
-					canTalk = true;
+					talk.canTalk = true;
 					isTalking = false;
 					
 					hasDisplayed = true;
@@ -775,7 +776,7 @@ function Update () {
 				else if (path == path21 && !hasDisplayed) {
 					
 					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
-					message.displayWarning("Key Card Obtained", 10);
+					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -795,7 +796,7 @@ function Update () {
 					
 					talkCount = 2;
 					
-					canTalk = true;
+					talk.canTalk = true;
 					isTalking = false;
 					
 					hasDisplayed = true;
@@ -821,7 +822,7 @@ function Update () {
 				else if (path == path14 || path == path34 || path == path44 && !hasDisplayed) {
 				
 					message.displaySubtitle("I'll see you later.", 5);
-					message.displayWarning("Key Card Obtained", 10);
+					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -842,7 +843,7 @@ function Update () {
 					talkSection = 0;
 					path = path1;
 					
-					canTalk = true;
+					talk.canTalk = true;
 					isTalking = false;
 					
 					hasDisplayed = true;
@@ -851,7 +852,7 @@ function Update () {
 				else if (path == path24 && !hasDisplayed) {
 					
 					message.displaySubtitle("I'll see you later.", 5);
-					message.displayWarning("Key Card Obtained", 10);
+					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -871,7 +872,7 @@ function Update () {
 					
 					talkCount = 2;
 					
-					canTalk = true;
+					talk.canTalk = true;
 					isTalking = false;
 					
 					hasDisplayed = true;
@@ -882,7 +883,7 @@ function Update () {
 				if (path == path131 || path == path331 || path == path431 && !hasDisplayed) {
 				
 					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
-					message.displayWarning("Key Card Obtained", 10);
+					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -902,7 +903,7 @@ function Update () {
 					
 					talkCount = 2;
 					
-					canTalk = true;
+					talk.canTalk = true;
 					isTalking = false;
 					
 					hasDisplayed = true;
@@ -911,7 +912,7 @@ function Update () {
 				else if (path == path134 || path == path334 || path == path434 && !hasDisplayed) {
 				
 					message.displaySubtitle("I'll see you later.", 5);
-					message.displayWarning("Key Card Obtained", 10);
+					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -933,7 +934,7 @@ function Update () {
 				
 					canSkip = false;
 					
-					canTalk = true;
+					talk.canTalk = true;
 					isTalking = false;
 					
 					hasDisplayed = true;

@@ -1,5 +1,10 @@
 ﻿#pragma strict
 
+var btnW												: int = 0;
+var btnH												: int = 0;
+var btnX												: int = 0;
+var btnY												: int = 0;
+
 // Variable to tell if the menu is open
 var menuMode											: int = 0;
 
@@ -13,7 +18,7 @@ var text												: GameObject;
 
 // This function only fires once during the start of this script
 function Start () {
-
+	
 }
 
 // This function fires over and over again throughout the life of this script
@@ -23,7 +28,7 @@ function Update () {
 	var mouse : MouseLook = pc.gameObject.GetComponent(MouseLook);
 	var movement : CharacterMotor = pc.gameObject.GetComponent(CharacterMotor);
 	var cam : MouseLook = Camera.main.GetComponent(MouseLook);
-	var talk : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
+	var talk : playerScript = pc.gameObject.GetComponent(playerScript);
 	var inventory : cameraScript = this.gameObject.GetComponent(cameraScript);
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 
@@ -76,5 +81,38 @@ function Update () {
 		cam.enabled = true;
 		
 		message.displayWarning("Menu error!..", 4);
+	}
+}
+
+function OnGUI ()
+{
+	if (menuMode == 1)
+	{
+		var inventory : cameraScript = this.gameObject.GetComponent(cameraScript);
+		var mouse : MouseLook = pc.gameObject.GetComponent(MouseLook);
+		var cam : MouseLook = Camera.main.GetComponent(MouseLook);
+	
+		btnX = (Screen.width / 2) - (btnW / 2);
+		btnY = (Screen.height / 2) - (btnH / 2);
+		btnW = Screen.width / 5;
+		btnH = Screen.height / 8;
+	
+		if (GUI.Button (Rect (btnX, btnY, btnW, btnH), "Reset Game"))
+		{
+			menuMode = 0;
+			Time.timeScale = 1.0;
+			
+			inventory.canChange = true;
+			
+			mouse.enabled = true;
+			cam.enabled = true;
+		
+			Application.LoadLevel(1);
+		}
+	}
+	
+	else
+	{
+	
 	}
 }

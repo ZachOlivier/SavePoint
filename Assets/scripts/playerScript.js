@@ -12,6 +12,8 @@ var isRunning											: boolean = false;
 var isStealth											: boolean = false;
 var isJump												: boolean = false;
 
+var canTalk												: boolean = false;
+
 var canSound											: boolean = true;
 
 // This function only fires once during the start of this script
