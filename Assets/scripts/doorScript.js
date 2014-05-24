@@ -29,7 +29,7 @@ function Update () {
 	var key : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
 	var badge : mariaBehavior = maria.gameObject.GetComponent(mariaBehavior);
 	
-	if (key.talkCount >= 1) {
+	if (key.talkCount >= 2) {
 		if (!canOpen)
 		{
 			canOpen = true;
@@ -57,7 +57,7 @@ function OnTriggerEnter (other : Collider) {
 		else {
 			audio.PlayOneShot(reject);
 			
-			message.displaySubtitle("I need to update my security card first..", 10);
+			message.displaySubtitle("I need to update my security card first.. William might be able to help.", 10);
 			message.displayInfo("Greg Clemens", 10);
 			message.displayWarning("Door access denied", 10);
 		}
@@ -74,7 +74,7 @@ function OnTriggerEnter (other : Collider) {
 		else {
 			audio.PlayOneShot(reject);
 			
-			message.displaySubtitle("I need to update my security badge first..", 10);
+			message.displaySubtitle("I need to update my security badge first.. Maria is in charge of that.", 10);
 			message.displayInfo("Greg Clemens", 10);
 			message.displayWarning("Door access denied", 10);
 		}

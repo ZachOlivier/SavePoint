@@ -29,7 +29,12 @@ var infoBox												: GUITexture;
 var subtitleBox											: GUITexture;
 var warningBox											: GUITexture;
 
-
+var lineLength											= 400;
+var numberOfLines										: int;
+var block												: GUIText;
+var words												: String[];
+var result												: String;
+var TextSize											: Rect;
 
 // This function only fires once during the start of this script
 function Start () {
@@ -155,7 +160,8 @@ function displayWarning (message : String, time : float) {
 
 // This function displays subtitles at the bottom of the screen in white text
 function displaySubtitle (message : String, time : float) {
-	subtitle.text = message;
+	FormatString( message );
+	//subtitle.text = message;
 	
 	subtitleTime = time;
 	
@@ -211,4 +217,32 @@ function displayInfo (message : String, time : float) {
 		info.enabled = true;
 		infoBox.enabled = true;
 	}
+}
+
+function FormatString ( text : String ) { 
+    words = text.Split(" "[0]); //Split the string into seperate words 
+    result = ""; 
+ 
+    for( var index = 0; index < words.length; index++)
+    { 
+       var word = words[index].Trim(); 
+       if (index == 0) {
+         result = words[0]; 
+         block.text = result; 
+       } 
+ 
+       if (index > 0 ) { 
+         result += " " + word; 
+         block.text = result; 
+       } 
+       TextSize = block.GetScreenRect(); 
+       if (TextSize.width > lineLength)
+       { 
+         //remover 
+         result = result.Substring(0,result.Length-(word.Length)); 
+         result += "\n" + word; 
+         numberOfLines += 1;
+         block.text = result;
+       } 
+    } 
 }

@@ -41,7 +41,7 @@ function Update () {
 			inventory.enabled = true;
 		}
 		
-		if (key.talkCount >= 1)
+		if (key.talkCount >= 2)
 		{
 			if (!item1.enabled)
 			{

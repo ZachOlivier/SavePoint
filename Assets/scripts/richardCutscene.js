@@ -71,7 +71,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Okay. Right now I’m not feeling anything, except maybe a little--(gasps)", 10);
+					message.displaySubtitle("Okay. Right now I’m not feeling anything, except maybe a little-- (gasps)", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 					

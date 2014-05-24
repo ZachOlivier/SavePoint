@@ -8,11 +8,15 @@ var canSkip												: boolean = false;
 
 var hasDisplayed										: boolean = false;
 
+var thisDisplayed										: boolean = false;
+
 // Variable to hold how much time has gone by in a conversation
 var timer												: float = 0.0;
 
 // Variable to hold how much time is allowed before moving on in conversation
 var time												: float = 0.0;
+
+var Damping												: int = 0;
 
 var talkDistance										: int = 0;
 var triggerDistance										: int = 0;
@@ -149,12 +153,18 @@ function Update () {
 	
 	if (Vector3.Distance(transform.position, Player.position) <= talkDistance)
 	{
-		transform.LookAt(Player);
+		var rotation = Quaternion.LookRotation(Player.position - transform.position);
+   		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
 		
 		// Set can talk to true, this lets the player be able to use the E key to start a conversation
 		if (!talk.canTalk)
 		{
 			talk.canTalk = true;
+		}
+		
+		if (!thisDisplayed)
+		{
+			thisDisplayed = true;
 		}
 		
 		if (talkCount == 0 && !hasDisplayed && !isTalking) {
@@ -195,17 +205,29 @@ function Update () {
 			isTalking = false;
 		}
 		
-		if (talkCount >= 1)
+		if (hasDisplayed)
 		{
-			if (hasDisplayed)
-			{
-				hasDisplayed = false;
-			}
+			hasDisplayed = false;
 		}
 		
 		if (!info.canDisplay)
 		{
 			info.canDisplay = true;
+		}
+		
+		if (thisDisplayed)
+		{
+			if (message.subtitle.enabled == true)
+			{
+				message.subtitle.enabled = false;
+			}
+			
+			if (message.info.enabled == true)
+			{
+				message.info.enabled = false;
+			}
+			
+			thisDisplayed = false;
 		}
 	}
 
@@ -263,14 +285,14 @@ function Update () {
 				hasDisplayed = false;
 		
 				// Make sure the conversation starts at the beginning
-				talkSection = 0;
+				if (talkCount == 0)
+				{
+					talkSection = 0;
+					path = 0;
+				}
 		
 				// Set the first allowed amount of time for that section of the conversation
 				time = .5;
-		
-				if (talkCount == 0) {
-					path = 0;
-				}
 			}
 		}
 		
@@ -387,7 +409,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Of course it did. You’re absolutely right. I’m sorry if it sounded like I meant anything else. \n I was just trying to tell you how much you’ve been missed.", 10);
+					message.displaySubtitle("Of course it did. You’re absolutely right. I’m sorry if it sounded like I meant anything else. I was just trying to tell you how much you’ve been missed.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("William Hobb", 10);
 					
@@ -405,7 +427,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Of course you do! I’m sorry if it sounded like I meant anything else. I was just trying to \n tell you how much you’ve been missed.", 10);
+					message.displaySubtitle("Of course you do! I’m sorry if it sounded like I meant anything else. I was just trying to tell you how much you’ve been missed.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("William Hobb", 10);
 					
@@ -456,7 +478,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("This morning at breakfast.. she’s sitting there in her wheelchair, at the kitchen table, \n and she’s making a mess, this huge mess, trying to lift her spoon to her mouth. \n So I go to take the spoon, to help her, and she says “Daddy I can do it myself!” \n Just like when she was four and learning to ride her bike. And for a split second I almost laugh. \n But then I remember-- she’s not four, she’s fifteen. At four she could still pedal a bike. \n At four she wasn’t wearing diapers. At four she didn’t.. she didn’t sound like a damn moron! \n And I think all this, right there, with her staring straight at me, and it takes everything \n I have in me not to just start bawling there on the spot. \n And somehow, somehow I don’t because I know it would only hurt her more, \n but my God it kills me inside.", 20);
+					message.displaySubtitle("This morning at breakfast.. she’s sitting there in her wheelchair, at the kitchen table, and she’s making a mess, this huge mess, trying to lift her spoon to her mouth. So I go to take the spoon, to help her, and she says “Daddy I can do it myself!” Just like when she was four and learning to ride her bike. And for a split second I almost laugh. But then I remember-- she’s not four, she’s fifteen. At four she could still pedal a bike. At four she wasn’t wearing diapers. At four she didn’t.. she didn’t sound like a damn moron! And I think all this, right there, with her staring straight at me, and it takes everything I have in me not to just start bawling there on the spot. And somehow, somehow I don’t because I know it would only hurt her more, but my God it kills me inside.", 20);
 					message.displayWarning("Right click to continue", 20);
 					message.displayInfo("Greg Clemens", 20);
 		
@@ -517,7 +539,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Jill had been standing at the counter, chopping vegetables for lunch later. She didn’t say anything. \n But after what Angie said the chopping stopped. We never looked at each other. \n We deliberately avoided looking at each other. I think we both knew what \n would happen if we did. So I just stared down at my cereal \n and swirled the flakes around the bowl. That’s how things have been of late.", 20);
+					message.displaySubtitle("Jill had been standing at the counter, chopping vegetables for lunch later. She didn’t say anything. But after what Angie said the chopping stopped. We never looked at each other. We deliberately avoided looking at each other. I think we both knew what would happen if we did. So I just stared down at my cereal and swirled the flakes around the bowl. That’s how things have been of late.", 20);
 					message.displayWarning("Right click to continue", 20);
 					message.displayInfo("Greg Clemens", 20);
 					
@@ -528,7 +550,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. \n The rest will come with time.", 10);
+					message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. The rest will come with time.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 			
@@ -544,7 +566,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. \n She’s beyond their help, now.", 10);
+					message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. She’s beyond their help, now.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 			
@@ -560,7 +582,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("There’s nothing to say, really. She’s going to get better. \n Whatever it takes, she’s going to get better.", 10);
+					message.displaySubtitle("There’s nothing to say, really. She’s going to get better. Whatever it takes, she’s going to get better.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 			
@@ -576,7 +598,7 @@ function Update () {
 				
 					canSkip = true;
 					
-					message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, \n some way for her to get better. There has to.", 10);
+					message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, some way for her to get better. There has to.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 			
@@ -628,7 +650,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. \n The rest will come with time.", 10);
+					message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. The rest will come with time.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 			
@@ -644,7 +666,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. \n She’s beyond their help, now.", 10);
+					message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. She’s beyond their help, now.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 			
@@ -660,7 +682,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("There’s nothing to say, really. She’s going to get better. \n Whatever it takes, she’s going to get better.", 10);
+					message.displaySubtitle("There’s nothing to say, really. She’s going to get better. Whatever it takes, she’s going to get better.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 			
@@ -676,7 +698,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, \n some way for her to get better. There has to.", 10);
+					message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, some way for her to get better. There has to.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 			
@@ -705,7 +727,7 @@ function Update () {
 				}
 			}
 		}
-		
+//------------------------------------------------------------------------------------------------------------------------------------------
 		if (talkCount == 1) {
 			if (talkSection == 0) {
 				if (path == path1 || path == path3 || path == path4 && !hasDisplayed) {
@@ -729,7 +751,7 @@ function Update () {
 				
 					canSkip = false;
 				
-					message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. \n Is there anything I can do for you?", 10);
+					message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Is there anything I can do for you?", 10);
 					message.displayWarning("Click a decision to continue", 10);
 					message.displayInfo("William Hobb", 10);
 					
@@ -745,39 +767,26 @@ function Update () {
 			if (talkSection == 1) {
 				if (path == path11 || path == path31 || path == path41 && !hasDisplayed) {
 				
-					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
-					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
-					message.displayInfo("William Hobb", 5);
+					canSkip = false;
+				
+					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 10);
+					message.displayWarning("Click a decision to continue", 10);
+					message.displayInfo("William Hobb", 10);
+					
+					message.displayDecision("", "", "How are you?", "End Conversation", 10);
 			
 					dec1.canClick = false;
-					dec2.canClick = false;
-					dec3.canClick = false;
-					dec4.canClick = false;
-		
-					cam.canChange = true;
-					menu.canMenu = true;
-		
-					look.enabled = true;
-					mouse.enabled = true;
-		
-					movement.enabled = true;
-				
-					info.canDisplay = true;
-					
-					talkSection = 0;
-					path = path1;
-					
-					talk.canTalk = true;
-					isTalking = false;
+					dec3.canClick = true;
+					dec4.canClick = true;
 					
 					hasDisplayed = true;
 				}
 				
 				else if (path == path21 && !hasDisplayed) {
 					
-					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
-					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
-					message.displayInfo("William Hobb", 5);
+					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is. Oh, speaking of technology changing: Here is your new key card.", 10);
+					message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 10);
+					message.displayInfo("William Hobb", 10);
 			
 					dec1.canClick = false;
 					dec2.canClick = false;
@@ -806,7 +815,7 @@ function Update () {
 				
 					canSkip = false;
 				
-					message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. \n Is there anything I can do for you?", 10);
+					message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Is there anything I can do for you?", 10);
 					message.displayWarning("Click a decision to continue", 10);
 					message.displayInfo("William Hobb", 10);
 					
@@ -822,7 +831,7 @@ function Update () {
 				else if (path == path14 || path == path34 || path == path44 && !hasDisplayed) {
 				
 					message.displaySubtitle("I'll see you later.", 5);
-					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
+					message.displayWarning("Conversation Ended.", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -852,7 +861,7 @@ function Update () {
 				else if (path == path24 && !hasDisplayed) {
 					
 					message.displaySubtitle("I'll see you later.", 5);
-					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
+					message.displayWarning("Conversation Ended.", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -870,7 +879,8 @@ function Update () {
 				
 					info.canDisplay = true;
 					
-					talkCount = 2;
+					talkSection = 0;
+					path = path2;
 					
 					talk.canTalk = true;
 					isTalking = false;
@@ -882,9 +892,9 @@ function Update () {
 			if (talkSection == 2) {
 				if (path == path131 || path == path331 || path == path431 && !hasDisplayed) {
 				
-					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 5);
-					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
-					message.displayInfo("William Hobb", 5);
+					message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is. Oh, speaking of technology changing: Here is your new key card.", 10);
+					message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 10);
+					message.displayInfo("William Hobb", 10);
 			
 					dec1.canClick = false;
 					dec2.canClick = false;
@@ -912,7 +922,7 @@ function Update () {
 				else if (path == path134 || path == path334 || path == path434 && !hasDisplayed) {
 				
 					message.displaySubtitle("I'll see you later.", 5);
-					message.displayWarning("Key Card Obtained \n Press Tab To Open Inventory", 10);
+					message.displayWarning("Conversation Ended.", 10);
 					message.displayInfo("William Hobb", 5);
 			
 					dec1.canClick = false;
@@ -930,9 +940,69 @@ function Update () {
 				
 					info.canDisplay = true;
 					
-					talkCount = 2;
+					talkSection = 1;
+					path = path13;
 				
 					canSkip = false;
+					
+					talk.canTalk = true;
+					isTalking = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path113 || path == path313 || path == path413 && !hasDisplayed)
+				{	
+					message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Here's your new key card.", 10);
+					message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 10);
+					message.displayInfo("William Hobb", 10);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+		
+					cam.canChange = true;
+					menu.canMenu = true;
+		
+					look.enabled = true;
+					mouse.enabled = true;
+		
+					movement.enabled = true;
+				
+					info.canDisplay = true;
+					
+					talkCount = 2;
+					
+					talk.canTalk = true;
+					isTalking = false;
+					
+					hasDisplayed = true;
+				}
+				
+				else if (path == path114 || path == path314 || path == path414 && !hasDisplayed)
+				{	
+					message.displaySubtitle("I'll see you later.", 5);
+					message.displayWarning("Conversation Ended.", 10);
+					message.displayInfo("William Hobb", 5);
+			
+					dec1.canClick = false;
+					dec2.canClick = false;
+					dec3.canClick = false;
+					dec4.canClick = false;
+		
+					cam.canChange = true;
+					menu.canMenu = true;
+		
+					look.enabled = true;
+					mouse.enabled = true;
+		
+					movement.enabled = true;
+				
+					info.canDisplay = true;
+					
+					talkSection = 1;
+					path = path11;
 					
 					talk.canTalk = true;
 					isTalking = false;

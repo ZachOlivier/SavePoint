@@ -57,7 +57,7 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("Security pesonnel", 4);
+				message.displayInfo("Security personnel", 4);
 			}
 			
 			else
@@ -147,7 +147,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "William" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 4);
 		}
 	
 		onWilliam = true;
@@ -156,7 +156,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "Maria" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 4);
 		}
 	
 		onMaria = true;
@@ -165,7 +165,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "Richard" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 4);
 		}
 	
 		onRichard = true;
@@ -174,7 +174,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "Enemy" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 4);
 		}
 	
 		onEnemy = true;

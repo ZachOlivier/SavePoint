@@ -8,11 +8,15 @@ var canSkip												: boolean = false;
 
 var hasDisplayed										: boolean = false;
 
+var thisDisplayed										: boolean = false;
+
 // Variable to hold how much time has gone by in a conversation
 var timer												: float = 0.0;
 
 // Variable to hold how much time is allowed before moving on in conversation
 var time												: float = 0.0;
+
+var Damping												: int = 0;
 
 var talkDistance										: int = 0;
 var triggerDistance										: int = 0;
@@ -149,12 +153,18 @@ function Update () {
 	
 	if (Vector3.Distance(transform.position, Player.position) <= talkDistance)
 	{
-		transform.LookAt(Player);
+		var rotation = Quaternion.LookRotation(Player.position - transform.position);
+   		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
 		
 		// Set can talk to true, this lets the player be able to use the E key to start a conversation
 		if (!talk.canTalk)
 		{
 			talk.canTalk = true;
+		}
+		
+		if (!thisDisplayed)
+		{
+			thisDisplayed = true;
 		}
 		
 		if (talkCount == 0 && !hasDisplayed && !isTalking) {
@@ -187,17 +197,29 @@ function Update () {
 			isTalking = false;
 		}
 		
-		if (talkCount >= 1)
+		if (hasDisplayed)
 		{
-			if (hasDisplayed)
-			{
-				hasDisplayed = false;
-			}
+			hasDisplayed = false;
 		}
 		
 		if (!info.canDisplay)
 		{
 			info.canDisplay = true;
+		}
+		
+		if (thisDisplayed)
+		{
+			if (message.subtitle.enabled == true)
+			{
+				message.subtitle.enabled = false;
+			}
+			
+			if (message.info.enabled == true)
+			{
+				message.info.enabled = false;
+			}
+			
+			thisDisplayed = false;
 		}
 	}
 
@@ -344,7 +366,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Yeah, maybe you can tell me why I get a call in the middle of the night \n telling me that I'm needed right away and yet when I get here \n I have to waste time updating a badge.", 10);
+					message.displaySubtitle("Yeah, maybe you can tell me why I get a call in the middle of the night telling me that I'm needed right away and yet when I get here I have to waste time updating a badge.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 		
@@ -372,7 +394,7 @@ function Update () {
 				else if (path == path2 && !hasDisplayed) {
 				
 					message.displaySubtitle("I can help you with that right now.", 10);
-					message.displayWarning("Security Badge Obtained \n Press Tab To Open Inventory.", 10);
+					message.displayWarning("Security Badge Obtained Press Tab To Open Inventory.", 10);
 					message.displayInfo("Maria Figueroa", 10);
 			
 					dec1.canClick = false;
@@ -402,7 +424,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("I can’t say as to why you were called in here, doctor. That’s outside my purview. \n As far as the badge, it’s expired. Furthermore, we updated our security system \n a few weeks ago. Now, I understand your time is important to you. If you’d like, \n we can upgrade your badge now and in a few minutes you’ll be on your way.", 20);
+					message.displaySubtitle("I can’t say as to why you were called in here, doctor. That’s outside my purview. As far as the badge, it’s expired. Furthermore, we updated our security system a few weeks ago. Now, I understand your time is important to you. If you’d like, we can upgrade your badge now and in a few minutes you’ll be on your way.", 20);
 					message.displayWarning("Right click to continue", 20);
 					message.displayInfo("Maria Figueroa", 20);
 					
@@ -425,7 +447,7 @@ function Update () {
 				else if (path == path3 && !hasDisplayed) {
 				
 					message.displaySubtitle("Fine, what do I have to do?", 10);
-					message.displayWarning("Security Badge Obtained \n Press Tab To Open Inventory.", 10);
+					message.displayWarning("Security Badge Obtained Press Tab To Open Inventory.", 10);
 					message.displayInfo("Greg Clemens", 10);
 					
 					dec1.canClick = false;
@@ -457,7 +479,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Yeah, we updated our security systems a few weeks ago and \n everyone needed new badges. If you’d like I can update your badge \n right now. It will only take a few minutes.", 10);
+					message.displaySubtitle("Yeah, we updated our security systems a few weeks ago and everyone needed new badges. If you’d like I can update your badge right now. It will only take a few minutes.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Maria Figueroa", 10);
 					
@@ -482,7 +504,7 @@ function Update () {
 				if (path == path1 && !hasDisplayed) {
 				
 					message.displaySubtitle("Not a problem, doctor.", 10);
-					message.displayWarning("Security Badge Obtained \n Press Tab To Open Inventory.", 10);
+					message.displayWarning("Security Badge Obtained Press Tab To Open Inventory.", 10);
 					message.displayInfo("Maria Figueroa", 10);
 					
 					dec1.canClick = false;

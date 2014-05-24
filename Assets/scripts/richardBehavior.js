@@ -8,11 +8,15 @@ var canSkip												: boolean = false;
 
 var hasDisplayed										: boolean = false;
 
+var thisDisplayed										: boolean = false;
+
 // Variable to hold how much time has gone by in a conversation
 var timer												: float = 0.0;
 
 // Variable to hold how much time is allowed before moving on in conversation
 var time												: float = 0.0;
+
+var Damping												: int = 0;
 
 var talkDistance										: int = 0;
 var triggerDistance										: int = 0;
@@ -149,12 +153,18 @@ function Update () {
 	
 	if (Vector3.Distance(transform.position, Player.position) <= talkDistance)
 	{
-		transform.LookAt(Player);
+		var rotation = Quaternion.LookRotation(Player.position - transform.position);
+   		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
 		
 		// Set can talk to true, this lets the player be able to use the E key to start a conversation
 		if (!talk.canTalk)
 		{
 			talk.canTalk = true;
+		}
+		
+		if (!thisDisplayed)
+		{
+			thisDisplayed = true;
 		}
 		
 		if (talkCount == 0 && !hasDisplayed && !isTalking) {
@@ -179,17 +189,29 @@ function Update () {
 			isTalking = false;
 		}
 		
-		if (talkCount >= 1)
+		if (hasDisplayed)
 		{
-			if (hasDisplayed)
-			{
-				hasDisplayed = false;
-			}
+			hasDisplayed = false;
 		}
 		
 		if (!info.canDisplay)
 		{
 			info.canDisplay = true;
+		}
+		
+		if (thisDisplayed)
+		{
+			if (message.subtitle.enabled == true)
+			{
+				message.subtitle.enabled = false;
+			}
+			
+			if (message.info.enabled == true)
+			{
+				message.info.enabled = false;
+			}
+			
+			thisDisplayed = false;
 		}
 	}
 
@@ -332,7 +354,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("I’m not. I had to leave Jill and Angie to come in here. \n I told you I wasn’t ready to do that.", 10);
+					message.displaySubtitle("I’m not. I had to leave Jill and Angie to come in here. I told you I wasn’t ready to do that.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 		
@@ -361,7 +383,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("You too Greg, you too. Look pal, I wouldn’t have called you in but \n this is serious.", 10);
+					message.displaySubtitle("You too Greg, you too. Look pal, I wouldn’t have called you in but this is serious.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Richard Fields", 10);
 					
@@ -372,7 +394,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("I know, Greg, and I respect that. I really do. I wouldn’t have asked \n if it wasn’t important.", 10);
+					message.displaySubtitle("I know, Greg, and I respect that. I really do. I wouldn’t have asked if it wasn’t important.", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Richard Fields", 10);
 					
@@ -424,7 +446,7 @@ function Update () {
 				
 					canSkip = false;
 			
-					message.displaySubtitle("I know, I know. Thing is, you didn’t want bothered at the time and also.. Well, \n because of the contents of the message, brass didn’t want to \n involve you at first.", 15);
+					message.displaySubtitle("I know, I know. Thing is, you didn’t want bothered at the time and also.. Well, because of the contents of the message, brass didn’t want to involve you at first.", 15);
 					message.displayWarning("Click a decision to continue", 15);
 					message.displayInfo("Richard Fields", 15);
 					
@@ -556,7 +578,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Since then it’s been repeating the message, the same message. \n It’s a simple schematic, a modification to the machine.", 15);
+					message.displaySubtitle("Since then it’s been repeating the message, the same message. It’s a simple schematic, a modification to the machine.", 15);
 					message.displayWarning("Right click to continue", 15);
 					message.displayInfo("Richard Fields", 15);
 					
@@ -582,7 +604,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("An upgrade. It appears to be some kind of human interface. The fact \n is the schematics that came through were clear, very clear, but they weren’t \n explanatory. We don’t understand the technology that we’re building here.", 20);
+					message.displaySubtitle("An upgrade. It appears to be some kind of human interface. The fact is the schematics that came through were clear, very clear, but they weren’t explanatory. We don’t understand the technology that we’re building here.", 20);
 					message.displayWarning("Right click to continue", 20);
 					message.displayInfo("Richard Fields", 20);
 					
@@ -608,7 +630,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Why? Because we’re stuck here Greg. We’re not getting anymore useful \n information from the machine, you were on leave, and yes, I understand \n why but that doesn’t change the facts. And the fact is the government \n wanted communication flowing again and we were at a dead end buddy, \n a total dead end.", 20);
+					message.displaySubtitle("Why? Because we’re stuck here Greg. We’re not getting anymore useful information from the machine, you were on leave, and yes, I understand why but that doesn’t change the facts. And the fact is the government wanted communication flowing again and we were at a dead end buddy, a total dead end.", 20);
 					message.displayWarning("Right click to continue", 20);
 					message.displayInfo("Richard Fields", 20);
 					
@@ -621,7 +643,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Okay, you were stuck and this message seemed like the solution. \n I get that. So what’s the problem?", 10);
+					message.displaySubtitle("Okay, you were stuck and this message seemed like the solution. I get that. So what’s the problem?", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 					
@@ -634,7 +656,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("There’s more. There was more to the message. At the end of the message, \n for each of these five weeks, they included a name.. Your name.", 15);
+					message.displaySubtitle("There’s more. There was more to the message. At the end of the message, for each of these five weeks, they included a name.. Your name.", 15);
 					message.displayWarning("Right click to continue", 15);
 					message.displayInfo("Richard Fields", 15);
 					
@@ -660,7 +682,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("I know. It’s weird. No reason was given, no explanation. Just your name. \n At first we thought it was some kind of sign off, or that they were addressing \n this to you. Hell, we even floated the idea that the message could be coming from you.", 20);
+					message.displaySubtitle("I know. It’s weird. No reason was given, no explanation. Just your name. At first we thought it was some kind of sign off, or that they were addressing this to you. Hell, we even floated the idea that the message could be coming from you.", 20);
 					message.displayWarning("Right click to continue", 20);
 					message.displayInfo("Richard Fields", 20);
 					
@@ -673,7 +695,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Coming from me? Are you daft? The machine’s been on since August. \n It’s been what, a hundred and...", 10);
+					message.displaySubtitle("Coming from me? Are you daft? The machine’s been on since August. It’s been what, a hundred and...", 10);
 					message.displayWarning("Right click to continue", 10);
 					message.displayInfo("Greg Clemens", 10);
 					
@@ -686,7 +708,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("207 days Greg. And every day, corresponds to a new year in the future. \n That’s the system. That means 207 years from now there is a machine \n sending us a message with some schematics and your name attached to it. \n And it’s been sending us that same message for 35 years.", 20);
+					message.displaySubtitle("207 days Greg. And every day, corresponds to a new year in the future. That’s the system. That means 207 years from now there is a machine sending us a message with some schematics and your name attached to it. And it’s been sending us that same message for 35 years.", 20);
 					message.displayWarning("Right click to continue", 20);
 					message.displayInfo("Richard Fields", 20);
 					
@@ -712,7 +734,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("We floated the idea. We never thought it was likely but think about it, \n every day a new year’s worth of technology was coming through to us. \n For 144 days that went on. We haven’t even scratched the surface \n sifting through that information. So yeah, we floated the idea.", 20);
+					message.displaySubtitle("We floated the idea. We never thought it was likely but think about it, every day a new year’s worth of technology was coming through to us. For 144 days that went on. We haven’t even scratched the surface sifting through that information. So yeah, we floated the idea.", 20);
 					message.displayWarning("Right click to continue", 20);
 					message.displayInfo("Richard Fields", 20);
 					
@@ -738,7 +760,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("I know. That’s what we thought.. at first. But then it occurred to us, \n maybe the message means you’re the one that needs to interface with the machine.", 15);
+					message.displaySubtitle("I know. That’s what we thought.. at first. But then it occurred to us, maybe the message means you’re the one that needs to interface with the machine.", 15);
 					message.displayWarning("Right click to continue", 15);
 					message.displayInfo("Richard Fields", 15);
 					
@@ -777,7 +799,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("You know what I mean. I can’t believe this. You didn’t call me \n in here to work on the machine, you want me to be a guinea pig.", 15);
+					message.displaySubtitle("You know what I mean. I can’t believe this. You didn’t call me in here to work on the machine, you want me to be a guinea pig.", 15);
 					message.displayWarning("Right click to continue", 15);
 					message.displayInfo("Greg Clemens", 15);
 					
@@ -894,7 +916,7 @@ function Update () {
 				
 					canSkip = true;
 				
-					message.displaySubtitle("Nothing severe though. Look, this is messed up, I’ll be the first \n to admit it. At the same time, could it be any more poetic? \n I mean she’s your girl. Maybe she’s just coming to you for help.", 15);
+					message.displaySubtitle("Nothing severe though. Look, this is messed up, I’ll be the first to admit it. At the same time, could it be any more poetic? I mean she’s your girl. Maybe she’s just coming to you for help.", 15);
 					message.displayWarning("Right click to continue", 15);
 					message.displayInfo("Richard Fields", 15);
 					
