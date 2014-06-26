@@ -222,6 +222,9 @@ function displayInfo (message : String, time : float) {
 function FormatString ( text : String ) { 
     words = text.Split(" "[0]); //Split the string into seperate words 
     result = ""; 
+    
+    subtitleBox.pixelInset.height = 70;
+    subtitleBox.pixelInset.y = 10;
  
     for( var index = 0; index < words.length; index++)
     { 
@@ -243,6 +246,8 @@ function FormatString ( text : String ) {
          result += "\n" + word; 
          numberOfLines += 1;
          block.text = result;
+         subtitleBox.pixelInset.height += 30;
+         subtitleBox.pixelInset.y -= 30;
        } 
     } 
 }

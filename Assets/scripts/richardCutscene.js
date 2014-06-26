@@ -47,8 +47,8 @@ function Update () {
 			
 				canSkip = true;
 			
-				message.displaySubtitle("A few minutes later...", 10);
-				message.displayWarning("Right click to continue", 10);
+				message.displaySubtitle("A few minutes later...", 100);
+				message.displayWarning("Right click to continue", 100);
 				
 				hasDisplayed = true;
 			}

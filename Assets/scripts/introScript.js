@@ -378,13 +378,13 @@ function Update () {
 		message.decision3.enabled = false;
 		message.decision4.enabled = false;
 
-		savePoint.transform.position.z = -2;
+		savePoint.transform.position.z = 0;
 	}
 	
 	if (part == 49) {
 
 		Destroy(savePoint.gameObject);
-		episodeText.transform.position.z = 12;
+		episodeText.transform.position.z = 20;
 	}
 	
 	// After the last scene has played

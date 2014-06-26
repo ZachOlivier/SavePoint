@@ -97,7 +97,7 @@ function OnGUI ()
 		btnW = Screen.width / 5;
 		btnH = Screen.height / 8;
 	
-		if (GUI.Button (Rect (btnX, btnY, btnW, btnH), "Reset Game"))
+		if (GUI.Button (Rect (btnX, btnY - 75, btnW, btnH), "Reset Level"))
 		{
 			menuMode = 0;
 			Time.timeScale = 1.0;
@@ -108,6 +108,19 @@ function OnGUI ()
 			cam.enabled = true;
 		
 			Application.LoadLevel(1);
+		}
+		
+		if (GUI.Button (Rect (btnX, btnY + 75, btnW, btnH), "Reset Game (Intro)"))
+		{
+			menuMode = 0;
+			Time.timeScale = 1.0;
+			
+			inventory.canChange = true;
+			
+			mouse.enabled = true;
+			cam.enabled = true;
+		
+			Application.LoadLevel(0);
 		}
 	}
 	

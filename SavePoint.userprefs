@@ -1,11 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\securityBehavior.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\menuScript.js">
     <Files>
-      <File FileName="Assets\scripts\securityBehavior.js" Line="797" Column="26" />
-      <File FileName="Assets\scripts\richardBehavior.js" Line="156" Column="48" />
-      <File FileName="Assets\scripts\mariaBehavior.js" Line="156" Column="48" />
-      <File FileName="Assets\scripts\enemyBehavior.js" Line="210" Column="4" />
+      <File FileName="Assets\scripts\menuScript.js" Line="121" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
