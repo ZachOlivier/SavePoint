@@ -12,11 +12,14 @@ var doorMoveTimer										: float = 0.0;
 var canOpen												: boolean = false;
 var ICopen												: boolean = false;
 
+var atDoor												: boolean = false;
+
 var text												: GameObject;
 var npc													: GameObject;
 var maria												: GameObject;
 var door1												: GameObject;
 var door2												: GameObject;
+var gui													: GameObject;
 
 function Start () {
 	canOpen = false;
@@ -28,6 +31,8 @@ function Start () {
 function Update () {
 	var key : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
 	var badge : mariaBehavior = maria.gameObject.GetComponent(mariaBehavior);
+	var taken : guiSystem = gui.gameObject.GetComponent(guiSystem);
+	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
 	
 	if (key.talkCount >= 2) {
 		if (!canOpen)
@@ -42,10 +47,23 @@ function Update () {
 			ICopen = true;
 		}
 	}
+	
+	if (atDoor == true && taken.badgeTaken == true && Input.GetButtonDown("Action"))
+	{
+		if (!ICopen)
+		{
+			ICopen = true;
+			
+			animation.Play(doorOpen.name);
+			audio.PlayOneShot(confirm);
+			message.displayWarning("Access Granted", 4);
+		}
+	}
 }
 
 function OnTriggerEnter (other : Collider) {
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
+	var taken : guiSystem = gui.gameObject.GetComponent(guiSystem);
 
 	if (other.gameObject.tag == "Player" && this.gameObject.name == "SecurityDoor") {
 		if (canOpen) {
@@ -65,10 +83,19 @@ function OnTriggerEnter (other : Collider) {
 	
 	if (other.gameObject.tag == "Player" && this.gameObject.name == "ICsecurityDoor")
 	{
+		atDoor = true;
+	
 		if (ICopen) {
 			animation.Play(doorOpen.name);
 			
 			audio.PlayOneShot(confirm);
+		}
+		
+		else if (taken.badgeTaken == true && !ICopen)
+		{
+			audio.PlayOneShot(reject);
+		
+			message.displayWarning("Press T to Use Badge", 100);
 		}
 		
 		else {
@@ -82,12 +109,21 @@ function OnTriggerEnter (other : Collider) {
 }
 
 function OnTriggerExit (other: Collider) {
+	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
+
 	if (other.gameObject.tag == "Player" && this.gameObject.name == "SecurityDoor" && canOpen) {
 		animation.Play(doorClose.name);
 	}
 
 	if (other.gameObject.tag == "Player" && this.gameObject.name == "ICsecurityDoor" && ICopen) {
 		animation.Play(doorClose.name);
+	}
+	
+	if (other.gameObject.tag == "Player" && this.gameObject.name == "ICsecurityDoor")
+	{
+		message.warning.enabled = false;
+	
+		atDoor = false;
 	}
 }
 

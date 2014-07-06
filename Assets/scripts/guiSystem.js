@@ -3,6 +3,8 @@
 var healthNum			: Texture2D[];
 var itemNum				: Texture2D[];
 
+var badgeTaken			: boolean = false;
+
 var healthGUI 			: GUITexture;
 
 var inventory			: GUITexture;
@@ -54,6 +56,14 @@ function Update () {
 			if (!item2.enabled)
 			{
 				item2.enabled = true;
+			}
+		}
+		
+		if (badgeTaken == true)
+		{
+			if (!item3.enabled)
+			{
+				item3.enabled = true;
 			}
 		}
 	}

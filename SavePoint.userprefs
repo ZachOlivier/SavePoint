@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\menuScript.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\enemyBehavior.js">
     <Files>
-      <File FileName="Assets\scripts\menuScript.js" Line="121" Column="23" />
+      <File FileName="Assets\scripts\enemyBehavior.js" Line="66" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
