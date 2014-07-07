@@ -57,8 +57,10 @@
      <Compile Include="Assets\scripts\guiSystem.js" />
      <Compile Include="Assets\scripts\introScript.js" />
      <Compile Include="Assets\scripts\mariaBehavior.js" />
+     <Compile Include="Assets\scripts\mariaBehaviorOriginal.js" />
      <Compile Include="Assets\scripts\menuScript.js" />
      <Compile Include="Assets\scripts\npcBehaviorOriginal.js" />
+     <Compile Include="Assets\scripts\pictureScript.js" />
      <Compile Include="Assets\scripts\playerScript.js" />
      <Compile Include="Assets\scripts\richardBehavior.js" />
      <Compile Include="Assets\scripts\richardCutscene.js" />

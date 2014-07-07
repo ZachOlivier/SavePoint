@@ -16,12 +16,10 @@ var timer												: float = 0.0;
 // Variable to hold how much time is allowed before moving on in conversation
 var time												: float = 0.0;
 
-var SnapDist											: float = 0.1;
 var Damping												: int = 0;
-var MoveSpeed											: int = 0;
 
 var talkDistance										: int = 0;
-//var triggerDistance										: int = 0;
+var triggerDistance										: int = 0;
 
 // Variable to hold the current part of the conversation
 var talkSection											: int = 0;
@@ -120,7 +118,6 @@ var path443												: int = 443;
 var path444												: int = 444;
 
 var Player												: Transform;
-var waypoint											: Transform;
 
 // Variable to hold the holder and text game objects so that we can access its scripts
 var holder												: GameObject;
@@ -130,7 +127,6 @@ var decide1												: GameObject;
 var decide2												: GameObject;
 var decide3												: GameObject;
 var decide4												: GameObject;
-var picture												: GameObject;
 
 // This function only fires once during the start of this script
 function Start () {
@@ -154,9 +150,8 @@ function Update () {
 	var movement : CharacterMotor = pc.gameObject.GetComponent(CharacterMotor);
 	var info : displayInfo = this.gameObject.GetComponent(displayInfo);
 	var talk : playerScript = pc.gameObject.GetComponent(playerScript);
-	var pic : pictureScript = picture.gameObject.GetComponent(pictureScript);
 	
-	if (Vector3.Distance(transform.position, Player.position) <= talkDistance && talkCount < 1)
+	if (Vector3.Distance(transform.position, Player.position) <= talkDistance)
 	{
 		var rotation = Quaternion.LookRotation(Player.position - transform.position);
    		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
@@ -183,7 +178,7 @@ function Update () {
 		else if (talkCount >= 1 && !hasDisplayed && !isTalking) {
 		
 			message.displaySubtitle("You have access to the IC Room now.", 5);
-			message.displayInfo("Maria Figueroa", 5);
+			message.info.enabled = false;
 			
 			hasDisplayed = true;
 		}
@@ -398,9 +393,9 @@ function Update () {
 				
 				else if (path == path2 && !hasDisplayed) {
 				
-					message.displaySubtitle("I can help you with that right now.", 5);
-					message.displayWarning("Conversation Ended..", 5);
-					message.displayInfo("Maria Figueroa", 5);
+					message.displaySubtitle("I can help you with that right now.", 10);
+					message.displayWarning("Security Badge Obtained Press Tab To Open Inventory.", 10);
+					message.displayInfo("Maria Figueroa", 10);
 			
 					dec1.canClick = false;
 					dec2.canClick = false;
@@ -451,9 +446,9 @@ function Update () {
 				
 				else if (path == path3 && !hasDisplayed) {
 				
-					message.displaySubtitle("Fine, what do I have to do?", 5);
-					message.displayWarning("Conversation Ended..", 5);
-					message.displayInfo("Greg Clemens", 5);
+					message.displaySubtitle("Fine, what do I have to do?", 10);
+					message.displayWarning("Security Badge Obtained Press Tab To Open Inventory.", 10);
+					message.displayInfo("Greg Clemens", 10);
 					
 					dec1.canClick = false;
 					dec2.canClick = false;
@@ -508,9 +503,9 @@ function Update () {
 			else if (talkSection == 6) {
 				if (path == path1 && !hasDisplayed) {
 				
-					message.displaySubtitle("Not a problem, doctor.", 5);
-					message.displayWarning("Conversation Ended..", 5);
-					message.displayInfo("Maria Figueroa", 5);
+					message.displaySubtitle("Not a problem, doctor.", 10);
+					message.displayWarning("Security Badge Obtained Press Tab To Open Inventory.", 10);
+					message.displayInfo("Maria Figueroa", 10);
 					
 					dec1.canClick = false;
 					dec2.canClick = false;
@@ -535,41 +530,6 @@ function Update () {
 					hasDisplayed = true;
 				}
 			}
-		}
-	}
-	
-	else if (talkCount > 0)
-	{
-		if (Vector3.Distance(transform.position, waypoint.position) > SnapDist)
-		{
-			rotation = Quaternion.LookRotation(waypoint.position - transform.position);
-			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
-			
-	 		transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-	 		
-	 		//animation.CrossFade(animal_walk.name);
-		}
-			
-		else if (Vector3.Distance(transform.position, waypoint.position) <= SnapDist)
-		{
-			if (transform.position != waypoint.position)
-			{
-				message.displaySubtitle("Please look towards me and at the camera.", 10);
-				message.displayInfo("Maria Figueroa", 10);
-				
-				if (!pic.canPicture)
-	   			{
-	   				pic.canPicture = true;
-	   			}
-			
-				transform.position = waypoint.position;
-			}
-		}
-		
-		if (pic.canPicture)
-		{
-			rotation = Quaternion.LookRotation(Player.position - transform.position);
-   			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
 		}
 	}
 }

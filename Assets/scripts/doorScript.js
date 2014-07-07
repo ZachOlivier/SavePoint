@@ -16,10 +16,11 @@ var atDoor												: boolean = false;
 
 var text												: GameObject;
 var npc													: GameObject;
-var maria												: GameObject;
+var picture												: GameObject;
 var door1												: GameObject;
 var door2												: GameObject;
 var gui													: GameObject;
+var enemy												: GameObject;
 
 function Start () {
 	canOpen = false;
@@ -30,9 +31,11 @@ function Start () {
 
 function Update () {
 	var key : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
-	var badge : mariaBehavior = maria.gameObject.GetComponent(mariaBehavior);
+	//var badge : mariaBehavior = maria.gameObject.GetComponent(mariaBehavior);
+	var badge : pictureScript = picture.gameObject.GetComponent(pictureScript);
 	var taken : guiSystem = gui.gameObject.GetComponent(guiSystem);
 	var message : uiSystem = text.gameObject.GetComponent(uiSystem);
+	var Enemy : enemyBehavior = enemy.gameObject.GetComponent(enemyBehavior);
 	
 	if (key.talkCount >= 2) {
 		if (!canOpen)
@@ -41,7 +44,7 @@ function Update () {
 		}
 	}
 	
-	if (badge.talkCount >= 1) {
+	if (badge.tookPicture == true) {
 		if (!ICopen)
 		{
 			ICopen = true;
@@ -52,11 +55,22 @@ function Update () {
 	{
 		if (!ICopen)
 		{
-			ICopen = true;
-			
-			animation.Play(doorOpen.name);
-			audio.PlayOneShot(confirm);
-			message.displayWarning("Access Granted", 4);
+			if (enemy.transform.position == Enemy.waypointOne.position)
+			{
+				message.displaySubtitle("That isn't your badge. I'll be taking that, you can get your own from Maria", 10);
+				message.displayWarning("Badge confiscated", 10);
+				message.displayInfo("Security Guard", 10);
+				
+				taken.badgeTaken = false;
+			}
+		
+			else {
+				ICopen = true;
+				
+				animation.Play(doorOpen.name);
+				audio.PlayOneShot(confirm);
+				message.displayWarning("Access Granted", 4);
+			}
 		}
 	}
 }

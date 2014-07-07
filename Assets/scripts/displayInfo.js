@@ -11,6 +11,10 @@ var onPortrait											: boolean = false;
 var onIC												: boolean = false;
 var onCore												: boolean = false;
 var onBadge												: boolean = false;
+var onPhone												: boolean = false;
+var onBook												: boolean = false;
+
+var calledHome											: boolean = false;
 var canTouch											: boolean = false;
 
 var vagueDistance										: int = 0;
@@ -56,12 +60,12 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("A security guard", 4);
+				message.displayInfo("A security guard", 5);
 			}
 			
 			else
 			{
-				message.displayInfo("Security Guard William Hebb", 4);
+				message.displayInfo("Security Guard William Hebb", 5);
 			}
 		}
 		
@@ -69,12 +73,12 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("Security personnel", 4);
+				message.displayInfo("Security personnel", 5);
 			}
 			
 			else
 			{
-				message.displayInfo("Head of Security Maria Figueroa", 4);
+				message.displayInfo("Head of Security Maria Figueroa", 5);
 			}
 		}
 		
@@ -82,12 +86,12 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("A scientist", 4);
+				message.displayInfo("A scientist", 5);
 			}
 			
 			else
 			{
-				message.displayInfo("Scientist Richard Fields", 4);
+				message.displayInfo("Scientist Richard Fields", 5);
 			}
 		}
 		
@@ -95,12 +99,12 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("Unknown person", 4);
+				message.displayInfo("Unknown person", 5);
 			}
 			
 			else
 			{
-				message.displayInfo("Enemy Patrol *Blind*", 4);
+				message.displayInfo("Security Guard", 5);
 			}
 		}
 		
@@ -108,12 +112,12 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("A framed picture", 4);
+				message.displayInfo("A framed picture", 5);
 			}
 			
 			else
 			{
-				message.displayInfo("My family portrait", 4);
+				message.displayInfo("My family portrait", 10);
 				message.displaySubtitle("We took this photo two years ago while on vacation. Did Jill really look that much younger? Did I? And look at Angie, her smile is the widest, her eyes so bright and full of promise. I shouldn’t be here; I should be with you.. except, I’m here for you. I’m going to fix this.. somehow.", 10);
 			}
 		}
@@ -122,12 +126,12 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("What's this?", 4);
+				message.displayInfo("What's this?", 5);
 			}
 			
 			else
 			{
-				message.displayInfo("IC machine", 4);
+				message.displayInfo("IC machine", 5);
 				message.displaySubtitle("This has been added since I left. It looks crudely constructed, as if made in a hurry.", 5);
 			}
 		}
@@ -136,12 +140,12 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("My creation", 4);
+				message.displayInfo("My creation", 5);
 			}
 			
 			else
 			{
-				message.displayInfo("IC core", 4);
+				message.displayInfo("IC core", 5);
 				message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time.", 5);
 			}
 		}
@@ -150,13 +154,41 @@ function Update () {
 		{
 			if (!wasInspected)
 			{
-				message.displayInfo("A badge?", 4);
+				message.displayInfo("A badge?", 5);
 			}
 			
 			else
 			{
-				message.displayInfo("Brian's badge", 4);
+				message.displayInfo("Brian's Badge", 5);
 				message.displaySubtitle("Looks like Brian left his clearance card laying around.", 5);
+			}
+		}
+		
+		else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Fire2"))
+		{
+			if (!wasInspected)
+			{
+				message.displayInfo("A phone?", 5);
+			}
+			
+			else
+			{
+				message.displayInfo("My Office Phone", 5);
+				message.displaySubtitle("Perhaps I should call home..", 5);
+			}
+		}
+		
+		else if (this.gameObject.name == "book" && onBook && canDisplay && Input.GetButtonDown("Fire2"))
+		{
+			if (!wasInspected)
+			{
+				message.displayInfo("A book?", 5);
+			}
+			
+			else
+			{
+				message.displayInfo("My Greek Mythology Book", 5);
+				message.displaySubtitle("It’s still turned to the same page I was reading when Angie.. when I got the news.", 5);
 			}
 		}
 	}
@@ -177,35 +209,35 @@ function Update () {
 		
 		if (this.gameObject.name == "William" && onWilliam && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("Security Guard William Hebb", 4);
+			message.displayInfo("Security Guard William Hebb", 5);
 			
 			wasInspected = true;
 		}
 		
 		else if (this.gameObject.name == "Maria" && onMaria && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("Head of Security Maria Figueroa", 4);
+			message.displayInfo("Head of Security Maria Figueroa", 5);
 			
 			wasInspected = true;
 		}
 		
 		else if (this.gameObject.name == "Richard" && onRichard && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("Scientist Richard Fields", 4);
+			message.displayInfo("Scientist Richard Fields", 5);
 			
 			wasInspected = true;
 		}
 		
 		else if (this.gameObject.name == "Enemy" && onEnemy && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("Enemy Patrol *Blind*", 4);
+			message.displayInfo("Security Guard", 5);
 			
 			wasInspected = true;
 		}
 		
 		else if (this.gameObject.name == "portrait" && onPortrait && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("My family portrait", 4);
+			message.displayInfo("My family portrait", 10);
 			message.displaySubtitle("We took this photo two years ago while on vacation. Did Jill really look that much younger? Did I? And look at Angie, her smile is the widest, her eyes so bright and full of promise. I shouldn’t be here; I should be with you.. except, I’m here for you. I’m going to fix this.. somehow.", 10);
 			
 			wasInspected = true;
@@ -213,7 +245,7 @@ function Update () {
 		
 		else if (this.gameObject.name == "ICMachine" && onIC && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("IC machine", 4);
+			message.displayInfo("IC machine", 5);
 			message.displaySubtitle("This has been added since I left. It looks crudely constructed, as if made in a hurry.", 5);
 			
 			wasInspected = true;
@@ -221,7 +253,7 @@ function Update () {
 		
 		else if (this.gameObject.name == "Core" && onCore && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("IC core", 4);
+			message.displayInfo("IC core", 5);
 			message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time.", 5);
 			
 			wasInspected = true;
@@ -229,8 +261,24 @@ function Update () {
 		
 		else if (this.gameObject.name == "badge" && onBadge && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("Brian's badge", 4);
+			message.displayInfo("Brian's Badge", 5);
 			message.displaySubtitle("Looks like Brian left his clearance card laying around.", 5);
+			
+			wasInspected = true;
+		}
+		
+		else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Fire2"))
+		{
+			message.displayInfo("My Office Phone", 5);
+			message.displaySubtitle("Perhaps I should call home..", 5);
+			
+			wasInspected = true;
+		}
+		
+		else if (this.gameObject.name == "book" && onBook && canDisplay && Input.GetButtonDown("Fire2"))
+		{
+			message.displayInfo("My Greek Mythology Book", 5);
+			message.displaySubtitle("It’s still turned to the same page I was reading when Angie.. when I got the news.", 5);
 			
 			wasInspected = true;
 		}
@@ -249,6 +297,7 @@ function Update () {
 		{
 			message.displayWarning("Badge Taken \n Press Tab to Open Inventory", 5);
 			message.displaySubtitle("I’m sure he won’t mind if I borrow this.", 5);
+			message.displayInfo("Greg Clemens", 5);
 			
 			taken.badgeTaken = true;
 			
@@ -257,8 +306,30 @@ function Update () {
 		
 		else if (this.gameObject.name == "badge" && onBadge && canDisplay && Input.GetButtonDown("Fire2"))
 		{
-			message.displayInfo("Brian's badge", 4);
+			message.displayInfo("Brian's Badge", 5);
 			message.displaySubtitle("Looks like Brian left his clearance card laying around.", 5);
+			
+			wasInspected = true;
+		}
+		
+		if (this.gameObject.name == "phone" && wasInspected && canDisplay && !calledHome && canTouch)
+		{
+			message.displayWarning("Press T to Call Home", 100);
+		}
+		
+		if (this.gameObject.name == "phone" && canDisplay && wasInspected && !calledHome && Input.GetButtonDown("Action"))
+		{
+			message.displayWarning("Called Home", 5);
+			message.displaySubtitle("They need me at home, I should hurry.", 5);
+			message.displayInfo("Greg Clemens", 5);
+			
+			calledHome = true;
+		}
+		
+		else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Fire2"))
+		{
+			message.displayInfo("My Office Phone", 5);
+			message.displaySubtitle("Perhaps I should call home..", 5);
 			
 			wasInspected = true;
 		}
@@ -282,7 +353,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "William" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click/Press R to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 5);
 		}
 	
 		onWilliam = true;
@@ -291,7 +362,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "Maria" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click/Press R to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 5);
 		}
 	
 		onMaria = true;
@@ -300,7 +371,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "Richard" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click/Press R to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 5);
 		}
 	
 		onRichard = true;
@@ -309,7 +380,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "Enemy" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click/Press R to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 5);
 		}
 	
 		onEnemy = true;
@@ -318,7 +389,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "portrait" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click/Press R to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 5);
 		}
 	
 		onPortrait = true;
@@ -327,7 +398,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "ICMachine" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click/Press R to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 5);
 		}
 	
 		onIC = true;
@@ -336,7 +407,7 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "Core" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click/Press R to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 5);
 		}
 	
 		onCore = true;
@@ -345,10 +416,28 @@ function OnMouseEnter () {
 	if (this.gameObject.name == "badge" && canDisplay) {
 		if (!wasInspected)
 		{
-			message.displayWarning("Right Click/Press R to Inspect", 4);
+			message.displayWarning("Right Click/Press R to Inspect", 5);
 		}
 	
 		onBadge = true;
+	}
+	
+	if (this.gameObject.name == "phone" && canDisplay) {
+		if (!wasInspected)
+		{
+			message.displayWarning("Right Click/Press R to Inspect", 5);
+		}
+	
+		onPhone = true;
+	}
+	
+	if (this.gameObject.name == "book" && canDisplay) {
+		if (!wasInspected)
+		{
+			message.displayWarning("Right Click/Press R to Inspect", 5);
+		}
+	
+		onBook = true;
 	}
 	
 	if (this.gameObject.tag == "Collider" && canDisplay) {
@@ -391,5 +480,13 @@ function OnMouseExit () {
 	
 	if (this.gameObject.name == "badge") {
 		onBadge = false;
+	}
+	
+	if (this.gameObject.name == "phone") {
+		onPhone = false;
+	}
+	
+	if (this.gameObject.name == "book") {
+		onBook = false;
 	}
 }

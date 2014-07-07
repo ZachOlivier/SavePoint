@@ -13,11 +13,13 @@ var item2 				: GUITexture;
 var item3 				: GUITexture;
 var item4 				: GUITexture;
 
+var item2GUI			: GameObject;
+
 var menu				: GUITexture;
 
 var PC					: GameObject;
 var npc					: GameObject;
-var maria				: GameObject;
+var picture				: GameObject;
 var holder				: GameObject;
 
 function Start () {
@@ -29,7 +31,8 @@ function Update () {
 	var inv : cameraScript = holder.gameObject.GetComponent(cameraScript);
 	var m : menuScript = holder.gameObject.GetComponent(menuScript);
 	var key : securityBehavior = npc.gameObject.GetComponent(securityBehavior);
-	var badge : mariaBehavior = maria.gameObject.GetComponent(mariaBehavior);
+	//var badge : mariaBehavior = maria.gameObject.GetComponent(mariaBehavior);
+	var badge : pictureScript = picture.gameObject.GetComponent(pictureScript);
 	
 	if (healthGUI.texture != healthNum[player.health - 1])
 	{
@@ -51,10 +54,13 @@ function Update () {
 			}
 		}
 		
-		if (badge.talkCount >= 1)
+		if (badge.tookPicture == true)
 		{
 			if (!item2.enabled)
 			{
+				//Be sure to uncomment this part in order to make the badge the screenshot!
+				//item2GUI.guiTexture.texture = Resources.Load("screenshot.png");
+			
 				item2.enabled = true;
 			}
 		}

@@ -61,9 +61,9 @@ var waypointFive										: Transform;
 function Start () {
 
 	// Set the first timer for how long the enemy should be idle to a random number between 3 and 6
-	timeIdle = Time.time + Random.Range(3, 6);
+	timeIdle = Time.time + Random.Range(2, 4);
 	
-	waypointTarget = 0;
+	waypointTarget = 5;
 	
 	enemyPosition.position = transform.position;
 	detectedPosition.position = transform.position;
@@ -75,7 +75,7 @@ function Update () {
 
 	var player : playerScript = PC.gameObject.GetComponent(playerScript);
 
-	if (Vector3.Distance(transform.position, Player.position) <= zone3)
+	/*if (Vector3.Distance(transform.position, Player.position) <= zone3)
 	{
 		if (player.isRunning || player.isJump) {
 		
@@ -154,7 +154,7 @@ function Update () {
 				}	
 			}
 		}
-	}
+	}*/
 
 	// If the current state is idle
 	if (state == IDLE) {
@@ -164,6 +164,11 @@ function Update () {
 		
 		// This makes sure the enemy isn't moving
 		transform.position = enemyPosition.position;
+		
+		if (transform.position == waypointOne.position)
+		{
+			
+		}
 		
 		// If the time set has passed by
 		if (Time.time > timeIdle) {
@@ -296,31 +301,31 @@ function Update () {
 		}
 		
 		if (transform.position == waypointOne.position) {
-		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	timeIdle = Time.time + Random.Range(7, 10);
 		 	
 		 	state = IDLE;
 		 }
 		 
 		 else if (transform.position == waypointTwo.position) {
-		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	timeIdle = Time.time + Random.Range(2, 4);
 		 	
 		 	state = IDLE;
 		 }
 		 
 		 else if (transform.position == waypointThree.position) {
-		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	timeIdle = Time.time + Random.Range(2, 4);
 		 	
 		 	state = IDLE;
 		 }
 		 
 		 else if (transform.position == waypointFour.position) {
-		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	timeIdle = Time.time + Random.Range(2, 4);
 		 	
 		 	state = IDLE;
 		 }
 		 
 		 else if (transform.position == waypointFive.position) {
-		 	timeIdle = Time.time + Random.Range(3, 6);
+		 	timeIdle = Time.time + Random.Range(2, 4);
 		 	
 		 	state = IDLE;
 		 }
@@ -378,7 +383,7 @@ function Update () {
 		
 		// If the enemy's current position is the detected object's current position
 		if (transform.position == detectedPosition.position) {
-			timeIdle = Time.time + Random.Range(3, 6);
+			timeIdle = Time.time + Random.Range(2, 4);
 		
 			state = IDLE;
 		}
@@ -386,7 +391,7 @@ function Update () {
 	
 	// Else if the state isn't set to one of the above, just reset the enemy's state to idle
 	else {
-		timeIdle = Time.time + Random.Range(3, 6);
+		timeIdle = Time.time + Random.Range(2, 4);
 	
 		state = IDLE;
 	}

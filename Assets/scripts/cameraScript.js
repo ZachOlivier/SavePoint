@@ -65,18 +65,22 @@ function Update () {
 	}
 	
 	// Else if the player pressed the tab key and the camera isn't in either mode but can change
-	else if (Input.GetButtonDown("Camera") && !cameraMode == 0 && !cameraMode == 1  && canChange) {
-		cameraMode = 0;
-		//Time.timeScale = 1.0;
-		
-		movement.enabled = true;
-		
-		menu.canMenu = true;
-		
-		mouse.enabled = true;
-		cam.enabled = true;
-		
-		message.displayWarning("Camera error!..", 4);
+	else if (Input.GetButtonDown("Camera") && canChange) {
+	
+		if (cameraMode != 0 || cameraMode != 1)
+		{
+			cameraMode = 0;
+			//Time.timeScale = 1.0;
+			
+			movement.enabled = true;
+			
+			menu.canMenu = true;
+			
+			mouse.enabled = true;
+			cam.enabled = true;
+			
+			message.displayWarning("Camera error!..", 4);
+		}
 	}
 }
 
