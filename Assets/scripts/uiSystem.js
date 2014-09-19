@@ -78,7 +78,6 @@ function Update () {
 	{
 		decision4Box.enabled = false;
 	}
-	
 
 	// If warning text is enabled and the amount of time that the text should be shown for is set
 	if (warning.enabled && warningTime != 0.0) {

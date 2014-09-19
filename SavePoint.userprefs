@@ -1,29 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\securityBehavior.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/guiSystem.cs">
     <Files>
-      <File FileName="Assets\scripts\cameraScript.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\mariaBehaviorOriginal.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\playerScript.js" Line="182" Column="38" />
-      <File FileName="Assets\scripts\uiSystem.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\soundScript.js" Line="20" Column="38" />
-      <File FileName="Assets\scripts\richardCutscene.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\doorScript.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\decisionScript1.js" Line="553" Column="2" />
-      <File FileName="Assets\scripts\decisionScript.js" Line="553" Column="2" />
-      <File FileName="Assets\scripts\menuScript.js" Line="73" Column="47" />
-      <File FileName="Assets\scripts\enemyBehavior.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\decisionScript2.js" Line="553" Column="2" />
-      <File FileName="Assets\scripts\introScript.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\guiSystem.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\timeChanger.js" Line="39" Column="4" />
-      <File FileName="Assets\scripts\npcBehaviorOriginal.js" Line="974" Column="2" />
-      <File FileName="Assets\scripts\displayInfo.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\pictureScript.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\richardBehavior.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\coreSpin.js" Line="24" Column="2" />
-      <File FileName="Assets\scripts\mariaBehavior.js" Line="1" Column="1" />
-      <File FileName="Assets\scripts\securityBehavior.js" Line="218" Column="20" />
+      <File FileName="Assets/scripts/guiSystem.cs" Line="41" Column="53" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
