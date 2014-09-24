@@ -206,7 +206,7 @@ public class securityBehavior : MonoBehaviour {
 			else if (talkCount == 2 && !hasDisplayed && !isTalking) {
 				
 				message.displaySubtitle("You take care of yourself.", 5);
-				message.info.enabled = false;
+				message.displayInfo("William Hebb", 5);
 				
 				hasDisplayed = true;
 			}

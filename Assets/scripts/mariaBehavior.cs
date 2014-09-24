@@ -178,7 +178,7 @@ public class mariaBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (Vector3.Distance(transform.position, Player.position) <= talkDistance && talkCount < 1)
+		if (Vector3.Distance(transform.position, Player.position) <= talkDistance)
 		{
 			var rotation = Quaternion.LookRotation(Player.position - transform.position);
 			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
@@ -202,7 +202,7 @@ public class mariaBehavior : MonoBehaviour {
 				hasDisplayed = true;
 			}
 			
-			else if (talkCount >= 1 && !hasDisplayed && !isTalking) {
+			else if (talkCount == 1 && !hasDisplayed && !isTalking) {
 				
 				message.displaySubtitle("You have access to the IC Room now.", 5);
 				message.displayInfo("Maria Figueroa", 5);
