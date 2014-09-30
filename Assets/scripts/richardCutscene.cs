@@ -96,12 +96,22 @@ public class richardCutscene : MonoBehaviour {
 			{
 				timer += Time.deltaTime;
 				
-				if (timer >= 4)
+				if (timer >= 5)
 				{
 					Camera.main.enabled = false;
-					
+
 					timer = 0;
 					talkCount = 2;
+				}
+			}
+
+			else if (talkCount == 2)
+			{
+				timer += Time.deltaTime;
+
+				if (timer >= 3)
+				{
+					Application.LoadLevel(3);
 				}
 			}
 		}

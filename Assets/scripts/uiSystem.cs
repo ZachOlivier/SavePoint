@@ -95,6 +95,26 @@ public class uiSystem : MonoBehaviour {
 		{
 			fourDecision4Box.enabled = false;
 		}
+
+		if (!displayingOne)
+		{
+			oneDecisionBox.enabled = false;
+		}
+
+		if (!displayingTwo)
+		{
+			twoDecisionBox.enabled = false;
+		}
+
+		if (!displayingThree)
+		{
+			threeDecisionBox.enabled = false;
+		}
+
+		if (!displayingFour)
+		{
+			fourDecisionBox.enabled = false;
+		}
 		
 		// If warning text is enabled and the amount of time that the text should be shown for is set
 		if (warning.enabled && warningTime != 0.0f) {
@@ -244,15 +264,15 @@ public class uiSystem : MonoBehaviour {
 
 		fourDecision1.text = message1;
 
-		Vector3 position1 = fourDecision1.transform.position;
+		Vector3 position1 = fourDecision1.transform.localPosition;
 		position1.x = .5f;
 		position1.y = .22f;
-		fourDecision1.transform.position = position1;
+		fourDecision1.transform.localPosition = position1;
 
-		Vector3 _position1 = decide1Box.transform.position;
+		Vector3 _position1 = decide1Box.transform.localPosition;
 		_position1.x = 0f;
 		_position1.y = -.34f;
-		decide1Box.transform.position = _position1;
+		decide1Box.transform.localPosition = _position1;
 
 		fourDecision1Box.pixelInset = new Rect (-185, fourDecision1Box.pixelInset.y, fourDecision1Box.pixelInset.width, fourDecision1Box.pixelInset.height);
 		
@@ -274,25 +294,25 @@ public class uiSystem : MonoBehaviour {
 		fourDecision1.text = message1;
 		fourDecision2.text = message2;
 
-		Vector3 position1 = fourDecision1.transform.position;
+		Vector3 position1 = fourDecision1.transform.localPosition;
 		position1.x = .44f;
 		position1.y = .15f;
-		fourDecision1.transform.position = position1;
+		fourDecision1.transform.localPosition = position1;
 
-		Vector3 position2 = fourDecision2.transform.position;
+		Vector3 position2 = fourDecision2.transform.localPosition;
 		position2.x = .56f;
 		position2.y = .15f;
-		fourDecision2.transform.position = position2;
+		fourDecision2.transform.localPosition = position2;
 
-		Vector3 _position1 = decide1Box.transform.position;
+		Vector3 _position1 = decide1Box.transform.localPosition;
 		_position1.x = -.36f;
 		_position1.y = -.42f;
-		decide1Box.transform.position = _position1;
+		decide1Box.transform.localPosition = _position1;
 
-		Vector3 _position2 = decide2Box.transform.position;
+		Vector3 _position2 = decide2Box.transform.localPosition;
 		_position2.x = .36f;
 		_position2.y = -.42f;
-		decide2Box.transform.position = _position2;
+		decide2Box.transform.localPosition = _position2;
 
 		fourDecision1Box.pixelInset = new Rect (-365, fourDecision1Box.pixelInset.y, fourDecision1Box.pixelInset.width, fourDecision1Box.pixelInset.height);
 		fourDecision2Box.pixelInset = new Rect (-5, fourDecision2Box.pixelInset.y, fourDecision2Box.pixelInset.width, fourDecision2Box.pixelInset.height);
@@ -318,35 +338,35 @@ public class uiSystem : MonoBehaviour {
 		fourDecision2.text = message2;
 		fourDecision3.text = message3;
 
-		Vector3 position1 = fourDecision1.transform.position;
+		Vector3 position1 = fourDecision1.transform.localPosition;
 		position1.x = .5f;
 		position1.y = .22f;
-		fourDecision1.transform.position = position1;
+		fourDecision1.transform.localPosition = position1;
 
-		Vector2 position2 = fourDecision2.transform.position;
+		Vector2 position2 = fourDecision2.transform.localPosition;
 		position2.x = .44f;
 		position2.y = .15f;
-		fourDecision2.transform.position = position2;
+		fourDecision2.transform.localPosition = position2;
 		
-		Vector3 position3 = fourDecision3.transform.position;
+		Vector3 position3 = fourDecision3.transform.localPosition;
 		position3.x = .56f;
 		position3.y = .15f;
-		fourDecision3.transform.position = position3;
+		fourDecision3.transform.localPosition = position3;
 
-		Vector3 _position1 = decide1Box.transform.position;
+		Vector3 _position1 = decide1Box.transform.localPosition;
 		_position1.x = 0f;
 		_position1.y = -.34f;
-		decide1Box.transform.position = _position1;
+		decide1Box.transform.localPosition = _position1;
 
-		Vector3 _position2 = decide2Box.transform.position;
+		Vector3 _position2 = decide2Box.transform.localPosition;
 		_position2.x = -.36f;
 		_position2.y = -.42f;
-		decide2Box.transform.position = _position2;
+		decide2Box.transform.localPosition = _position2;
 		
-		Vector3 _position3 = decide3Box.transform.position;
+		Vector3 _position3 = decide3Box.transform.localPosition;
 		_position3.x = .36f;
 		_position3.y = -.42f;
-		decide3Box.transform.position = _position3;
+		decide3Box.transform.localPosition = _position3;
 		
 		fourDecision1Box.pixelInset = new Rect (-185, fourDecision1Box.pixelInset.y, fourDecision1Box.pixelInset.width, fourDecision1Box.pixelInset.height);
 		fourDecision2Box.pixelInset = new Rect (-365, fourDecision2Box.pixelInset.y, fourDecision2Box.pixelInset.width, fourDecision2Box.pixelInset.height);
@@ -376,45 +396,45 @@ public class uiSystem : MonoBehaviour {
 		fourDecision3.text = message3;
 		fourDecision4.text = message4;
 
-		Vector3 position1 = fourDecision1.transform.position;
+		Vector3 position1 = fourDecision1.transform.localPosition;
 		position1.x = .47f;
 		position1.y = .22f;
-		fourDecision1.transform.position = position1;
+		fourDecision1.transform.localPosition = position1;
 		
-		Vector2 position2 = fourDecision2.transform.position;
+		Vector2 position2 = fourDecision2.transform.localPosition;
 		position2.x = .41f;
 		position2.y = .14f;
-		fourDecision2.transform.position = position2;
+		fourDecision2.transform.localPosition = position2;
 		
-		Vector3 position3 = fourDecision3.transform.position;
+		Vector3 position3 = fourDecision3.transform.localPosition;
 		position3.x = .53f;
 		position3.y = .22f;
-		fourDecision3.transform.position = position3;
+		fourDecision3.transform.localPosition = position3;
 
-		Vector4 position4 = fourDecision4.transform.position;
+		Vector4 position4 = fourDecision4.transform.localPosition;
 		position4.x = .59f;
 		position4.y = .14f;
-		fourDecision4.transform.position = position4;
+		fourDecision4.transform.localPosition = position4;
 
-		Vector3 _position1 = decide1Box.transform.position;
+		Vector3 _position1 = decide1Box.transform.localPosition;
 		_position1.x = -.31f;
 		_position1.y = -.34f;
-		decide1Box.transform.position = _position1;
+		decide1Box.transform.localPosition = _position1;
 
-		Vector3 _position2 = decide2Box.transform.position;
+		Vector3 _position2 = decide2Box.transform.localPosition;
 		_position2.x = -.4f;
 		_position2.y = -.43f;
-		decide2Box.transform.position = _position2;
+		decide2Box.transform.localPosition = _position2;
 
-		Vector3 _position3 = decide3Box.transform.position;
+		Vector3 _position3 = decide3Box.transform.localPosition;
 		_position3.x = .31f;
 		_position3.y = -.34f;
-		decide3Box.transform.position = _position3;
+		decide3Box.transform.localPosition = _position3;
 
-		Vector3 _position4 = decide4Box.transform.position;
+		Vector3 _position4 = decide4Box.transform.localPosition;
 		_position4.x = .4f;
 		_position4.y = -.43f;
-		decide4Box.transform.position = _position4;
+		decide4Box.transform.localPosition = _position4;
 		
 		fourDecision1Box.pixelInset = new Rect (-365, fourDecision1Box.pixelInset.y, fourDecision1Box.pixelInset.width, fourDecision1Box.pixelInset.height);
 		fourDecision2Box.pixelInset = new Rect (-365, fourDecision2Box.pixelInset.y, fourDecision2Box.pixelInset.width, fourDecision2Box.pixelInset.height);
@@ -458,10 +478,10 @@ public class uiSystem : MonoBehaviour {
 		words = text.Split(" "[0]); //Split the string into seperate words
 		result = "";
 
-		float a = 70.0f;
-		float b = 10.0f;
+		float a = 40.0f;
+		float b = -35.0f;
 
-		subtitleBox.pixelInset = new Rect (-550, b, 1095, a);
+		subtitleBox.pixelInset = new Rect (-507, b, 1014, a);
 		
 		for( var index = 0; index < words.Length; index++)
 		{
@@ -483,9 +503,9 @@ public class uiSystem : MonoBehaviour {
 				result += "\n" + word;
 				numberOfLines += 1;
 				block.text = result;
-				a += 30.0f;
-				b -= 30.0f;
-				subtitleBox.pixelInset = new Rect (-550, b, 1095, a);
+				a += 28.0f;
+				b -= 28.0f;
+				subtitleBox.pixelInset = new Rect (-507, b, 1014, a);
 			}
 		}
 	}

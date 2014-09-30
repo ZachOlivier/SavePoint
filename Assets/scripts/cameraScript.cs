@@ -62,7 +62,7 @@ public class cameraScript : MonoBehaviour {
 			cam.enabled = false;
 			
 			// Display a message on the screen that will stay for 4 seconds
-			message.displayWarning("Inventory mode active..", 4);
+			message.displayWarning("Inventory mode active.. \n Press Tab to Close", 4);
 		}
 		
 		// Else if the player pressed the tab key and the camera is currently in inventory mode and can change

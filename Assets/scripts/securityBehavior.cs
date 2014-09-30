@@ -482,10 +482,10 @@ public class securityBehavior : MonoBehaviour {
 						message.displayWarning("Click a decision to continue", 10);
 						message.displayInfo("William Hobb", 10);
 						
-						message.display2Decision("Confide", "Don't Confide", 10);
+						message.display3Decision("Confide", "", "Don't Confide", 10);
 
-						fourDec1.canClick = false;
-						fourDec2.canClick = true;
+						fourDec1.canClick = true;
+						fourDec2.canClick = false;
 						fourDec3.canClick = true;
 						fourDec4.canClick = false;
 						
@@ -762,11 +762,11 @@ public class securityBehavior : MonoBehaviour {
 						message.displayWarning("Click a decision to continue", 10);
 						message.displayInfo("William Hobb", 10);
 						
-						message.display2Decision("News", "How are you?", 10);
+						message.display3Decision("News", "", "How are you?", 10);
 						
 						fourDec1.canClick = true;
-						fourDec2.canClick = true;
-						fourDec3.canClick = false;
+						fourDec2.canClick = false;
+						fourDec3.canClick = true;
 						fourDec4.canClick = false;
 						
 						hasDisplayed = true;
@@ -800,11 +800,11 @@ public class securityBehavior : MonoBehaviour {
 						message.displayWarning("Click a decision to continue", 10);
 						message.displayInfo("William Hobb", 10);
 						
-						message.display2Decision("", "How are you?", 10);
+						message.display3Decision("", "", "How are you?", 10);
 						
 						fourDec1.canClick = false;
-						fourDec2.canClick = true;
-						fourDec3.canClick = false;
+						fourDec2.canClick = false;
+						fourDec3.canClick = true;
 						fourDec4.canClick = false;
 						
 						hasDisplayed = true;

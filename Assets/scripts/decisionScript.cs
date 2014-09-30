@@ -219,6 +219,11 @@ public class decisionScript : MonoBehaviour {
 			message.fourDecision3.enabled = false;
 			message.fourDecision4.enabled = false;
 
+			message.displayingOne 	= false;
+			message.displayingTwo 	= false;
+			message.displayingThree = false;
+			message.displayingFour 	= false;
+
 			fourDecisionOne = false;
 		}
 		
@@ -317,6 +322,11 @@ public class decisionScript : MonoBehaviour {
 			message.fourDecision2.enabled = false;
 			message.fourDecision3.enabled = false;
 			message.fourDecision4.enabled = false;
+
+			message.displayingOne 	= false;
+			message.displayingTwo 	= false;
+			message.displayingThree = false;
+			message.displayingFour 	= false;
 
 			fourDecisionTwo = false;
 		}
@@ -417,6 +427,11 @@ public class decisionScript : MonoBehaviour {
 			message.fourDecision3.enabled = false;
 			message.fourDecision4.enabled = false;
 
+			message.displayingOne 	= false;
+			message.displayingTwo 	= false;
+			message.displayingThree = false;
+			message.displayingFour 	= false;
+
 			fourDecisionThree = false;
 		}
 		
@@ -516,33 +531,30 @@ public class decisionScript : MonoBehaviour {
 			message.fourDecision3.enabled = false;
 			message.fourDecision4.enabled = false;
 
+			message.displayingOne 	= false;
+			message.displayingTwo 	= false;
+			message.displayingThree = false;
+			message.displayingFour 	= false;
+
 			fourDecisionFour = false;
 		}
 	}
 
 	void OnMouseEnter () {
 
-		if (this.gameObject.name == "decideBox1" && canClick) {
-			message.displayInfo("Decision 1 Path", 3);
-			
+		if (this.gameObject.name == "decideBox1" && canClick) {	
 			fourDecisionOne = true;
 		}
 		
 		if (this.gameObject.name == "decideBox2" && canClick) {
-			message.displayInfo("Decision 2 Path", 3);
-			
 			fourDecisionTwo = true;
 		}
 		
 		if (this.gameObject.name == "decideBox3" && canClick) {
-			message.displayInfo("Decision 3 Path", 3);
-			
 			fourDecisionThree = true;
 		}
 		
 		if (this.gameObject.name == "decideBox4" && canClick) {
-			message.displayInfo("Decision 4 Path", 3);
-			
 			fourDecisionFour = true;
 		}
 	}
