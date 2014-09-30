@@ -257,10 +257,10 @@ public class richardBehavior : MonoBehaviour {
 					hasDisplayed = false;
 					
 					message.subtitle.enabled = false;
-					message.decision1.enabled = false;
-					message.decision2.enabled = false;
-					message.decision3.enabled = false;
-					message.decision4.enabled = false;
+					message.fourDecision1.enabled = false;
+					message.fourDecision2.enabled = false;
+					message.fourDecision3.enabled = false;
+					message.fourDecision4.enabled = false;
 					message.info.enabled = false;
 					
 					dec1.canClick = false;
@@ -328,7 +328,7 @@ public class richardBehavior : MonoBehaviour {
 					message.displayWarning("Click a decision to continue", 10);
 					message.displayInfo("Richard Fields", 10);
 					
-					message.displayDecision("Direct", "Friendly", "Annoyed", "", 10);
+					message.display3Decision("Direct", "Friendly", "Annoyed", 10);
 					
 					dec1.canClick = true;
 					dec2.canClick = true;
@@ -470,7 +470,7 @@ public class richardBehavior : MonoBehaviour {
 						message.displayWarning("Click a decision to continue", 15);
 						message.displayInfo("Richard Fields", 15);
 						
-						message.displayDecision("Angry", "Questioning", "Understanding", "Silence", 15);
+						message.display4Decision("Angry", "Questioning", "Understanding", "Silence", 15);
 						
 						dec1.canClick = true;
 						dec2.canClick = true;

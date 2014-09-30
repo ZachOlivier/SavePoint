@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_5_4;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_3;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -39,52 +39,50 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\cameraScript.js" />
-     <Compile Include="Assets\scripts\coreSpin.js" />
-     <Compile Include="Assets\scripts\decisionScript.js" />
-     <Compile Include="Assets\scripts\decisionScript1.js" />
-     <Compile Include="Assets\scripts\decisionScript2.js" />
-     <Compile Include="Assets\scripts\displayInfo.js" />
-     <Compile Include="Assets\scripts\doorScript.js" />
-     <Compile Include="Assets\scripts\enemyBehavior.js" />
-     <Compile Include="Assets\scripts\guiSystem.js" />
-     <Compile Include="Assets\scripts\introScript.js" />
-     <Compile Include="Assets\scripts\mariaBehavior.js" />
-     <Compile Include="Assets\scripts\mariaBehaviorOriginal.js" />
-     <Compile Include="Assets\scripts\menuScript.js" />
-     <Compile Include="Assets\scripts\npcBehaviorOriginal.js" />
-     <Compile Include="Assets\scripts\pictureScript.js" />
-     <Compile Include="Assets\scripts\playerScript.js" />
-     <Compile Include="Assets\scripts\richardBehavior.js" />
-     <Compile Include="Assets\scripts\richardCutscene.js" />
-     <Compile Include="Assets\scripts\rotateScript.js" />
-     <Compile Include="Assets\scripts\securityBehavior.js" />
-     <Compile Include="Assets\scripts\soundScript.js" />
-     <Compile Include="Assets\scripts\timeChanger.js" />
-     <Compile Include="Assets\scripts\uiSystem.js" />
+     <Compile Include="Assets\scripts\JavaScript\cameraScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\coreSpin.js" />
+     <Compile Include="Assets\scripts\JavaScript\decisionScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\decisionScript1.js" />
+     <Compile Include="Assets\scripts\JavaScript\decisionScript2.js" />
+     <Compile Include="Assets\scripts\JavaScript\displayInfo.js" />
+     <Compile Include="Assets\scripts\JavaScript\doorScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\enemyBehavior.js" />
+     <Compile Include="Assets\scripts\JavaScript\guiSystem.js" />
+     <Compile Include="Assets\scripts\JavaScript\introScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\mariaBehavior.js" />
+     <Compile Include="Assets\scripts\JavaScript\mariaBehaviorOriginal.js" />
+     <Compile Include="Assets\scripts\JavaScript\menuScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\npcBehaviorOriginal.js" />
+     <Compile Include="Assets\scripts\JavaScript\pictureScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\playerScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\richardBehavior.js" />
+     <Compile Include="Assets\scripts\JavaScript\richardCutscene.js" />
+     <Compile Include="Assets\scripts\JavaScript\rotateScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\securityBehavior.js" />
+     <Compile Include="Assets\scripts\JavaScript\soundScript.js" />
+     <Compile Include="Assets\scripts\JavaScript\timeChanger.js" />
+     <Compile Include="Assets\scripts\JavaScript\uiSystem.js" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Standard Assets\Tessellation Shaders\BumpedSpecularSmooth.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-     <None Include="Assets\Resources\3D Text Shader.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
-     <None Include="Assets\UVersionControl\README.txt" />
      <None Include="Assets\Standard Assets\Tessellation Shaders\BumpedSpecularDisplacement.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>/Users/robinolivier/SavePoint/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>C:/Users/ZachOlivier/Documents/GitHub/SavePoint/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/guiSystem.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\securityBehavior.cs">
     <Files>
-      <File FileName="Assets/scripts/guiSystem.cs" Line="88" Column="27" />
-      <File FileName="Assets/scripts/cameraScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/scripts/menuScript.cs" Line="124" Column="30" />
+      <File FileName="Assets\scripts\uiSystem.cs" Line="287" Column="33" />
+      <File FileName="Assets\scripts\securityBehavior.cs" Line="313" Column="6" />
+      <File FileName="Assets\scripts\introScript.cs" Line="392" Column="4" />
+      <File FileName="Assets\scripts\mariaBehavior.cs" Line="274" Column="39" />
+      <File FileName="Assets\scripts\richardBehavior.cs" Line="259" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

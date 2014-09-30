@@ -4,10 +4,10 @@ using System.Collections;
 public class decisionScript1 : MonoBehaviour {
 	
 	// Variables to tell whether the mouse is hovering over a decision box
-	public bool decisionOne										= false;
-	public bool decisionTwo										= false;
-	public bool decisionThree										= false;
-	public bool decisionFour										= false;
+	public bool fourDecisionOne										= false;
+	public bool fourDecisionTwo										= false;
+	public bool fourDecisionThree									= false;
+	public bool fourDecisionFour									= false;
 	
 	// Variable to tell whether the decisions can be clicked or not
 	public bool canClick											= false;
@@ -123,7 +123,7 @@ public class decisionScript1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (Input.GetButtonDown("Fire1") && decisionOne && this.gameObject.name == "decision1Box") {
+		if (Input.GetButtonDown("Fire1") && fourDecisionOne && this.gameObject.name == "decideBox1") {
 			
 			talk.hasDisplayed = false;
 			talk.talkSection++;
@@ -213,15 +213,16 @@ public class decisionScript1 : MonoBehaviour {
 			}
 			
 			canClick = false;
-			decisionOne = false;
+
+			message.fourDecision1.enabled = false;
+			message.fourDecision2.enabled = false;
+			message.fourDecision3.enabled = false;
+			message.fourDecision4.enabled = false;
 			
-			message.decision1.enabled = false;
-			message.decision2.enabled = false;
-			message.decision3.enabled = false;
-			message.decision4.enabled = false;
+			fourDecisionOne = false;
 		}
 		
-		if (Input.GetButtonDown("Fire1") && decisionTwo && this.gameObject.name == "decision2Box") {
+		if (Input.GetButtonDown("Fire1") && fourDecisionTwo && this.gameObject.name == "decideBox2") {
 			
 			talk.hasDisplayed = false;
 			talk.talkSection++;
@@ -311,15 +312,16 @@ public class decisionScript1 : MonoBehaviour {
 			}
 			
 			canClick = false;
-			decisionTwo = false;
+
+			message.fourDecision1.enabled = false;
+			message.fourDecision2.enabled = false;
+			message.fourDecision3.enabled = false;
+			message.fourDecision4.enabled = false;
 			
-			message.decision1.enabled = false;
-			message.decision2.enabled = false;
-			message.decision3.enabled = false;
-			message.decision4.enabled = false;
+			fourDecisionTwo = false;
 		}
 		
-		if (Input.GetButtonDown("Fire1") && decisionThree && this.gameObject.name == "decision3Box") {
+		if (Input.GetButtonDown("Fire1") && fourDecisionThree && this.gameObject.name == "decideBox3") {
 			
 			talk.hasDisplayed = false;
 			talk.talkSection++;
@@ -409,15 +411,16 @@ public class decisionScript1 : MonoBehaviour {
 			}
 			
 			canClick = false;
-			decisionThree = false;
+
+			message.fourDecision1.enabled = false;
+			message.fourDecision2.enabled = false;
+			message.fourDecision3.enabled = false;
+			message.fourDecision4.enabled = false;
 			
-			message.decision1.enabled = false;
-			message.decision2.enabled = false;
-			message.decision3.enabled = false;
-			message.decision4.enabled = false;
+			fourDecisionThree = false;
 		}
 		
-		if (Input.GetButtonDown("Fire1") && decisionFour && this.gameObject.name == "decision4Box") {
+		if (Input.GetButtonDown("Fire1") && fourDecisionFour && this.gameObject.name == "decideBox4") {
 			
 			talk.hasDisplayed = false;
 			talk.talkSection++;
@@ -507,58 +510,59 @@ public class decisionScript1 : MonoBehaviour {
 			}
 			
 			canClick = false;
-			decisionFour = false;
+
+			message.fourDecision1.enabled = false;
+			message.fourDecision2.enabled = false;
+			message.fourDecision3.enabled = false;
+			message.fourDecision4.enabled = false;
 			
-			message.decision1.enabled = false;
-			message.decision2.enabled = false;
-			message.decision3.enabled = false;
-			message.decision4.enabled = false;
+			fourDecisionFour = false;
 		}
 	}
-
+	
 	void OnMouseEnter () {
 		
-		if (this.gameObject.name == "decision1Box" && canClick) {
+		if (this.gameObject.name == "decideBox1" && canClick) {
 			message.displayInfo("Decision 1 Path", 3);
 			
-			decisionOne = true;
+			fourDecisionOne = true;
 		}
 		
-		if (this.gameObject.name == "decision2Box" && canClick) {
+		if (this.gameObject.name == "decideBox2" && canClick) {
 			message.displayInfo("Decision 2 Path", 3);
 			
-			decisionTwo = true;
+			fourDecisionTwo = true;
 		}
 		
-		if (this.gameObject.name == "decision3Box" && canClick) {
+		if (this.gameObject.name == "decideBox3" && canClick) {
 			message.displayInfo("Decision 3 Path", 3);
 			
-			decisionThree = true;
+			fourDecisionThree = true;
 		}
 		
-		if (this.gameObject.name == "decision4Box" && canClick) {
+		if (this.gameObject.name == "decideBox4" && canClick) {
 			message.displayInfo("Decision 4 Path", 3);
 			
-			decisionFour = true;
+			fourDecisionFour = true;
 		}
 	}
 	
 	void OnMouseExit () {
 		
-		if (this.gameObject.name == "decision1Box" && canClick) {
-			decisionOne = false;
+		if (this.gameObject.name == "decideBox1" && canClick) {
+			fourDecisionOne = false;
 		}
 		
-		if (this.gameObject.name == "decision2Box" && canClick) {
-			decisionTwo = false;
+		if (this.gameObject.name == "decideBox2" && canClick) {
+			fourDecisionTwo = false;
 		}
 		
-		if (this.gameObject.name == "decision3Box" && canClick) {
-			decisionThree = false;
+		if (this.gameObject.name == "decideBox3" && canClick) {
+			fourDecisionThree = false;
 		}
 		
-		if (this.gameObject.name == "decision4Box" && canClick) {
-			decisionFour = false;
+		if (this.gameObject.name == "decideBox4" && canClick) {
+			fourDecisionFour = false;
 		}
 	}
 }

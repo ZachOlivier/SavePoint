@@ -3,6 +3,11 @@ using System.Collections;
 
 public class guiSystem : MonoBehaviour {
 
+	public Texture2D mouseTexture;
+
+	private int mouseWidth = 32;
+	private int mouseHeight = 32;
+	
 	public Texture2D[] healthNum;
 	public Texture2D[] itemNum;
 
@@ -44,11 +49,17 @@ public class guiSystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
+		Screen.showCursor = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (Screen.showCursor == true)
+		{
+			Screen.showCursor = false;
+		}
 	
 		if (healthGUI.texture != healthNum[player.health - 1])
 		{
@@ -115,5 +126,10 @@ public class guiSystem : MonoBehaviour {
 		{
 			
 		}
+	}
+
+	void OnGUI () {
+
+		GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, mouseWidth, mouseHeight), mouseTexture);
 	}
 }

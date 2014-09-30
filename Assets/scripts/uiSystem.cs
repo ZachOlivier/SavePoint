@@ -15,19 +15,33 @@ public class uiSystem : MonoBehaviour {
 	public float decisionTime		= 0.0f;
 	public float infoTime			= 0.0f;
 
+	public bool displayingOne	= false;
+	public bool displayingTwo	= false;
+	public bool displayingThree = false;
+	public bool displayingFour	= false;
+
+	public GameObject decide1Box;
+	public GameObject decide2Box;
+	public GameObject decide3Box;
+	public GameObject decide4Box;
+
 	// Variables to hold the guiTexts so that we can access their scripts
-	public GUIText decision1;
-	public GUIText decision2;
-	public GUIText decision3;
-	public GUIText decision4;
+	public GUIText fourDecision1;
+	public GUIText fourDecision2;
+	public GUIText fourDecision3;
+	public GUIText fourDecision4;
 	public GUIText info;
 	public GUIText subtitle;
 	public GUIText warning;
 
-	public GUITexture decision1Box;
-	public GUITexture decision2Box;
-	public GUITexture decision3Box;
-	public GUITexture decision4Box;
+	public GUITexture oneDecisionBox;
+	public GUITexture twoDecisionBox;
+	public GUITexture threeDecisionBox;
+	public GUITexture fourDecisionBox;
+	public GUITexture fourDecision1Box;
+	public GUITexture fourDecision2Box;
+	public GUITexture fourDecision3Box;
+	public GUITexture fourDecision4Box;
 	public GUITexture infoBox;
 	public GUITexture subtitleBox;
 	public GUITexture warningBox;
@@ -61,25 +75,25 @@ public class uiSystem : MonoBehaviour {
 		{
 			subtitleBox.enabled = false;
 		}
-		
-		if (!decision1.enabled)
+
+		if (!fourDecision1.enabled)
 		{
-			decision1Box.enabled = false;
+			fourDecision1Box.enabled = false;
 		}
-		
-		if (!decision2.enabled)
+
+		if (!fourDecision2.enabled)
 		{
-			decision2Box.enabled = false;
+			fourDecision2Box.enabled = false;
 		}
-		
-		if (!decision3.enabled)
+
+		if (!fourDecision3.enabled)
 		{
-			decision3Box.enabled = false;
+			fourDecision3Box.enabled = false;
 		}
-		
-		if (!decision4.enabled)
+
+		if (!fourDecision4.enabled)
 		{
-			decision4Box.enabled = false;
+			fourDecision4Box.enabled = false;
 		}
 		
 		// If warning text is enabled and the amount of time that the text should be shown for is set
@@ -111,19 +125,69 @@ public class uiSystem : MonoBehaviour {
 			}
 		}
 		
-		if (decision1.enabled && decisionTime != 0.0f) {
+		if (displayingOne && decisionTime != 0.0f) {
 			decisionTimer += Time.deltaTime;
 			
 			if (decisionTimer > decisionTime) {
-				decision1.enabled = false;
-				decision2.enabled = false;
-				decision3.enabled = false;
-				decision4.enabled = false;
+				fourDecision1.enabled = false;
+				oneDecisionBox.enabled = false;
+				fourDecision1Box.enabled = false;
+
+				displayingOne = false;
 				
-				decision1Box.enabled = false;
-				decision2Box.enabled = false;
-				decision3Box.enabled = false;
-				decision4Box.enabled = false;
+				decisionTimer = 0.0f;
+			}
+		}
+
+		else if (displayingTwo && decisionTime != 0.0f) {
+			decisionTimer += Time.deltaTime;
+			
+			if (decisionTimer > decisionTime) {
+				fourDecision1.enabled = false;
+				fourDecision2.enabled = false;
+				twoDecisionBox.enabled = false;
+				fourDecision1Box.enabled = false;
+				fourDecision2Box.enabled = false;
+				
+				displayingTwo = false;
+				
+				decisionTimer = 0.0f;
+			}
+		}
+
+		else if (displayingThree && decisionTime != 0.0f) {
+			decisionTimer += Time.deltaTime;
+			
+			if (decisionTimer > decisionTime) {
+				fourDecision1.enabled = false;
+				fourDecision2.enabled = false;
+				fourDecision3.enabled = false;
+				threeDecisionBox.enabled = false;
+				fourDecision1Box.enabled = false;
+				fourDecision2Box.enabled = false;
+				fourDecision3Box.enabled = false;
+				
+				displayingThree = false;
+				
+				decisionTimer = 0.0f;
+			}
+		}
+
+		else if (displayingFour && decisionTime != 0.0f) {
+			decisionTimer += Time.deltaTime;
+			
+			if (decisionTimer > decisionTime) {
+				fourDecision1.enabled = false;
+				fourDecision2.enabled = false;
+				fourDecision3.enabled = false;
+				fourDecision4.enabled = false;
+				fourDecisionBox.enabled = false;
+				fourDecision1Box.enabled = false;
+				fourDecision2Box.enabled = false;
+				fourDecision3Box.enabled = false;
+				fourDecision4Box.enabled = false;
+				
+				displayingFour = false;
 				
 				decisionTimer = 0.0f;
 			}
@@ -176,34 +240,203 @@ public class uiSystem : MonoBehaviour {
 	}
 	
 	// This void displays the last subtitle in gray text at the bottom of the screen, and decisions the player can make in white text below the subtitle
-	public void displayDecision (string message1, string message2, string message3, string message4, float time) {
-		decision1.text = message1;
-		decision2.text = message2;
-		decision3.text = message3;
-		decision4.text = message4;
+	public void display1Decision (string message1, float time) {
+
+		fourDecision1.text = message1;
+
+		Vector3 position1 = fourDecision1.transform.position;
+		position1.x = .5f;
+		position1.y = .22f;
+		fourDecision1.transform.position = position1;
+
+		Vector3 _position1 = decide1Box.transform.position;
+		_position1.x = 0f;
+		_position1.y = -.34f;
+		decide1Box.transform.position = _position1;
+
+		fourDecision1Box.pixelInset = new Rect (-185, fourDecision1Box.pixelInset.y, fourDecision1Box.pixelInset.width, fourDecision1Box.pixelInset.height);
 		
 		decisionTime = time;
 		
 		decisionTimer = 0.0f;
 		
-		if (!decision1.enabled) {
-			decision1.enabled = true;
-			decision1Box.enabled = true;
+		if (!displayingOne) {
+			fourDecision1.enabled = true;
+			fourDecision1Box.enabled = true;
+			oneDecisionBox.enabled = true;
+
+			displayingOne = true;
 		}
+	}
+
+	// This void displays the last subtitle in gray text at the bottom of the screen, and decisions the player can make in white text below the subtitle
+	public void display2Decision (string message1, string message2, float time) {
+		fourDecision1.text = message1;
+		fourDecision2.text = message2;
+
+		Vector3 position1 = fourDecision1.transform.position;
+		position1.x = .44f;
+		position1.y = .15f;
+		fourDecision1.transform.position = position1;
+
+		Vector3 position2 = fourDecision2.transform.position;
+		position2.x = .56f;
+		position2.y = .15f;
+		fourDecision2.transform.position = position2;
+
+		Vector3 _position1 = decide1Box.transform.position;
+		_position1.x = -.36f;
+		_position1.y = -.42f;
+		decide1Box.transform.position = _position1;
+
+		Vector3 _position2 = decide2Box.transform.position;
+		_position2.x = .36f;
+		_position2.y = -.42f;
+		decide2Box.transform.position = _position2;
+
+		fourDecision1Box.pixelInset = new Rect (-365, fourDecision1Box.pixelInset.y, fourDecision1Box.pixelInset.width, fourDecision1Box.pixelInset.height);
+		fourDecision2Box.pixelInset = new Rect (-5, fourDecision2Box.pixelInset.y, fourDecision2Box.pixelInset.width, fourDecision2Box.pixelInset.height);
 		
-		if (!decision2.enabled) {
-			decision2.enabled = true;
-			decision2Box.enabled = true;
+		decisionTime = time;
+		
+		decisionTimer = 0.0f;
+		
+		if (!displayingTwo) {
+			fourDecision1.enabled = true;
+			fourDecision2.enabled = true;
+			fourDecision1Box.enabled = true;
+			fourDecision2Box.enabled = true;
+			twoDecisionBox.enabled = true;
+
+			displayingTwo = true;
 		}
+	}
+
+	// This void displays the last subtitle in gray text at the bottom of the screen, and decisions the player can make in white text below the subtitle
+	public void display3Decision (string message1, string message2, string message3, float time) {
+		fourDecision1.text = message1;
+		fourDecision2.text = message2;
+		fourDecision3.text = message3;
+
+		Vector3 position1 = fourDecision1.transform.position;
+		position1.x = .5f;
+		position1.y = .22f;
+		fourDecision1.transform.position = position1;
+
+		Vector2 position2 = fourDecision2.transform.position;
+		position2.x = .44f;
+		position2.y = .15f;
+		fourDecision2.transform.position = position2;
 		
-		if (!decision3.enabled) {
-			decision3.enabled = true;
-			decision3Box.enabled = true;
+		Vector3 position3 = fourDecision3.transform.position;
+		position3.x = .56f;
+		position3.y = .15f;
+		fourDecision3.transform.position = position3;
+
+		Vector3 _position1 = decide1Box.transform.position;
+		_position1.x = 0f;
+		_position1.y = -.34f;
+		decide1Box.transform.position = _position1;
+
+		Vector3 _position2 = decide2Box.transform.position;
+		_position2.x = -.36f;
+		_position2.y = -.42f;
+		decide2Box.transform.position = _position2;
+		
+		Vector3 _position3 = decide3Box.transform.position;
+		_position3.x = .36f;
+		_position3.y = -.42f;
+		decide3Box.transform.position = _position3;
+		
+		fourDecision1Box.pixelInset = new Rect (-185, fourDecision1Box.pixelInset.y, fourDecision1Box.pixelInset.width, fourDecision1Box.pixelInset.height);
+		fourDecision2Box.pixelInset = new Rect (-365, fourDecision2Box.pixelInset.y, fourDecision2Box.pixelInset.width, fourDecision2Box.pixelInset.height);
+		fourDecision3Box.pixelInset = new Rect (-5, fourDecision3Box.pixelInset.y, fourDecision3Box.pixelInset.width, fourDecision3Box.pixelInset.height);
+		
+		decisionTime = time;
+		
+		decisionTimer = 0.0f;
+		
+		if (!displayingThree) {
+			fourDecision1.enabled = true;
+			fourDecision2.enabled = true;
+			fourDecision3.enabled = true;
+			fourDecision1Box.enabled = true;
+			fourDecision2Box.enabled = true;
+			fourDecision3Box.enabled = true;
+			threeDecisionBox.enabled = true;
+			
+			displayingThree = true;
 		}
+	}
+
+	// This void displays the last subtitle in gray text at the bottom of the screen, and decisions the player can make in white text below the subtitle
+	public void display4Decision (string message1, string message2, string message3, string message4, float time) {
+		fourDecision1.text = message1;
+		fourDecision2.text = message2;
+		fourDecision3.text = message3;
+		fourDecision4.text = message4;
+
+		Vector3 position1 = fourDecision1.transform.position;
+		position1.x = .47f;
+		position1.y = .22f;
+		fourDecision1.transform.position = position1;
 		
-		if (!decision4.enabled) {
-			decision4.enabled = true;
-			decision4Box.enabled = true;
+		Vector2 position2 = fourDecision2.transform.position;
+		position2.x = .41f;
+		position2.y = .14f;
+		fourDecision2.transform.position = position2;
+		
+		Vector3 position3 = fourDecision3.transform.position;
+		position3.x = .53f;
+		position3.y = .22f;
+		fourDecision3.transform.position = position3;
+
+		Vector4 position4 = fourDecision4.transform.position;
+		position4.x = .59f;
+		position4.y = .14f;
+		fourDecision4.transform.position = position4;
+
+		Vector3 _position1 = decide1Box.transform.position;
+		_position1.x = -.31f;
+		_position1.y = -.34f;
+		decide1Box.transform.position = _position1;
+
+		Vector3 _position2 = decide2Box.transform.position;
+		_position2.x = -.4f;
+		_position2.y = -.43f;
+		decide2Box.transform.position = _position2;
+
+		Vector3 _position3 = decide3Box.transform.position;
+		_position3.x = .31f;
+		_position3.y = -.34f;
+		decide3Box.transform.position = _position3;
+
+		Vector3 _position4 = decide4Box.transform.position;
+		_position4.x = .4f;
+		_position4.y = -.43f;
+		decide4Box.transform.position = _position4;
+		
+		fourDecision1Box.pixelInset = new Rect (-365, fourDecision1Box.pixelInset.y, fourDecision1Box.pixelInset.width, fourDecision1Box.pixelInset.height);
+		fourDecision2Box.pixelInset = new Rect (-365, fourDecision2Box.pixelInset.y, fourDecision2Box.pixelInset.width, fourDecision2Box.pixelInset.height);
+		fourDecision3Box.pixelInset = new Rect (-5, fourDecision3Box.pixelInset.y, fourDecision3Box.pixelInset.width, fourDecision3Box.pixelInset.height);
+		fourDecision4Box.pixelInset = new Rect (-5, fourDecision4Box.pixelInset.y, fourDecision4Box.pixelInset.width, fourDecision4Box.pixelInset.height);
+		
+		decisionTime = time;
+		
+		decisionTimer = 0.0f;
+		
+		if (!displayingFour) {
+			fourDecision1.enabled = true;
+			fourDecision2.enabled = true;
+			fourDecision3.enabled = true;
+			fourDecision4.enabled = true;
+			fourDecision1Box.enabled = true;
+			fourDecision2Box.enabled = true;
+			fourDecision3Box.enabled = true;
+			fourDecision4Box.enabled = true;
+			fourDecisionBox.enabled = true;
+			
+			displayingFour = true;
 		}
 	}
 	

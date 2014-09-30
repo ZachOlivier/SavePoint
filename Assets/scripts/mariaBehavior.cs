@@ -272,10 +272,10 @@ public class mariaBehavior : MonoBehaviour {
 					hasDisplayed = false;
 					
 					message.subtitle.enabled = false;
-					message.decision1.enabled = false;
-					message.decision2.enabled = false;
-					message.decision3.enabled = false;
-					message.decision4.enabled = false;
+					message.fourDecision1.enabled = false;
+					message.fourDecision2.enabled = false;
+					message.fourDecision3.enabled = false;
+					message.fourDecision4.enabled = false;
 					message.info.enabled = false;
 					
 					dec1.canClick = false;
@@ -347,7 +347,7 @@ public class mariaBehavior : MonoBehaviour {
 					message.displayWarning("Click a decision to continue", 10);
 					message.displayInfo("Maria Figueroa", 10);
 					
-					message.displayDecision("Polite", "Direct", "Annoyed", "", 10);
+					message.display3Decision("Polite", "Direct", "Annoyed", 10);
 					
 					dec1.canClick = true;
 					dec2.canClick = true;

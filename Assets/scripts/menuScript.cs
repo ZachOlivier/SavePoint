@@ -18,7 +18,7 @@ public class menuScript : MonoBehaviour {
 	public GameObject pc;
 	public GameObject npc;
 	public GameObject text;
-	public GameObject picture;
+	//public GameObject picture;
 
 	public GUIStyle myStyle;
 
@@ -28,7 +28,7 @@ public class menuScript : MonoBehaviour {
 	private playerScript	talk;
 	private cameraScript	inventory;
 	private uiSystem		message;
-	private pictureScript	pic;
+	//private pictureScript	pic;
 
 	void Awake () {
 
@@ -39,7 +39,7 @@ public class menuScript : MonoBehaviour {
 		talk 		= pc.GetComponent <playerScript> ();
 		inventory 	= this.GetComponent <cameraScript> ();
 		message 	= text.GetComponent <uiSystem> ();
-		pic 		= picture.GetComponent <pictureScript> ();
+		//pic 		= picture.GetComponent <pictureScript> ();
 	}
 
 	// Use this for initialization
