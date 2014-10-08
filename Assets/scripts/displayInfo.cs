@@ -158,7 +158,16 @@ public class displayInfo : MonoBehaviour {
 				else
 				{
 					message.displayInfo("IC core", 5);
-					message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time.", 5);
+
+					if (Application.loadedLevel == 1)
+					{
+						message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time.", 5);
+					}
+
+					else if (Application.loadedLevel == 3)
+					{
+						message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time. I should check to see if it's still working. I may need to get closer.", 7);
+					}
 				}
 			}
 			
@@ -266,7 +275,16 @@ public class displayInfo : MonoBehaviour {
 			else if (this.gameObject.name == "Core" && onCore && canDisplay && Input.GetButtonDown("Fire2"))
 			{
 				message.displayInfo("IC core", 5);
-				message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time.", 5);
+
+				if (Application.loadedLevel == 1)
+				{
+					message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time.", 5);
+				}
+				
+				else if (Application.loadedLevel == 3)
+				{
+					message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time. I should check to see if it's still working. I may need to get closer.", 7);
+				}
 				
 				wasInspected = true;
 			}
@@ -302,10 +320,10 @@ public class displayInfo : MonoBehaviour {
 			
 			if (this.gameObject.name == "badge" && wasInspected && canDisplay && canTouch)
 			{
-				message.displayWarning("Press T to Take", 100);
+				message.displayWarning("Press E to Take", 100);
 			}
 			
-			if (this.gameObject.name == "badge" && canDisplay && wasInspected && Input.GetButtonDown("Action"))
+			if (this.gameObject.name == "badge" && canDisplay && wasInspected && Input.GetButtonDown("Talk"))
 			{
 				message.displayWarning("Badge Taken \n Press Tab to Open Inventory", 5);
 				message.displaySubtitle("I’m sure he won’t mind if I borrow this.", 5);
@@ -326,10 +344,10 @@ public class displayInfo : MonoBehaviour {
 			
 			if (this.gameObject.name == "phone" && wasInspected && canDisplay && !calledHome && canTouch)
 			{
-				message.displayWarning("Press T to Call Home", 100);
+				message.displayWarning("Press E to Call Home", 100);
 			}
 			
-			if (this.gameObject.name == "phone" && canDisplay && wasInspected && !calledHome && Input.GetButtonDown("Action"))
+			if (this.gameObject.name == "phone" && canDisplay && wasInspected && !calledHome && Input.GetButtonDown("Talk"))
 			{
 				message.displayWarning("Called Home", 5);
 				message.displaySubtitle("They need me at home, I should hurry.", 5);

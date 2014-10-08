@@ -42,9 +42,13 @@ public class guiSystem : MonoBehaviour {
 		player 		= PC.GetComponent <playerScript> ();
 		inv		 	= holder.GetComponent <cameraScript> ();
 		m			= holder.GetComponent <menuScript> ();
-		key 		= npc.GetComponent <securityBehavior> ();
 		//badge 		= maria.GetComponent <mariaBehavior> ();
-		badge 		= picture.GetComponent <pictureScript> ();
+
+		if (Application.loadedLevel == 1)
+		{
+			key 		= npc.GetComponent <securityBehavior> ();
+			badge 		= picture.GetComponent <pictureScript> ();
+		}
 	}
 
 	// Use this for initialization
@@ -65,58 +69,23 @@ public class guiSystem : MonoBehaviour {
 		{
 			healthGUI.texture = healthNum[player.health - 1];
 		}
-		
+
 		if (inv.cameraMode == 1)
 		{
 			if (!inventory.enabled)
 			{
 				inventory.enabled = true;
 			}
-			
-			if (key.talkCount >= 2)
-			{
-				if (!item1.enabled)
-				{
-					item1.enabled = true;
-				}
-			}
-			
-			if (badge.tookPicture == true)
-			{
-				if (!item2.enabled)
-				{
-					//Be sure to uncomment this part in order to make the badge the screenshot!
-					//item2GUI.guiTexture.texture = Resources.Load("screenshot.png");
-					
-					item2.enabled = true;
-				}
-			}
-			
-			if (badgeTaken == true)
-			{
-				if (!item3.enabled)
-				{
-					item3.enabled = true;
-				}
-			}
 		}
-		
+
 		else if (inv.cameraMode == 0)
 		{
 			if (inventory.enabled)
 			{
 				inventory.enabled = false;
 			}
-			
-			if (item1.enabled || item2.enabled || item3.enabled || item4.enabled)
-			{
-				item1.enabled = false;
-				item2.enabled = false;
-				item3.enabled = false;
-				item4.enabled = false;
-			}
 		}
-		
+
 		if (m.menuMode == 1)
 		{
 			
@@ -125,6 +94,55 @@ public class guiSystem : MonoBehaviour {
 		else if (m.menuMode == 0)
 		{
 			
+		}
+		
+		if (Application.loadedLevel == 1)
+		{
+			if (inv.cameraMode == 1)
+			{	
+				if (key.talkCount >= 2)
+				{
+					if (!item1.enabled)
+					{
+						item1.enabled = true;
+					}
+				}
+				
+				if (badge.tookPicture == true)
+				{
+					if (!item2.enabled)
+					{
+						//Be sure to uncomment this part in order to make the badge the screenshot!
+						//item2GUI.guiTexture.texture = Resources.Load("screenshot.png");
+						
+						item2.enabled = true;
+					}
+				}
+				
+				if (badgeTaken == true)
+				{
+					if (!item3.enabled)
+					{
+						item3.enabled = true;
+					}
+				}
+			}
+			
+			else if (inv.cameraMode == 0)
+			{	
+				if (item1.enabled || item2.enabled || item3.enabled || item4.enabled)
+				{
+					item1.enabled = false;
+					item2.enabled = false;
+					item3.enabled = false;
+					item4.enabled = false;
+				}
+			}
+		}
+
+		else if (Application.loadedLevel == 3)
+		{
+
 		}
 	}
 

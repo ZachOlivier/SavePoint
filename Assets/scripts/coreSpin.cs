@@ -27,5 +27,10 @@ public class coreSpin : MonoBehaviour {
 		{
 			this.transform.Rotate(Vector3.back * Time.deltaTime * rotationSpeed);
 		}
+
+		else
+		{
+			this.transform.Rotate(Vector3.back * Time.deltaTime * rotationSpeed);
+		}
 	}
 }

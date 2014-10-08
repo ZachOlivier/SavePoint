@@ -9,7 +9,7 @@ public class menuScript : MonoBehaviour {
 	public int btnY	= 0;
 
 	// Variable to tell if the menu is open
-	public double menuMode	= 0;
+	public int menuMode	= 0;
 
 	// Variable to tell if the menu can open or not
 	public bool canMenu	= true;
@@ -115,7 +115,6 @@ public class menuScript : MonoBehaviour {
 	
 	void OnGUI ()
 	{
-		
 		if (menuMode == 1)
 		{
 			btnX = (Screen.width / 2) - (btnW / 2);
@@ -190,8 +189,16 @@ public class menuScript : MonoBehaviour {
 				Time.timeScale = 1.0f;
 				
 				menuMode = 0;
-				
-				Application.LoadLevel(1);
+
+				if (Application.loadedLevel == 1)
+				{
+					Application.LoadLevel(1);
+				}
+
+				else if (Application.loadedLevel == 3)
+				{
+					Application.LoadLevel(3);
+				}
 			}
 		}
 		

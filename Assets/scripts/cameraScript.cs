@@ -62,7 +62,7 @@ public class cameraScript : MonoBehaviour {
 			cam.enabled = false;
 			
 			// Display a message on the screen that will stay for 4 seconds
-			message.displayWarning("Inventory mode active.. \n Press Tab to Close", 4);
+			message.displayWarning("Inventory mode active.. \n Press Tab to Close", 10000);
 		}
 		
 		// Else if the player pressed the tab key and the camera is currently in inventory mode and can change
@@ -70,15 +70,20 @@ public class cameraScript : MonoBehaviour {
 			cameraMode = 0;
 			//Time.timeScale = 1.0;
 
-			if (!pic.canPicture)
+			if (Application.loadedLevel == 1)
 			{
-			movement.enabled = true;
+				if (!pic.canPicture)
+				{
+					movement.enabled = true;
+				}
+				
+				else {
+					movement.enabled = false;
+				}
 			}
 
-			else {
-				movement.enabled = false;
-			}
-			
+			movement.enabled = true;
+
 			menu.canMenu = true;
 			
 			mouse.enabled = true;
@@ -95,13 +100,16 @@ public class cameraScript : MonoBehaviour {
 				cameraMode = 0;
 				//Time.timeScale = 1.0;
 				
-				if (!pic.canPicture)
+				if (Application.loadedLevel == 1)
 				{
-					movement.enabled = true;
-				}
-				
-				else {
-					movement.enabled = false;
+					if (!pic.canPicture)
+					{
+						movement.enabled = true;
+					}
+					
+					else {
+						movement.enabled = false;
+					}
 				}
 				
 				menu.canMenu = true;

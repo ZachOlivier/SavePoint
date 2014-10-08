@@ -568,6 +568,8 @@ public class mariaBehavior : MonoBehaviour {
 				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
 
 				movement.enabled = false;
+				menu.canMenu = false;
+				cam.canChange = false;
 
 				transform.position += transform.forward * MoveSpeed * Time.deltaTime;
 				

@@ -9,14 +9,19 @@ public class pictureScript : MonoBehaviour {
 
 	public GameObject pc;
 	public GameObject text;
+	public GameObject holder;
 
 	private CharacterMotor		movement;
 	private uiSystem	message;
+	private cameraScript		cam;
+	private menuScript			menu;
 
 	void Awake () {
 
 		movement 	= pc.GetComponent <CharacterMotor> ();
 		message = text.GetComponent <uiSystem> ();
+		cam 		= holder.GetComponent <cameraScript> ();
+		menu 		= holder.GetComponent <menuScript> ();
 	}
 
 	// Use this for initialization
@@ -27,7 +32,7 @@ public class pictureScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (canPicture && inPicture && Input.GetButtonDown("Action"))
+		if (canPicture && inPicture && Input.GetButtonDown("Talk"))
 		{
 			//Application.CaptureScreenshot("screenshot.png");
 			
@@ -36,6 +41,8 @@ public class pictureScript : MonoBehaviour {
 			message.displayInfo("Greg Clemens", 5);
 
 			movement.enabled = true;
+			menu.canMenu = true;
+			cam.canChange = true;
 
 			tookPicture = true;
 			canPicture = false;
@@ -47,7 +54,7 @@ public class pictureScript : MonoBehaviour {
 		
 		if (canPicture)
 		{
-			message.displayWarning("Press T to Take Picture", 100);
+			message.displayWarning("Press E to Take Picture", 100);
 			
 			inPicture = true;
 		}
