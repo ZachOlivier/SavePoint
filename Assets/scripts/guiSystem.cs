@@ -13,8 +13,11 @@ public class guiSystem : MonoBehaviour {
 
 	public bool badgeTaken		= false;
 
+	public bool locked			= false;
+
 	public GUITexture healthGUI;
 
+	public GUITexture journal;
 	public GUITexture inventory;
 	public GUITexture item1;
 	public GUITexture item2;
@@ -70,80 +73,132 @@ public class guiSystem : MonoBehaviour {
 			healthGUI.texture = healthNum[player.health - 1];
 		}
 
-		if (inv.cameraMode == 1)
+		if (Input.mousePosition.x > 512 && !locked)
 		{
-			if (!inventory.enabled)
-			{
-				inventory.enabled = true;
-			}
-		}
+			clearJournal();
 
-		else if (inv.cameraMode == 0)
-		{
-			if (inventory.enabled)
+			if (Application.loadedLevel == 1)
 			{
-				inventory.enabled = false;
+				if (inv.cameraMode == 1)
+				{	
+					if (key.talkCount >= 2)
+					{
+						if (!item1.enabled)
+						{
+							item1.enabled = true;
+						}
+					}
+					
+					if (badge.tookPicture == true)
+					{
+						if (!item2.enabled)
+						{
+							//Be sure to uncomment this part in order to make the badge the screenshot!
+							//item2GUI.guiTexture.texture = Resources.Load("screenshot.png");
+							
+							item2.enabled = true;
+						}
+					}
+					
+					if (badgeTaken == true)
+					{
+						if (!item3.enabled)
+						{
+							item3.enabled = true;
+						}
+					}
+				}
+				
+				else if (inv.cameraMode == 0)
+				{	
+					if (item1.enabled || item2.enabled || item3.enabled || item4.enabled)
+					{
+						item1.enabled = false;
+						item2.enabled = false;
+						item3.enabled = false;
+						item4.enabled = false;
+					}
+				}
 			}
-		}
+			
+			else if (Application.loadedLevel == 3)
+			{
+				
+			}
 
-		if (m.menuMode == 1)
-		{
-			
-		}
-		
-		else if (m.menuMode == 0)
-		{
-			
-		}
-		
-		if (Application.loadedLevel == 1)
-		{
 			if (inv.cameraMode == 1)
-			{	
-				if (key.talkCount >= 2)
+			{
+				if (!inventory.enabled)
 				{
-					if (!item1.enabled)
-					{
-						item1.enabled = true;
-					}
-				}
-				
-				if (badge.tookPicture == true)
-				{
-					if (!item2.enabled)
-					{
-						//Be sure to uncomment this part in order to make the badge the screenshot!
-						//item2GUI.guiTexture.texture = Resources.Load("screenshot.png");
-						
-						item2.enabled = true;
-					}
-				}
-				
-				if (badgeTaken == true)
-				{
-					if (!item3.enabled)
-					{
-						item3.enabled = true;
-					}
+					inventory.enabled = true;
 				}
 			}
 			
 			else if (inv.cameraMode == 0)
-			{	
-				if (item1.enabled || item2.enabled || item3.enabled || item4.enabled)
+			{
+				if (inventory.enabled)
 				{
-					item1.enabled = false;
-					item2.enabled = false;
-					item3.enabled = false;
-					item4.enabled = false;
+					inventory.enabled = false;
 				}
+			}
+
+			if (m.menuMode == 1)
+			{
+				
+			}
+			
+			else if (m.menuMode == 0)
+			{
+				
 			}
 		}
 
-		else if (Application.loadedLevel == 3)
-		{
+		else if (Input.mousePosition.x < 512 && !locked)
 
+		{
+			clearInventory();
+
+			if (inv.cameraMode == 1)
+			{
+				if (!journal.enabled)
+				{
+					journal.enabled = true;
+				}
+			}
+			
+			else if (inv.cameraMode == 0)
+			{
+				if (journal.enabled)
+				{
+					journal.enabled = false;
+				}
+			}
+			
+			if (m.menuMode == 1)
+			{
+				
+			}
+			
+			else if (m.menuMode == 0)
+			{
+				
+			}
 		}
+	}
+
+	void clearInventory ()
+	{
+		inventory.enabled = false;
+
+		item1.enabled = false;
+		item2.enabled = false;
+		item3.enabled = false;
+		item4.enabled = false;
+	}
+
+	void clearJournal ()
+	{
+		journal.enabled = false;
 	}
 
 	void OnGUI () {

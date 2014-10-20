@@ -17,7 +17,7 @@ public class playerScript : MonoBehaviour {
 	public bool isStealth		= false;
 	public bool isJump			= false;
 
-	public bool canTalk		= false;
+	public bool canTalk			= false;
 
 	public bool canSound		= true;
 
@@ -25,7 +25,7 @@ public class playerScript : MonoBehaviour {
 
 	void Awake () {
 
-		movement = this.GetComponent <CharacterMotor> ();
+		movement 	= this.GetComponent <CharacterMotor> ();
 	}
 
 	// Use this for initialization

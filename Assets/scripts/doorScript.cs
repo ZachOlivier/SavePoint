@@ -70,7 +70,7 @@ public class doorScript : MonoBehaviour {
 			}
 		}
 		
-		if (atDoor == true && taken.badgeTaken == true && Input.GetButtonDown("Action"))
+		if (atDoor == true && taken.badgeTaken == true && Input.GetButtonDown("Talk"))
 		{
 			if (!ICopen)
 			{
@@ -126,7 +126,7 @@ public class doorScript : MonoBehaviour {
 			{
 				audio.PlayOneShot(reject);
 				
-				message.displayWarning("Press T to Use Badge", 100);
+				message.displayWarning("Press E to Use Badge", 100);
 			}
 			
 			else {

@@ -9,6 +9,8 @@ public class introScript : MonoBehaviour {
 	//int timer		= 0;
 	public int part		= 0;
 
+	public Texture2D icBG;
+
 	public AudioClip music1;
 	public AudioClip music2;
 	public AudioClip music3;
@@ -17,9 +19,7 @@ public class introScript : MonoBehaviour {
 	public bool canSkip	= true;
 	public bool canBack	= true;
 
-	// Variables for holding the text game objects, we want to be able to manipulate their position
-	public GameObject savePoint;
-	public GameObject episodeText;
+	public GUISkin mySkin;
 
 	public GameObject text;
 
@@ -36,7 +36,7 @@ public class introScript : MonoBehaviour {
 	void Start () {
 	
 		// Make sure that whenever the intro scene is played, it starts at the beginning
-		part = 0;
+		part = -1;
 	}
 	
 	// Update is called once per frame
@@ -51,7 +51,7 @@ public class introScript : MonoBehaviour {
 		}
 		
 		if (Input.GetButtonDown("Talk")) {
-			part = 50;
+			part = 48;
 		}
 
 		if (!message.displayingOne)
@@ -64,14 +64,22 @@ public class introScript : MonoBehaviour {
 			message.fourDecision2.enabled = false;
 			message.fourDecision3.enabled = false;
 		}
-		
-		if (part == 0) {
-			
+
+		if (part == -1)
+		{
 			canBack = false;
-			
+
+			message.displaySubtitle("\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis game contains language not suitable for children.\n\nGameplay changes depending on decisions the player makes.", 1000);
+			message.subtitleBox.enabled = false;
+		}
+
+		if (part == 0) {
+
+			canBack = false;
+
 			message.displaySubtitle("Do better", 100);
 			message.displayWarning("Left Click to Proceed, Right Click to Go Back", 100);
-			message.displayInfo("Press E to Skip", 100);
+			message.displayInfo("Press E to Skip", 1000);
 			message.display1Decision("Unknown Voice", 100);
 		}
 		
@@ -414,8 +422,10 @@ public class introScript : MonoBehaviour {
 			canBack = false;
 
 			message.displayingOne = false;
-			
-			message.subtitle.enabled = false;
+			message.displayingTwo = false;
+			message.displayingThree = false;
+			message.displayingFour = false;
+
 			message.warning.enabled = false;
 			message.info.enabled = false;
 			message.fourDecision1.enabled = false;
@@ -423,27 +433,34 @@ public class introScript : MonoBehaviour {
 			message.fourDecision3.enabled = false;
 			message.fourDecision4.enabled = false;
 
-			Vector3 position = savePoint.transform.position;
-			position.z = 0.0f;
-			savePoint.transform.position = position;
-		}
-		
-		if (part == 49) {
-			
-			Destroy(savePoint.gameObject);
-
-			Vector3 position = episodeText.transform.position;
-			position.z = 20.0f;
-			episodeText.transform.position = position;
+			message.displaySubtitle("\n\n\n\n\n\n\n\n\n\n\n\n\nSave Point\n\n\n\n\nEpisode 1: The Man Who Texted Yesterday", 1000);
 		}
 		
 		// After the last scene has played
-		if (part == 50) {
-			
+		if (part == 49) {
+
+			message.displaySubtitle("\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis game contains language not suitable for children.\n\nGameplay changes depending on decisions the player makes.", 1000);
+			message.subtitleBox.enabled = false;
+		}
+
+		if (part == 50)
+		{
 			audio.Stop();
 			
 			// Load the next level, currently set to the game level 1 (Prototype)
 			Application.LoadLevel(1);
 		}
 	}
+
+	/*void OnGUI()
+	{
+		if (GUI.skin != mySkin)
+		{
+			GUI.skin = mySkin;
+		}
+
+		mySkin.box.normal.background = icBG;
+
+		GUILayout.Box("", GUILayout.Width (1600), GUILayout.Height (900));
+	}*/
 }

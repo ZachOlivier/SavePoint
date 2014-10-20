@@ -14,13 +14,15 @@ public class menuScript : MonoBehaviour {
 	// Variable to tell if the menu can open or not
 	public bool canMenu	= true;
 
+	public GUITexture menuBackground;
+
 	// Variables to hold the player and npc game objects so that we can access their scripts
 	public GameObject pc;
 	public GameObject npc;
 	public GameObject text;
 	//public GameObject picture;
-
-	public GUIStyle myStyle;
+	
+	public GUISkin mySkin;
 
 	private MouseLook		mouse;
 	//private CharacterMotor	movement;
@@ -82,6 +84,8 @@ public class menuScript : MonoBehaviour {
 				//movement.enabled = true;
 				
 				inventory.canChange = true;
+
+				menuBackground.enabled = false;
 				
 				mouse.enabled = true;
 				cam.enabled = true;
@@ -115,114 +119,200 @@ public class menuScript : MonoBehaviour {
 	
 	void OnGUI ()
 	{
+		if (GUI.skin != mySkin)
+		{
+			GUI.skin = mySkin;
+		}
+
 		if (menuMode == 1)
 		{
 			btnX = (Screen.width / 2) - (btnW / 2);
 			btnY = (Screen.height / 2) - (btnH / 2);
 			btnW = Screen.width / 5;
 			btnH = Screen.height / 10;
-			
-			GUI.Label (new Rect(btnX - 75, btnY - 325, btnW, btnH), "Menu Screen", myStyle);
+
+			menuBackground.enabled = true;
+
+			GUI.Label (new Rect(btnX + 45, btnY - 325, btnW, btnH), "Menu Screen");
 			
 			if (GUI.Button (new Rect (btnX, btnY - 50, btnW, btnH), "Options"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				menuMode = 2;
 			}
 			
 			if (GUI.Button (new Rect (btnX, btnY + 50, btnW, btnH), "Reset Level"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				menuMode = 11;
 			}
 			
 			if (GUI.Button (new Rect (btnX, btnY + 150, btnW, btnH), "Restart Game (Intro)"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				menuMode = 12;
 			}
 			
 			if (GUI.Button (new Rect (btnX, btnY + 250, btnW, btnH), "Quit Game"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				menuMode = 10;
 			}
 		}
 		
 		else if (menuMode == 2)
 		{
-			GUI.Label (new Rect(btnX - 120, btnY - 325, btnW, btnH), "Options Screen", myStyle);
+			GUI.Label (new Rect(btnX + 30, btnY - 325, btnW, btnH), "Options Screen");
 			
 			if (GUI.Button (new Rect (btnX, btnY - 250, btnW, btnH), "Save Options"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				menuMode = 1;
 			}
 		}
 		
 		else if (menuMode == 10)
 		{
-			GUI.Label (new Rect(btnX - 100, btnY - 100, btnW, btnH), "Are you sure?", myStyle);
+			GUI.Label (new Rect(btnX + 45, btnY - 100, btnW, btnH), "Are you sure?");
 			
 			if (GUI.Button (new Rect (btnX - 200, btnY, btnW, btnH), "Cancel"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				menuMode = 1;
 			}
 			
 			if (GUI.Button (new Rect (btnX + 200, btnY, btnW, btnH), "Quit"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				Application.Quit();
 			}
 		}
 		
 		else if (menuMode == 11)
 		{
-			GUI.Label (new Rect(btnX - 100, btnY - 100, btnW, btnH), "Are you sure?", myStyle);
+			GUI.Label (new Rect(btnX + 45, btnY - 100, btnW, btnH), "Are you sure?");
 			
 			if (GUI.Button (new Rect (btnX - 200, btnY, btnW, btnH), "Cancel"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				menuMode = 1;
 			}
 			
 			if (GUI.Button (new Rect (btnX + 200, btnY, btnW, btnH), "Reset Level"))
 			{
-				inventory.canChange = true;
-				
-				mouse.enabled = true;
-				cam.enabled = true;
-				
-				Time.timeScale = 1.0f;
-				
-				menuMode = 0;
-
-				if (Application.loadedLevel == 1)
+				if (Event.current.button == 1 || Event.current.button == 2)
 				{
-					Application.LoadLevel(1);
+					
 				}
-
-				else if (Application.loadedLevel == 3)
+				
+				else
 				{
-					Application.LoadLevel(3);
+					inventory.canChange = true;
+					
+					mouse.enabled = true;
+					cam.enabled = true;
+					
+					Time.timeScale = 1.0f;
+					
+					menuMode = 0;
+
+					if (Application.loadedLevel == 1)
+					{
+						Application.LoadLevel(1);
+					}
+
+					else if (Application.loadedLevel == 3)
+					{
+						Application.LoadLevel(3);
+					}
 				}
 			}
 		}
 		
 		else if (menuMode == 12)
 		{
-			GUI.Label (new Rect(btnX - 100, btnY - 100, btnW, btnH), "Are you sure?", myStyle);
+			GUI.Label (new Rect(btnX + 45, btnY - 100, btnW, btnH), "Are you sure?");
 			
 			if (GUI.Button (new Rect (btnX - 200, btnY, btnW, btnH), "Cancel"))
 			{
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
+				
+				else
+
 				menuMode = 1;
 			}
 			
 			if (GUI.Button (new Rect (btnX + 200, btnY, btnW, btnH), "Restart Game (Intro)"))
 			{
-				inventory.canChange = true;
+				if (Event.current.button == 1 || Event.current.button == 2)
+				{
+					
+				}
 				
-				mouse.enabled = true;
-				cam.enabled = true;
-				
-				Time.timeScale = 1.0f;
-				
-				menuMode = 0;
-				
-				Application.LoadLevel(0);
+				else
+				{
+					inventory.canChange = true;
+					
+					mouse.enabled = true;
+					cam.enabled = true;
+					
+					Time.timeScale = 1.0f;
+					
+					menuMode = 0;
+					
+					Application.LoadLevel(0);
+				}
 			}
 		}
 		

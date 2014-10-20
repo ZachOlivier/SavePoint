@@ -4,18 +4,23 @@ using System.Collections;
 public class displayInfo : MonoBehaviour {
 
 	public bool canDisplay			= false;
+	public bool coreDisplay			= false;
+	public bool coreInspected		= false;
+	public bool daphneInspected		= false;
 	public bool wasInspected		= false;
 
 	public bool onWilliam			= false;
-	public bool onMaria			= false;
+	public bool onMaria				= false;
 	public bool onRichard			= false;
-	public bool onEnemy			= false;
+	public bool onEnemy				= false;
 	public bool onPortrait			= false;
 	public bool onIC				= false;
 	public bool onCore				= false;
-	public bool onBadge			= false;
-	public bool onPhone			= false;
+	public bool onBadge				= false;
+	public bool onPhone				= false;
 	public bool onBook				= false;
+	public bool onDaphne			= false;
+	public bool onScepter			= false;
 
 	public bool calledHome			= false;
 	public bool canTouch			= false;
@@ -27,11 +32,13 @@ public class displayInfo : MonoBehaviour {
 	public float timer				= 0.0f;
 	public float time				= 0.0f;
 
+	public GameObject		pc;
 	public GameObject		text;
 	public GameObject		gui;
 
 	public Transform		Player;
 
+	private irmaScript		irma;
 	private uiSystem		message;
 	private guiSystem		taken;
 
@@ -42,6 +49,11 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "badge")
 		{
 			taken = gui.GetComponent <guiSystem> ();
+		}
+
+		if (Application.loadedLevel == 3)
+		{
+			irma = pc.GetComponent <irmaScript> ();
 		}
 	}
 
@@ -68,7 +80,7 @@ public class displayInfo : MonoBehaviour {
 				canDisplay = true;
 			}
 			
-			if (this.gameObject.name == "William" && onWilliam && canDisplay && Input.GetButtonDown("Fire2"))
+			if (this.gameObject.name == "William" && onWilliam && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -81,7 +93,7 @@ public class displayInfo : MonoBehaviour {
 				}
 			}
 			
-			else if (this.gameObject.name == "Maria" && onMaria && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "Maria" && onMaria && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -94,7 +106,7 @@ public class displayInfo : MonoBehaviour {
 				}
 			}
 			
-			else if (this.gameObject.name == "Richard" && onRichard && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "Richard" && onRichard && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -107,7 +119,7 @@ public class displayInfo : MonoBehaviour {
 				}
 			}
 			
-			else if (this.gameObject.name == "Enemy" && onEnemy && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "Enemy" && onEnemy && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -120,7 +132,7 @@ public class displayInfo : MonoBehaviour {
 				}
 			}
 			
-			else if (this.gameObject.name == "portrait" && onPortrait && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "portrait" && onPortrait && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -134,7 +146,7 @@ public class displayInfo : MonoBehaviour {
 				}
 			}
 			
-			else if (this.gameObject.name == "ICMachine" && onIC && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "ICMachine" && onIC && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -148,7 +160,7 @@ public class displayInfo : MonoBehaviour {
 				}
 			}
 			
-			else if (this.gameObject.name == "Core" && onCore && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "Core" && onCore && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -157,21 +169,31 @@ public class displayInfo : MonoBehaviour {
 				
 				else
 				{
-					message.displayInfo("IC core", 5);
-
 					if (Application.loadedLevel == 1)
 					{
+						message.displayInfo("IC core", 5);
 						message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time.", 5);
 					}
 
-					else if (Application.loadedLevel == 3)
+					else if (Application.loadedLevel == 3 && coreDisplay)
 					{
-						message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time. I should check to see if it's still working. I may need to get closer.", 7);
+						irma.hasDisplayed = false;
+						irma.talkSection = 0;
+						irma.talkNumber = 0;
+						irma.talkCount = 5;
+						
+						coreDisplay = false;
+					}
+
+					else if (Application.loadedLevel == 3 && coreInspected)
+					{
+						message.displayInfo("IC core", 7);
+						message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time. This one is different from the one I created.", 7);
 					}
 				}
 			}
 			
-			else if (this.gameObject.name == "badge" && onBadge && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "badge" && onBadge && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -185,7 +207,7 @@ public class displayInfo : MonoBehaviour {
 				}
 			}
 			
-			else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -199,7 +221,7 @@ public class displayInfo : MonoBehaviour {
 				}
 			}
 			
-			else if (this.gameObject.name == "book" && onBook && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "book" && onBook && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				if (!wasInspected)
 				{
@@ -210,6 +232,37 @@ public class displayInfo : MonoBehaviour {
 				{
 					message.displayInfo("My Greek Mythology Book", 5);
 					message.displaySubtitle("It’s still turned to the same page I was reading when Angie.. when I got the news.", 5);
+				}
+			}
+
+			else if (this.gameObject.name == "Daphne" && onDaphne && canDisplay && Input.GetButtonDown("Inspect"))
+			{
+				if (coreInspected)
+				{
+					irma.hasDisplayed = false;
+					irma.talkSection = 0;
+					irma.talkNumber = 0;
+					irma.talkCount = 6;
+				}
+			}
+
+			else if (this.gameObject.name == "scepter" && onScepter && canDisplay && Input.GetButtonDown("Inspect"))
+			{
+				if (coreDisplay)
+				{
+					message.displayInfo("Caduceus", 5);
+					message.displaySubtitle("Used for the IC-Machine. There should be another somewhere.", 5);
+				}
+			}
+
+			else if (this.gameObject.name == "scepterBroken" && onScepter && canDisplay && Input.GetButtonDown("Inspect"))
+			{
+				if (daphneInspected)
+				{
+					irma.hasDisplayed = false;
+					irma.talkSection = 0;
+					irma.talkNumber = 0;
+					irma.talkCount = 7;
 				}
 			}
 		}
@@ -228,35 +281,35 @@ public class displayInfo : MonoBehaviour {
 				canDisplay = true;
 			}
 			
-			if (this.gameObject.name == "William" && onWilliam && canDisplay && Input.GetButtonDown("Fire2"))
+			if (this.gameObject.name == "William" && onWilliam && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("Security Guard William Hebb", 5);
 				
 				wasInspected = true;
 			}
 			
-			else if (this.gameObject.name == "Maria" && onMaria && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "Maria" && onMaria && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("Head of Security Maria Figueroa", 5);
 				
 				wasInspected = true;
 			}
 			
-			else if (this.gameObject.name == "Richard" && onRichard && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "Richard" && onRichard && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("Scientist Richard Fields", 5);
 				
 				wasInspected = true;
 			}
 			
-			else if (this.gameObject.name == "Enemy" && onEnemy && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "Enemy" && onEnemy && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("Security Guard", 5);
 				
 				wasInspected = true;
 			}
 			
-			else if (this.gameObject.name == "portrait" && onPortrait && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "portrait" && onPortrait && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("My family portrait", 10);
 				message.displaySubtitle("We took this photo two years ago while on vacation. Did Jill really look that much younger? Did I? And look at Angie, her smile is the widest, her eyes so bright and full of promise. I shouldn’t be here; I should be with you.. except, I’m here for you. I’m going to fix this.. somehow.", 10);
@@ -264,7 +317,7 @@ public class displayInfo : MonoBehaviour {
 				wasInspected = true;
 			}
 			
-			else if (this.gameObject.name == "ICMachine" && onIC && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "ICMachine" && onIC && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("IC machine", 5);
 				message.displaySubtitle("This has been added since I left. It looks crudely constructed, as if made in a hurry.", 5);
@@ -272,24 +325,36 @@ public class displayInfo : MonoBehaviour {
 				wasInspected = true;
 			}
 			
-			else if (this.gameObject.name == "Core" && onCore && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "Core" && onCore && canDisplay && Input.GetButtonDown("Inspect"))
 			{
-				message.displayInfo("IC core", 5);
-
 				if (Application.loadedLevel == 1)
 				{
+					message.displayInfo("IC core", 5);
 					message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time.", 5);
+
+					wasInspected = true;
 				}
-				
-				else if (Application.loadedLevel == 3)
+
+				else if (Application.loadedLevel == 3 && coreDisplay)
 				{
-					message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time. I should check to see if it's still working. I may need to get closer.", 7);
+					irma.hasDisplayed = false;
+					irma.talkSection = 0;
+					irma.talkNumber = 0;
+					irma.talkCount = 5;
+
+					coreDisplay = false;
 				}
 				
-				wasInspected = true;
+				else if (Application.loadedLevel == 3 && coreInspected)
+				{
+					message.displayInfo("IC core", 7);
+					message.displaySubtitle("The Iris-Chronus machine. I named it after Iris, the Greek Goddess of Messages and Chronus, the God of Time. This one is different from the one I created.", 7);
+				
+					wasInspected = true;
+				}
 			}
 			
-			else if (this.gameObject.name == "badge" && onBadge && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "badge" && onBadge && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("Brian's Badge", 5);
 				message.displaySubtitle("Looks like Brian left his clearance card laying around.", 5);
@@ -297,7 +362,7 @@ public class displayInfo : MonoBehaviour {
 				wasInspected = true;
 			}
 			
-			else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("My Office Phone", 5);
 				message.displaySubtitle("Perhaps I should call home..", 5);
@@ -305,12 +370,49 @@ public class displayInfo : MonoBehaviour {
 				wasInspected = true;
 			}
 			
-			else if (this.gameObject.name == "book" && onBook && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "book" && onBook && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("My Greek Mythology Book", 5);
 				message.displaySubtitle("It’s still turned to the same page I was reading when Angie.. when I got the news.", 5);
 				
 				wasInspected = true;
+			}
+
+			else if (this.gameObject.name == "Daphne" && onDaphne && canDisplay && Input.GetButtonDown("Inspect"))
+			{
+				if (coreInspected)
+				{
+					wasInspected = true;
+
+					irma.hasDisplayed = false;
+					irma.talkSection = 0;
+					irma.talkNumber = 0;
+					irma.talkCount = 6;
+				}
+			}
+			
+			else if (this.gameObject.name == "scepter" && onScepter && canDisplay && Input.GetButtonDown("Inspect"))
+			{
+				if (coreDisplay)
+				{
+					message.displayInfo("Caduceus", 5);
+					message.displaySubtitle("Used for the IC-Machine. There should be another somewhere.", 5);
+					
+					wasInspected = true;
+				}
+			}
+			
+			else if (this.gameObject.name == "scepterBroken" && onScepter && canDisplay && Input.GetButtonDown("Inspect"))
+			{
+				if (daphneInspected)
+				{
+					wasInspected = true;
+
+					irma.hasDisplayed = false;
+					irma.talkSection = 0;
+					irma.talkNumber = 0;
+					irma.talkCount = 7;
+				}
 			}
 		}
 		
@@ -334,7 +436,7 @@ public class displayInfo : MonoBehaviour {
 				Destroy(this.gameObject);
 			}
 			
-			else if (this.gameObject.name == "badge" && onBadge && canDisplay && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "badge" && onBadge && canDisplay && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("Brian's Badge", 5);
 				message.displaySubtitle("Looks like Brian left his clearance card laying around.", 5);
@@ -356,7 +458,7 @@ public class displayInfo : MonoBehaviour {
 				calledHome = true;
 			}
 			
-			else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Fire2"))
+			else if (this.gameObject.name == "phone" && onPhone && canDisplay && !calledHome && Input.GetButtonDown("Inspect"))
 			{
 				message.displayInfo("My Office Phone", 5);
 				message.displaySubtitle("Perhaps I should call home..", 5);
@@ -382,7 +484,7 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "William" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onWilliam = true;
@@ -391,7 +493,7 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "Maria" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onMaria = true;
@@ -400,7 +502,7 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "Richard" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onRichard = true;
@@ -409,7 +511,7 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "Enemy" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onEnemy = true;
@@ -418,7 +520,7 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "portrait" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onPortrait = true;
@@ -427,16 +529,22 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "ICMachine" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onIC = true;
 		}
 		
 		if (this.gameObject.name == "Core" && canDisplay) {
-			if (!wasInspected)
+
+			if (Application.loadedLevel == 1)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
+			}
+			
+			else if (Application.loadedLevel == 3 && coreDisplay)
+			{
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onCore = true;
@@ -445,7 +553,7 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "badge" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onBadge = true;
@@ -454,7 +562,7 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "phone" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onPhone = true;
@@ -463,10 +571,37 @@ public class displayInfo : MonoBehaviour {
 		if (this.gameObject.name == "book" && canDisplay) {
 			if (!wasInspected)
 			{
-				message.displayWarning("Right Click/Press R to Inspect", 5);
+				message.displayWarning("Press R to Inspect", 5);
 			}
 			
 			onBook = true;
+		}
+
+		if (this.gameObject.name == "Daphne" && canDisplay) {
+			if (!wasInspected && coreInspected)
+			{
+				message.displayWarning("Press R to Inspect", 5);
+			}
+			
+			onDaphne = true;
+		}
+
+		if (this.gameObject.name == "scepter" && canDisplay) {
+			if (!wasInspected && coreDisplay)
+			{
+				message.displayWarning("Press R to Inspect", 5);
+			}
+			
+			onScepter = true;
+		}
+
+		if (this.gameObject.name == "scepterBroken" && canDisplay) {
+			if (!wasInspected && daphneInspected)
+			{
+				message.displayWarning("Press R to Inspect", 5);
+			}
+			
+			onScepter = true;
 		}
 		
 		if (this.gameObject.tag == "Collider" && canDisplay) {
@@ -516,6 +651,21 @@ public class displayInfo : MonoBehaviour {
 		
 		if (this.gameObject.name == "book") {
 			onBook = false;
+		}
+
+		if (this.gameObject.name == "Daphne")
+		{
+			onDaphne = false;
+		}
+
+		if (this.gameObject.name == "scepter")
+		{
+			onScepter = false;
+		}
+
+		if (this.gameObject.name == "scepterBroken")
+		{
+			onScepter = false;
 		}
 	}
 }

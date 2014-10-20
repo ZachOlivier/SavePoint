@@ -32,93 +32,93 @@ public class securityBehavior : MonoBehaviour {
 	public int path	= 0;
 
 	// Variables to hold the decisions the player can make
-	public int path1												= 1;
-	public int path11												= 11;
-	public int path12												= 12;
-	public int path13												= 13;
-	public int path14												= 14;
-	public int path111												= 111;
-	public int path112												= 112;
-	public int path113												= 113;
-	public int path114												= 114;
-	public int path121												= 121;
-	public int path122												= 122;
-	public int path123												= 123;
-	public int path124												= 124;
-	public int path131												= 131;
-	public int path132												= 132;
-	public int path133												= 133;
-	public int path134												= 134;
-	public int path141												= 141;
-	public int path142												= 142;
-	public int path143												= 143;
-	public int path144												= 144;
+	private int path1												= 1;
+	private int path11												= 11;
+	private int path12												= 12;
+	private int path13												= 13;
+	private int path14												= 14;
+	private int path111												= 111;
+	private int path112												= 112;
+	private int path113												= 113;
+	private int path114												= 114;
+	private int path121												= 121;
+	private int path122												= 122;
+	private int path123												= 123;
+	private int path124												= 124;
+	private int path131												= 131;
+	private int path132												= 132;
+	private int path133												= 133;
+	private int path134												= 134;
+	private int path141												= 141;
+	private int path142												= 142;
+	private int path143												= 143;
+	private int path144												= 144;
 	
-	public int path2												= 2;
-	public int path21												= 21;
-	public int path22												= 22;
-	public int path23												= 23;
-	public int path24												= 24;
-	public int path211												= 211;
-	public int path212												= 212;
-	public int path213												= 213;
-	public int path214												= 214;
-	public int path221												= 221;
-	public int path222												= 222;
-	public int path223												= 223;
-	public int path224												= 224;
-	public int path231												= 231;
-	public int path232												= 232;
-	public int path233												= 233;
-	public int path234												= 234;
-	public int path241												= 241;
-	public int path242												= 242;
-	public int path243												= 243;
-	public int path244												= 244;
+	private int path2												= 2;
+	private int path21												= 21;
+	private int path22												= 22;
+	private int path23												= 23;
+	private int path24												= 24;
+	private int path211												= 211;
+	private int path212												= 212;
+	private int path213												= 213;
+	private int path214												= 214;
+	private int path221												= 221;
+	private int path222												= 222;
+	private int path223												= 223;
+	private int path224												= 224;
+	private int path231												= 231;
+	private int path232												= 232;
+	private int path233												= 233;
+	private int path234												= 234;
+	private int path241												= 241;
+	private int path242												= 242;
+	private int path243												= 243;
+	private int path244												= 244;
 	
-	public int path3												= 3;
-	public int path31												= 31;
-	public int path32												= 32;
-	public int path33												= 33;
-	public int path34												= 34;
-	public int path311												= 311;
-	public int path312												= 312;
-	public int path313												= 313;
-	public int path314												= 314;
-	public int path321												= 321;
-	public int path322												= 322;
-	public int path323												= 323;
-	public int path324												= 324;
-	public int path331												= 331;
-	public int path332												= 332;
-	public int path333												= 333;
-	public int path334												= 334;
-	public int path341												= 341;
-	public int path342												= 342;
-	public int path343												= 343;
-	public int path344												= 344;
+	private int path3												= 3;
+	private int path31												= 31;
+	private int path32												= 32;
+	private int path33												= 33;
+	private int path34												= 34;
+	private int path311												= 311;
+	private int path312												= 312;
+	private int path313												= 313;
+	private int path314												= 314;
+	private int path321												= 321;
+	private int path322												= 322;
+	private int path323												= 323;
+	private int path324												= 324;
+	private int path331												= 331;
+	private int path332												= 332;
+	private int path333												= 333;
+	private int path334												= 334;
+	private int path341												= 341;
+	private int path342												= 342;
+	private int path343												= 343;
+	private int path344												= 344;
 	
-	public int path4												= 4;
-	public int path41												= 41;
-	public int path42												= 42;
-	public int path43												= 43;
-	public int path44												= 44;
-	public int path411												= 411;
-	public int path412												= 412;
-	public int path413												= 413;
-	public int path414												= 414;
-	public int path421												= 421;
-	public int path422												= 422;
-	public int path423												= 423;
-	public int path424												= 424;
-	public int path431												= 431;
-	public int path432												= 432;
-	public int path433												= 433;
-	public int path434												= 434;
-	public int path441												= 441;
-	public int path442												= 442;
-	public int path443												= 443;
-	public int path444												= 444;
+	private int path4												= 4;
+	private int path41												= 41;
+	private int path42												= 42;
+	private int path43												= 43;
+	private int path44												= 44;
+	private int path411												= 411;
+	private int path412												= 412;
+	private int path413												= 413;
+	private int path414												= 414;
+	private int path421												= 421;
+	private int path422												= 422;
+	private int path423												= 423;
+	private int path424												= 424;
+	private int path431												= 431;
+	private int path432												= 432;
+	private int path433												= 433;
+	private int path434												= 434;
+	private int path441												= 441;
+	private int path442												= 442;
+	private int path443												= 443;
+	private int path444												= 444;
 
 	public Transform Player;
 	
@@ -126,10 +126,6 @@ public class securityBehavior : MonoBehaviour {
 	public GameObject holder;
 	public GameObject text;
 	public GameObject pc;
-	public GameObject fourDecide1;
-	public GameObject fourDecide2;
-	public GameObject fourDecide3;
-	public GameObject fourDecide4;
 
 	private cameraScript		cam;
 	//private timeChanger			chosen;
@@ -137,10 +133,6 @@ public class securityBehavior : MonoBehaviour {
 	private uiSystem			message;
 	private MouseLook			mouse;
 	private MouseLook			look;
-	private decisionScript		fourDec1;
-	private decisionScript		fourDec2;
-	private decisionScript		fourDec3;
-	private decisionScript		fourDec4;
 	private CharacterMotor		movement;
 	private displayInfo			info;
 	private playerScript		talk;
@@ -154,10 +146,6 @@ public class securityBehavior : MonoBehaviour {
 		message = text.GetComponent <uiSystem> ();
 		mouse = pc.GetComponent <MouseLook> ();
 		look = Camera.main.GetComponent <MouseLook> ();
-		fourDec1 = fourDecide1.GetComponent <decisionScript> ();
-		fourDec2 = fourDecide2.GetComponent <decisionScript> ();
-		fourDec3 = fourDecide3.GetComponent <decisionScript> ();
-		fourDec4 = fourDecide4.GetComponent <decisionScript> ();
 		movement = pc.GetComponent <CharacterMotor> ();
 		info = this.GetComponent <displayInfo> ();
 		talk = pc.GetComponent <playerScript> ();
@@ -189,7 +177,7 @@ public class securityBehavior : MonoBehaviour {
 			
 			if (talkCount == 0 && !hasDisplayed && !isTalking) {
 				
-				message.displaySubtitle("Good evening Dr. Clemens.", 10);
+				message.displaySubtitle("Good evening Dr. Clemens.", 5);
 				message.displayInfo("William Hebb - Press E To Talk", 100);
 				
 				hasDisplayed = true;
@@ -258,8 +246,7 @@ public class securityBehavior : MonoBehaviour {
 				
 				if (isTalking) {
 					isTalking = false;
-					
-					// Let the player know they can't talk right now and let the game be able to pause
+
 					cam.canChange = true;
 					menu.canMenu = true;
 					
@@ -278,18 +265,15 @@ public class securityBehavior : MonoBehaviour {
 					message.fourDecision3.enabled = false;
 					message.fourDecision4.enabled = false;
 					message.info.enabled = false;
-
-					fourDec1.canClick = false;
-					fourDec2.canClick = false;
-					fourDec3.canClick = false;
-					fourDec4.canClick = false;
+					message.displayingOne = false;
+					message.displayingTwo = false;
+					message.displayingThree = false;
+					message.displayingFour = false;
 					
 					message.displayWarning("Conversation Ended..", 4);
 				}
 				
 				else if (!isTalking) {
-					// Set the NPC to currently talking
-					isTalking = true;
 					
 					// Make it so the NPC can't talk again and the game can't pause
 					cam.canChange = false;
@@ -313,6 +297,9 @@ public class securityBehavior : MonoBehaviour {
 					
 					// Set the first allowed amount of time for that section of the conversation
 					time = .5f;
+
+					// Set the NPC to currently talking
+					isTalking = true;
 				}
 			}
 			
@@ -321,15 +308,20 @@ public class securityBehavior : MonoBehaviour {
 			}
 		}
 		
-		// Else if the player pressed the E key and the NPC can't talk, and the game isn't paused
+		/* Else if the player pressed the E key and the NPC can't talk, and the game isn't paused
 		else if (Input.GetButtonDown("Talk") && !talk.canTalk && cam.cameraMode == 0 && menu.menuMode == 0) {
 			
 			message.displayWarning("Can't talk right now..", 4);
-		}
+		}*/
 		
 		if (isTalking) {
 			
 			//timer += Time.deltaTime;
+
+			if (message.williamTalk == false)
+			{
+				message.williamTalk = true;
+			}
 			
 			if (canSkip) {
 				if (Input.GetButtonDown("Fire2")) {
@@ -350,11 +342,6 @@ public class securityBehavior : MonoBehaviour {
 					
 					message.display4Decision("Apologetic", "Evasive", "Defensive", "Dismissive", 100);
 					
-					fourDec1.canClick = true;
-					fourDec2.canClick = true;
-					fourDec3.canClick = true;
-					fourDec4.canClick = true;
-					
 					hasDisplayed = true;
 				}
 				
@@ -366,11 +353,6 @@ public class securityBehavior : MonoBehaviour {
 						message.displaySubtitle("I know it has. I.. home had to come first.", 100);
 						message.displayWarning("Right click to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
 						
 						hasDisplayed = true;
 					}
@@ -382,11 +364,6 @@ public class securityBehavior : MonoBehaviour {
 						message.displaySubtitle("Thanks, William. It’s nice to see you too. How’ve you been?", 100);
 						message.displayWarning("Right click to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
 						
 						hasDisplayed = true;
 					}
@@ -398,11 +375,6 @@ public class securityBehavior : MonoBehaviour {
 						message.displaySubtitle("I have a daughter at home that might disagree.", 100);
 						message.displayWarning("Right click to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
 						
 						hasDisplayed = true;
 					}
@@ -414,11 +386,6 @@ public class securityBehavior : MonoBehaviour {
 						message.displaySubtitle("I know. But I’m back now.", 100);
 						message.displayWarning("Right click to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
 						
 						hasDisplayed = true;
 					}
@@ -429,9 +396,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Of course it did. You’re absolutely right. I’m sorry if it sounded like I meant anything else. I was just trying to tell you how much you’ve been missed.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("Of course it did. You’re absolutely right. I’m sorry if it sounded like I meant anything else. I was just trying to tell you how much you’ve been missed.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
 						hasDisplayed = true;
 					}
@@ -446,9 +413,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Of course you do! I’m sorry if it sounded like I meant anything else. I was just trying to tell you how much you’ve been missed.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("Of course you do! I’m sorry if it sounded like I meant anything else. I was just trying to tell you how much you’ve been missed.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
 						hasDisplayed = true;
 					}
@@ -465,9 +432,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("No, it’s fine. It’s just.. It’s been tough, with Angie.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
+						message.displaySubtitle("No, it’s fine. It’s just.. It’s been tough, with Angie.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -478,16 +445,11 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = false;
 						
-						message.displaySubtitle("I really am sorry, Doctor. How is she doing?", 10);
-						message.displayWarning("Click a decision to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("I really am sorry, Doctor. How is she doing?", 100);
+						message.displayWarning("Click a decision to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
-						message.display3Decision("Confide", "", "Don't Confide", 10);
-
-						fourDec1.canClick = true;
-						fourDec2.canClick = false;
-						fourDec3.canClick = true;
-						fourDec4.canClick = false;
+						message.display3Decision("Confide", "", "Don't Confide", 100);
 						
 						hasDisplayed = true;
 					}
@@ -498,14 +460,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("This morning at breakfast.. she’s sitting there in her wheelchair, at the kitchen table, and she’s making a mess, this huge mess, trying to lift her spoon to her mouth. So I go to take the spoon, to help her, and she says “Daddy I can do it myself!” Just like when she was four and learning to ride her bike. And for a split second I almost laugh. But then I remember-- she’s not four, she’s fifteen. At four she could still pedal a bike. At four she wasn’t wearing diapers. At four she didn’t.. she didn’t sound like a damn moron! And I think all this, right there, with her staring straight at me, and it takes everything I have in me not to just start bawling there on the spot. And somehow, somehow I don’t because I know it would only hurt her more, but my God it kills me inside.", 20);
-						message.displayWarning("Right click to continue", 20);
-						message.displayInfo("Greg Clemens", 20);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("This morning at breakfast.. she’s sitting there in her wheelchair, at the kitchen table, and she’s making a mess, this huge mess, trying to lift her spoon to her mouth. So I go to take the spoon, to help her, and she says “Daddy I can do it myself!” Just like when she was four and learning to ride her bike. And for a split second I almost laugh. But then I remember-- she’s not four, she’s fifteen. At four she could still pedal a bike. At four she wasn’t wearing diapers. At four she didn’t.. she didn’t sound like a damn moron! And I think all this, right there, with her staring straight at me, and it takes everything I have in me not to just start bawling there on the spot. And somehow, somehow I don’t because I know it would only hurt her more, but my God it kills me inside.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -514,14 +471,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("It’s life, you know? Some days are better than others.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("It’s life, you know? Some days are better than others.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -532,9 +484,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Jesus..", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("Jesus..", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
 						hasDisplayed = true;
 					}
@@ -544,15 +496,10 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = false;
 						
 						message.displaySubtitle("I’m so sorry Greg. I don’t know what to say.", 100);
-						message.displayWarning("Click a decision to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displayWarning("Click a decision to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
-						message.display4Decision("Optimistic", "Pessimistic", "Determined", "Desperate", 10);
-						
-						fourDec1.canClick = true;
-						fourDec2.canClick = true;
-						fourDec3.canClick = true;
-						fourDec4.canClick = true;
+						message.display4Decision("Optimistic", "Pessimistic", "Determined", "Desperate", 100);
 						
 						hasDisplayed = true;
 					}
@@ -563,9 +510,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Jill had been standing at the counter, chopping vegetables for lunch later. She didn’t say anything. But after what Angie said the chopping stopped. We never looked at each other. We deliberately avoided looking at each other. I think we both knew what would happen if we did. So I just stared down at my cereal and swirled the flakes around the bowl. That’s how things have been of late.", 20);
-						message.displayWarning("Right click to continue", 20);
-						message.displayInfo("Greg Clemens", 20);
+						message.displaySubtitle("Jill had been standing at the counter, chopping vegetables for lunch later. She didn’t say anything. But after what Angie said the chopping stopped. We never looked at each other. We deliberately avoided looking at each other. I think we both knew what would happen if we did. So I just stared down at my cereal and swirled the flakes around the bowl. That’s how things have been of late.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -574,14 +521,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. The rest will come with time.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. The rest will come with time.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -590,14 +532,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. She’s beyond their help, now.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. She’s beyond their help, now.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -606,14 +543,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("There’s nothing to say, really. She’s going to get better. Whatever it takes, she’s going to get better.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("There’s nothing to say, really. She’s going to get better. Whatever it takes, she’s going to get better.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -622,14 +554,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, some way for her to get better. There has to.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, some way for her to get better. There has to.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -640,16 +567,11 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = false;
 						
-						message.displaySubtitle("I’m so sorry Greg. I don’t know what to say.", 10);
-						message.displayWarning("Click a decision to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("I’m so sorry Greg. I don’t know what to say.", 100);
+						message.displayWarning("Click a decision to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
-						message.display4Decision("Optimistic", "Pessimistic", "Determined", "Desperate", 10);
-						
-						fourDec1.canClick = true;
-						fourDec2.canClick = true;
-						fourDec3.canClick = true;
-						fourDec4.canClick = true;
+						message.display4Decision("Optimistic", "Pessimistic", "Determined", "Desperate", 100);
 						
 						hasDisplayed = true;
 					}
@@ -674,15 +596,10 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. The rest will come with time.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
+						message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. The rest will come with time.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
-						
 						hasDisplayed = true;
 					}
 					
@@ -690,14 +607,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. She’s beyond their help, now.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. She’s beyond their help, now.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -706,14 +618,9 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("There’s nothing to say, really. She’s going to get better. Whatever it takes, she’s going to get better.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("There’s nothing to say, really. She’s going to get better. Whatever it takes, she’s going to get better.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -722,15 +629,10 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, some way for her to get better. There has to.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
+						message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, some way for her to get better. There has to.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
-						
 						hasDisplayed = true;
 					}
 				}
@@ -758,17 +660,12 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = false;
 						
-						message.displaySubtitle("Is there anything I can do for you?", 10);
-						message.displayWarning("Click a decision to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("Is there anything I can do for you?", 100);
+						message.displayWarning("Click a decision to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
-						message.display3Decision("News", "", "How are you?", 10);
-						
-						fourDec1.canClick = true;
-						fourDec2.canClick = false;
-						fourDec3.canClick = true;
-						fourDec4.canClick = false;
-						
+						message.display3Decision("News", "", "How are you?", 100);
+
 						hasDisplayed = true;
 					}
 					
@@ -776,16 +673,11 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = false;
 						
-						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Is there anything I can do for you?", 10);
-						message.displayWarning("Click a decision to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Is there anything I can do for you?", 100);
+						message.displayWarning("Click a decision to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
-						message.display1Decision("News", 10);
-						
-						fourDec1.canClick = true;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.display1Decision("News", 100);
 						
 						hasDisplayed = true;
 					}
@@ -796,30 +688,20 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = false;
 						
-						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 10);
-						message.displayWarning("Click a decision to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 100);
+						message.displayWarning("Click a decision to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
-						message.display3Decision("", "", "How are you?", 10);
-						
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = true;
-						fourDec4.canClick = false;
+						message.display3Decision("", "", "How are you?", 100);
 						
 						hasDisplayed = true;
 					}
 					
 					else if (path == path21 && !hasDisplayed) {
 						
-						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is. Oh, speaking of technology changing: Here is your new key card.", 10);
-						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 10);
-						message.displayInfo("William Hobb", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is. Oh, speaking of technology changing: Here is your new key card.", 100);
+						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 100);
+						message.displayInfo("William Hobb", 100);;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -843,16 +725,11 @@ public class securityBehavior : MonoBehaviour {
 						
 						canSkip = false;
 						
-						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Is there anything I can do for you?", 10);
-						message.displayWarning("Click a decision to continue", 10);
-						message.displayInfo("William Hobb", 10);
+						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Is there anything I can do for you?", 100);
+						message.displayWarning("Click a decision to continue", 100);
+						message.displayInfo("William Hobb", 100);
 						
-						message.display1Decision("News", 10);
-						
-						fourDec1.canClick = true;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.display1Decision("News", 100);
 						
 						hasDisplayed = true;
 					}
@@ -860,13 +737,8 @@ public class securityBehavior : MonoBehaviour {
 					else if (path == path14 || path == path34 || path == path44 && !hasDisplayed) {
 						
 						message.displaySubtitle("I'll see you later.", 5);
-						message.displayWarning("Conversation Ended.", 10);
+						message.displayWarning("Conversation Ended.", 5);
 						message.displayInfo("William Hobb", 5);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -890,13 +762,8 @@ public class securityBehavior : MonoBehaviour {
 					else if (path == path24 && !hasDisplayed) {
 						
 						message.displaySubtitle("I'll see you later.", 5);
-						message.displayWarning("Conversation Ended.", 10);
+						message.displayWarning("Conversation Ended.", 5);
 						message.displayInfo("William Hobb", 5);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -921,14 +788,9 @@ public class securityBehavior : MonoBehaviour {
 				if (talkSection == 2) {
 					if (path == path131 || path == path331 || path == path431 && !hasDisplayed) {
 						
-						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is. Oh, speaking of technology changing: Here is your new key card.", 10);
-						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 10);
-						message.displayInfo("William Hobb", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is. Oh, speaking of technology changing: Here is your new key card.", 100);
+						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 100);
+						message.displayInfo("William Hobb", 100);
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -951,13 +813,8 @@ public class securityBehavior : MonoBehaviour {
 					else if (path == path134 || path == path334 || path == path434 && !hasDisplayed) {
 						
 						message.displaySubtitle("I'll see you later.", 5);
-						message.displayWarning("Conversation Ended.", 10);
+						message.displayWarning("Conversation Ended.", 5);
 						message.displayInfo("William Hobb", 5);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -982,14 +839,9 @@ public class securityBehavior : MonoBehaviour {
 					
 					else if (path == path113 || path == path313 || path == path413 && !hasDisplayed)
 					{	
-						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Here's your new key card.", 10);
-						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 10);
-						message.displayInfo("William Hobb", 10);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
+						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Here's your new key card.", 100);
+						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 100);
+						message.displayInfo("William Hobb", 100);
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -1012,13 +864,8 @@ public class securityBehavior : MonoBehaviour {
 					else if (path == path114 || path == path314 || path == path414 && !hasDisplayed)
 					{	
 						message.displaySubtitle("I'll see you later.", 5);
-						message.displayWarning("Conversation Ended.", 10);
+						message.displayWarning("Conversation Ended.", 5);
 						message.displayInfo("William Hobb", 5);
-
-						fourDec1.canClick = false;
-						fourDec2.canClick = false;
-						fourDec3.canClick = false;
-						fourDec4.canClick = false;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -1039,6 +886,14 @@ public class securityBehavior : MonoBehaviour {
 						hasDisplayed = true;
 					}
 				}
+			}
+		}
+
+		else if (!isTalking)
+		{
+			if (message.williamTalk == true)
+			{
+				message.williamTalk = false;
 			}
 		}
 	}

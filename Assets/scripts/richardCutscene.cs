@@ -7,6 +7,11 @@ public class richardCutscene : MonoBehaviour {
 	public bool canTalk		= false;
 	public bool isTalking		= false;
 
+	public Texture2D mouseTexture;
+
+	private int mouseWidth = 32;
+	private int mouseHeight = 32;
+
 	public bool canSkip		= false;
 
 	public bool hasDisplayed	= false;
@@ -37,10 +42,17 @@ public class richardCutscene : MonoBehaviour {
 		talkSection = 0;
 		
 		isTalking = true;
+
+		Screen.showCursor = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (Screen.showCursor == true)
+		{
+			Screen.showCursor = false;
+		}
 	
 		if (isTalking) {
 			
@@ -68,9 +80,9 @@ public class richardCutscene : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Okay, now just relax Greg. I’m going to turn it on now. \n Let me know if you feel any pain.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Richard Fields", 10);
+						message.displaySubtitle("Okay, now just relax Greg. I’m going to turn it on now. \n Let me know if you feel any pain.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
 					}
@@ -81,9 +93,9 @@ public class richardCutscene : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Okay. Right now I’m not feeling anything, except maybe a little-- (gasps)", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
+						message.displaySubtitle("Okay. Right now I’m not feeling anything, except maybe a little-- (gasps)", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						talkCount = 1;
 						
@@ -115,5 +127,10 @@ public class richardCutscene : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void OnGUI () {
+		
+		GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, mouseWidth, mouseHeight), mouseTexture);
 	}
 }

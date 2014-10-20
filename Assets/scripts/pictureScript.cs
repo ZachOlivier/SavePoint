@@ -37,7 +37,7 @@ public class pictureScript : MonoBehaviour {
 			//Application.CaptureScreenshot("screenshot.png");
 			
 			message.displaySubtitle("Finally.. Now can I do what I came here to do?", 5);
-			message.displayWarning("Picture Taken, Received New Badge \n Press Tab to Open Inventory", 5);
+			message.displayWarning("Picture Taken, Received Badge \n Press Tab to Open Inventory", 5);
 			message.displayInfo("Greg Clemens", 5);
 
 			movement.enabled = true;

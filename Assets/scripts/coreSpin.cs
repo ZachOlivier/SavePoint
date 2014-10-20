@@ -15,7 +15,7 @@ public class coreSpin : MonoBehaviour {
 	
 		if (this.gameObject.name == "InnerCore")
 		{
-			this.transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
+			this.transform.Rotate(Vector3.back * Time.deltaTime * rotationSpeed);
 		}
 		
 		else if (this.gameObject.name == "OuterCore")
@@ -26,6 +26,11 @@ public class coreSpin : MonoBehaviour {
 		else if (this.gameObject.name == "OuterCore2")
 		{
 			this.transform.Rotate(Vector3.back * Time.deltaTime * rotationSpeed);
+		}
+
+		else if (this.gameObject.name == "Fan")
+		{
+			this.transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
 		}
 
 		else

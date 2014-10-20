@@ -13,9 +13,19 @@ public class soundScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		audio.clip = music1;
-		audio.loop = true;
-		audio.Play();
+		if (Application.loadedLevel == 1)
+		{
+			audio.clip = music1;
+			audio.loop = true;
+			audio.Play();
+		}
+
+		else if (Application.loadedLevel == 3)
+		{
+			audio.clip = music4;
+			audio.loop = true;
+			audio.Play();
+		}
 	}
 	
 	// Update is called once per frame

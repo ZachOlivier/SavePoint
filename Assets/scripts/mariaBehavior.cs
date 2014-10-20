@@ -7,12 +7,12 @@ public class mariaBehavior : MonoBehaviour {
 	//bool talk.canTalk		= false;
 	public bool isTalking			= false;
 
-	public bool canSkip			= false;
+	public bool canSkip				= false;
 
 	public bool hasDisplayed		= false;
 
 	public bool thisDisplayed		= false;
-	
+
 	// Variable to hold how much time has gone by in a conversation
 	public float timer		= 0.0f;
 	
@@ -35,93 +35,93 @@ public class mariaBehavior : MonoBehaviour {
 	public int path	= 0;
 	
 	// Variables to hold the decisions the player can make
-	public int path1												= 1;
-	public int path11												= 11;
-	public int path12												= 12;
-	public int path13												= 13;
-	public int path14												= 14;
-	public int path111												= 111;
-	public int path112												= 112;
-	public int path113												= 113;
-	public int path114												= 114;
-	public int path121												= 121;
-	public int path122												= 122;
-	public int path123												= 123;
-	public int path124												= 124;
-	public int path131												= 131;
-	public int path132												= 132;
-	public int path133												= 133;
-	public int path134												= 134;
-	public int path141												= 141;
-	public int path142												= 142;
-	public int path143												= 143;
-	public int path144												= 144;
+	private int path1												= 1;
+	private int path11												= 11;
+	private int path12												= 12;
+	private int path13												= 13;
+	private int path14												= 14;
+	private int path111												= 111;
+	private int path112												= 112;
+	private int path113												= 113;
+	private int path114												= 114;
+	private int path121												= 121;
+	private int path122												= 122;
+	private int path123												= 123;
+	private int path124												= 124;
+	private int path131												= 131;
+	private int path132												= 132;
+	private int path133												= 133;
+	private int path134												= 134;
+	private int path141												= 141;
+	private int path142												= 142;
+	private int path143												= 143;
+	private int path144												= 144;
 	
-	public int path2												= 2;
-	public int path21												= 21;
-	public int path22												= 22;
-	public int path23												= 23;
-	public int path24												= 24;
-	public int path211												= 211;
-	public int path212												= 212;
-	public int path213												= 213;
-	public int path214												= 214;
-	public int path221												= 221;
-	public int path222												= 222;
-	public int path223												= 223;
-	public int path224												= 224;
-	public int path231												= 231;
-	public int path232												= 232;
-	public int path233												= 233;
-	public int path234												= 234;
-	public int path241												= 241;
-	public int path242												= 242;
-	public int path243												= 243;
-	public int path244												= 244;
+	private int path2												= 2;
+	private int path21												= 21;
+	private int path22												= 22;
+	private int path23												= 23;
+	private int path24												= 24;
+	private int path211												= 211;
+	private int path212												= 212;
+	private int path213												= 213;
+	private int path214												= 214;
+	private int path221												= 221;
+	private int path222												= 222;
+	private int path223												= 223;
+	private int path224												= 224;
+	private int path231												= 231;
+	private int path232												= 232;
+	private int path233												= 233;
+	private int path234												= 234;
+	private int path241												= 241;
+	private int path242												= 242;
+	private int path243												= 243;
+	private int path244												= 244;
 	
-	public int path3												= 3;
-	public int path31												= 31;
-	public int path32												= 32;
-	public int path33												= 33;
-	public int path34												= 34;
-	public int path311												= 311;
-	public int path312												= 312;
-	public int path313												= 313;
-	public int path314												= 314;
-	public int path321												= 321;
-	public int path322												= 322;
-	public int path323												= 323;
-	public int path324												= 324;
-	public int path331												= 331;
-	public int path332												= 332;
-	public int path333												= 333;
-	public int path334												= 334;
-	public int path341												= 341;
-	public int path342												= 342;
-	public int path343												= 343;
-	public int path344												= 344;
+	private int path3												= 3;
+	private int path31												= 31;
+	private int path32												= 32;
+	private int path33												= 33;
+	private int path34												= 34;
+	private int path311												= 311;
+	private int path312												= 312;
+	private int path313												= 313;
+	private int path314												= 314;
+	private int path321												= 321;
+	private int path322												= 322;
+	private int path323												= 323;
+	private int path324												= 324;
+	private int path331												= 331;
+	private int path332												= 332;
+	private int path333												= 333;
+	private int path334												= 334;
+	private int path341												= 341;
+	private int path342												= 342;
+	private int path343												= 343;
+	private int path344												= 344;
 	
-	public int path4												= 4;
-	public int path41												= 41;
-	public int path42												= 42;
-	public int path43												= 43;
-	public int path44												= 44;
-	public int path411												= 411;
-	public int path412												= 412;
-	public int path413												= 413;
-	public int path414												= 414;
-	public int path421												= 421;
-	public int path422												= 422;
-	public int path423												= 423;
-	public int path424												= 424;
-	public int path431												= 431;
-	public int path432												= 432;
-	public int path433												= 433;
-	public int path434												= 434;
-	public int path441												= 441;
-	public int path442												= 442;
-	public int path443												= 443;
-	public int path444												= 444;
+	private int path4												= 4;
+	private int path41												= 41;
+	private int path42												= 42;
+	private int path43												= 43;
+	private int path44												= 44;
+	private int path411												= 411;
+	private int path412												= 412;
+	private int path413												= 413;
+	private int path414												= 414;
+	private int path421												= 421;
+	private int path422												= 422;
+	private int path423												= 423;
+	private int path424												= 424;
+	private int path431												= 431;
+	private int path432												= 432;
+	private int path433												= 433;
+	private int path434												= 434;
+	private int path441												= 441;
+	private int path442												= 442;
+	private int path443												= 443;
+	private int path444												= 444;
 
 	public Transform Player;
 	public Transform waypoint;
@@ -130,10 +130,6 @@ public class mariaBehavior : MonoBehaviour {
 	public GameObject holder;
 	public GameObject text;
 	public GameObject pc;
-	public GameObject decide1;
-	public GameObject decide2;
-	public GameObject decide3;
-	public GameObject decide4;
 	public GameObject picture;
 
 	private cameraScript		cam;
@@ -142,10 +138,6 @@ public class mariaBehavior : MonoBehaviour {
 	private uiSystem			message;
 	private MouseLook			mouse;
 	private MouseLook			look;
-	private decisionScript1		dec1;
-	private decisionScript1		dec2;
-	private decisionScript1		dec3;
-	private decisionScript1		dec4;
 	private CharacterMotor		movement;
 	private displayInfo			info;
 	private playerScript		talk;
@@ -160,10 +152,6 @@ public class mariaBehavior : MonoBehaviour {
 		message 	= text.GetComponent <uiSystem> ();
 		mouse 		= pc.GetComponent <MouseLook> ();
 		look 		= Camera.main.GetComponent <MouseLook> ();
-		dec1 		= decide1.GetComponent <decisionScript1> ();
-		dec2 		= decide2.GetComponent <decisionScript1> ();
-		dec3 		= decide3.GetComponent <decisionScript1> ();
-		dec4 		= decide4.GetComponent <decisionScript1> ();
 		movement 	= pc.GetComponent <CharacterMotor> ();
 		info 		= this.GetComponent <displayInfo> ();
 		talk 		= pc.GetComponent <playerScript> ();
@@ -196,8 +184,8 @@ public class mariaBehavior : MonoBehaviour {
 			
 			if (talkCount == 0 && !hasDisplayed && !isTalking) {
 				
-				message.displaySubtitle("Dr. Clemens, welcome back.", 10);
-				message.displayInfo("Maria Figueroa - Press E To Talk", 10);
+				message.displaySubtitle("Dr. Clemens, welcome back.", 5);
+				message.displayInfo("Maria Figueroa - Press E To Talk", 100);
 				
 				hasDisplayed = true;
 			}
@@ -257,8 +245,7 @@ public class mariaBehavior : MonoBehaviour {
 				
 				if (isTalking) {
 					isTalking = false;
-					
-					// Let the player know they can't talk right now and let the game be able to pause
+
 					cam.canChange = true;
 					menu.canMenu = true;
 					
@@ -277,18 +264,15 @@ public class mariaBehavior : MonoBehaviour {
 					message.fourDecision3.enabled = false;
 					message.fourDecision4.enabled = false;
 					message.info.enabled = false;
-					
-					dec1.canClick = false;
-					dec2.canClick = false;
-					dec3.canClick = false;
-					dec4.canClick = false;
+					message.displayingOne = false;
+					message.displayingTwo = false;
+					message.displayingThree = false;
+					message.displayingFour = false;
 					
 					message.displayWarning("Conversation Ended..", 4);
 				}
 				
 				else if (!isTalking) {
-					// Set the NPC to currently talking
-					isTalking = true;
 					
 					// Make it so the NPC can't talk again and the game can't pause
 					cam.canChange = false;
@@ -312,6 +296,9 @@ public class mariaBehavior : MonoBehaviour {
 					if (talkCount == 0) {
 						path = 0;
 					}
+
+					// Set the NPC to currently talking
+					isTalking = true;
 				}
 			}
 			
@@ -320,15 +307,20 @@ public class mariaBehavior : MonoBehaviour {
 			}
 		}
 		
-		// Else if the player pressed the E key and the NPC can't talk, and the game isn't paused
+		/* Else if the player pressed the E key and the NPC can't talk, and the game isn't paused
 		else if (Input.GetButtonDown("Talk") && !talk.canTalk && cam.cameraMode == 0 && menu.menuMode == 0) {
 			
 			message.displayWarning("Can't talk right now..", 4);
-		}
+		}*/
 		
 		if (isTalking) {
 			
 			//timer += Time.deltaTime;
+
+			if (message.mariaTalk == false)
+			{
+				message.mariaTalk = true;
+			}
 			
 			if (canSkip) {
 				if (Input.GetButtonDown("Fire2")) {
@@ -343,15 +335,11 @@ public class mariaBehavior : MonoBehaviour {
 					
 					canSkip = false;
 					
-					message.displaySubtitle("Dr. Clemens, welcome back.", 10);
-					message.displayWarning("Click a decision to continue", 10);
-					message.displayInfo("Maria Figueroa", 10);
+					message.displaySubtitle("Dr. Clemens, welcome back.", 100);
+					message.displayWarning("Click a decision to continue", 100);
+					message.displayInfo("Maria Figueroa", 100);
 					
-					message.display3Decision("Polite", "Direct", "Annoyed", 10);
-					
-					dec1.canClick = true;
-					dec2.canClick = true;
-					dec3.canClick = true;
+					message.display3Decision("Polite", "Direct", "Annoyed", 100);
 					
 					hasDisplayed = true;
 				}
@@ -361,14 +349,9 @@ public class mariaBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Thank you, Maria. How are you?", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-						
-						dec1.canClick = false;
-						dec2.canClick = false;
-						dec3.canClick = false;
-						dec4.canClick = false;
+						message.displaySubtitle("Thank you, Maria. How are you?", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -377,14 +360,9 @@ public class mariaBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("I need to update my badge.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-						
-						dec1.canClick = false;
-						dec2.canClick = false;
-						dec3.canClick = false;
-						dec4.canClick = false;
+						message.displaySubtitle("I need to update my badge.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -393,14 +371,9 @@ public class mariaBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Yeah, maybe you can tell me why I get a call in the middle of the night telling me that I'm needed right away and yet when I get here I have to waste time updating a badge.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
-						
-						dec1.canClick = false;
-						dec2.canClick = false;
-						dec3.canClick = false;
-						dec4.canClick = false;
+						message.displaySubtitle("Yeah, maybe you can tell me why I get a call in the middle of the night telling me that I'm needed right away and yet when I get here I have to waste time updating a badge.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -411,9 +384,9 @@ public class mariaBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("I'm well, doctor. And yourself?", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Maria Figueroa", 10);
+						message.displaySubtitle("I'm well, doctor. And yourself?", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Maria Figueroa", 100);
 						
 						hasDisplayed = true;
 					}
@@ -423,11 +396,6 @@ public class mariaBehavior : MonoBehaviour {
 						message.displaySubtitle("I can help you with that right now.", 5);
 						message.displayWarning("Conversation Ended..", 5);
 						message.displayInfo("Maria Figueroa", 5);
-						
-						dec1.canClick = false;
-						dec2.canClick = false;
-						dec3.canClick = false;
-						dec4.canClick = false;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -451,9 +419,9 @@ public class mariaBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("I can’t say as to why you were called in here, doctor. That’s outside my purview. As far as the badge, it’s expired. Furthermore, we updated our security system a few weeks ago. Now, I understand your time is important to you. If you’d like, we can upgrade your badge now and in a few minutes you’ll be on your way.", 20);
-						message.displayWarning("Right click to continue", 20);
-						message.displayInfo("Maria Figueroa", 20);
+						message.displaySubtitle("I can’t say as to why you were called in here, doctor. That’s outside my purview. As far as the badge, it’s expired. Furthermore, we updated our security system a few weeks ago. Now, I understand your time is important to you. If you’d like, we can upgrade your badge now and in a few minutes you’ll be on your way.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Maria Figueroa", 100);
 						
 						hasDisplayed = true;
 					}
@@ -464,9 +432,9 @@ public class mariaBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("I'm good. William told me I needed to update my badge?", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
+						message.displaySubtitle("I'm good. William told me I needed to update my badge?", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -476,11 +444,6 @@ public class mariaBehavior : MonoBehaviour {
 						message.displaySubtitle("Fine, what do I have to do?", 5);
 						message.displayWarning("Conversation Ended..", 5);
 						message.displayInfo("Greg Clemens", 5);
-						
-						dec1.canClick = false;
-						dec2.canClick = false;
-						dec3.canClick = false;
-						dec4.canClick = false;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -506,9 +469,9 @@ public class mariaBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Yeah, we updated our security systems a few weeks ago and everyone needed new badges. If you’d like I can update your badge right now. It will only take a few minutes.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Maria Figueroa", 10);
+						message.displaySubtitle("Yeah, we updated our security systems a few weeks ago and everyone needed new badges. If you’d like I can update your badge right now. It will only take a few minutes.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Maria Figueroa", 100);
 						
 						hasDisplayed = true;
 					}
@@ -519,9 +482,9 @@ public class mariaBehavior : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Sure. Thanks Maria.", 10);
-						message.displayWarning("Right click to continue", 10);
-						message.displayInfo("Greg Clemens", 10);
+						message.displaySubtitle("Sure. Thanks Maria.", 100);
+						message.displayWarning("Right click to continue", 100);
+						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
 					}
@@ -533,11 +496,6 @@ public class mariaBehavior : MonoBehaviour {
 						message.displaySubtitle("Not a problem, doctor.", 5);
 						message.displayWarning("Conversation Ended..", 5);
 						message.displayInfo("Maria Figueroa", 5);
-						
-						dec1.canClick = false;
-						dec2.canClick = false;
-						dec3.canClick = false;
-						dec4.canClick = false;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -559,8 +517,16 @@ public class mariaBehavior : MonoBehaviour {
 				}
 			}
 		}
+
+		else if (!isTalking)
+		{
+			if (message.mariaTalk == true)
+			{
+				message.mariaTalk = false;
+			}
+		}
 		
-		else if (talkCount > 0)
+		if (talkCount > 0)
 		{
 			if (Vector3.Distance(transform.position, waypoint.position) > SnapDist)
 			{
@@ -571,17 +537,22 @@ public class mariaBehavior : MonoBehaviour {
 				menu.canMenu = false;
 				cam.canChange = false;
 
+				if (pic.canPicture)
+				{
+					pic.canPicture = false;
+				}
+
 				transform.position += transform.forward * MoveSpeed * Time.deltaTime;
 				
 				//animation.CrossFade(animal_walk.name);
 			}
 			
-			else if (Vector3.Distance(transform.position, waypoint.position) <= SnapDist)
+			else if (Vector3.Distance(waypoint.position, transform.position) <= SnapDist)
 			{
 				if (transform.position != waypoint.position)
 				{
-					message.displaySubtitle("Please look towards me and at the camera.", 10);
-					message.displayInfo("Maria Figueroa", 10);
+					message.displaySubtitle("Please look towards me and at the camera.", 100);
+					message.displayInfo("Maria Figueroa", 100);
 					
 					if (!pic.canPicture)
 					{
