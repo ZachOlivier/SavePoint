@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/icScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/menuScript.cs">
     <Files>
-      <File FileName="Assets/scripts/icScript.cs" Line="266" Column="5" />
+      <File FileName="Assets/scripts/irmaScript.cs" Line="1556" Column="2" />
+      <File FileName="Assets/scripts/irmaScript.cs" Line="323" Column="28" />
+      <File FileName="Assets/scripts/menuScript.cs" Line="162" Column="74" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

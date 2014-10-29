@@ -6,6 +6,7 @@ using System.Collections;
 public class playerScript : MonoBehaviour {
 
 	public AudioClip walkSound;
+	public AudioClip walkOnDebris;
 	public AudioClip runSound;
 
 	public int health	= 5;
@@ -25,7 +26,7 @@ public class playerScript : MonoBehaviour {
 
 	void Awake () {
 
-		movement 	= this.GetComponent <CharacterMotor> ();
+		movement 	= this.GetComponentInParent <CharacterMotor> ();
 	}
 
 	// Use this for initialization
@@ -137,7 +138,8 @@ public class playerScript : MonoBehaviour {
 			movement.movement.maxForwardSpeed 		= 15.0f;
 			movement.movement.maxSidewaysSpeed 		= 12.0f;
 			movement.movement.maxBackwardsSpeed		= 5.0f;
-			
+
+			audio.volume = .4f;
 			audio.clip = runSound;
 		}
 		
@@ -161,7 +163,8 @@ public class playerScript : MonoBehaviour {
 			movement.movement.maxForwardSpeed 		= 6.0f;
 			movement.movement.maxSidewaysSpeed 		= 6.0f;
 			movement.movement.maxBackwardsSpeed		= 2.0f;
-			
+
+			audio.volume = .2f;
 			audio.clip = walkSound;
 		}
 		

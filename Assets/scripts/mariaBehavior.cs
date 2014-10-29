@@ -185,7 +185,7 @@ public class mariaBehavior : MonoBehaviour {
 			if (talkCount == 0 && !hasDisplayed && !isTalking) {
 				
 				message.displaySubtitle("Dr. Clemens, welcome back.", 5);
-				message.displayInfo("Maria Figueroa - Press E To Talk", 100);
+				message.displayInfo("Maria Figueroa\nPress E To Talk", 100);
 				
 				hasDisplayed = true;
 			}

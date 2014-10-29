@@ -68,10 +68,10 @@ public class guiSystem : MonoBehaviour {
 			Screen.showCursor = false;
 		}
 	
-		if (healthGUI.texture != healthNum[player.health - 1])
+		/*if (healthGUI.texture != healthNum[player.health - 1])
 		{
 			healthGUI.texture = healthNum[player.health - 1];
-		}
+		}*/
 
 		if (Input.mousePosition.x > 512 && !locked)
 		{

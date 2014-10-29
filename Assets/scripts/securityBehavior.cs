@@ -178,7 +178,7 @@ public class securityBehavior : MonoBehaviour {
 			if (talkCount == 0 && !hasDisplayed && !isTalking) {
 				
 				message.displaySubtitle("Good evening Dr. Clemens.", 5);
-				message.displayInfo("William Hebb - Press E To Talk", 100);
+				message.displayInfo("William Hebb\nPress E To Talk", 100);
 				
 				hasDisplayed = true;
 			}
@@ -186,7 +186,7 @@ public class securityBehavior : MonoBehaviour {
 			else if (talkCount == 1 && !hasDisplayed && !isTalking) {
 				
 				message.displaySubtitle("Yes Sir?", 5);
-				message.displayInfo("William Hebb - Press E To Talk", 100);
+				message.displayInfo("William Hebb\nPress E To Talk", 100);
 				
 				hasDisplayed = true;
 			}

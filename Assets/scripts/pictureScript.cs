@@ -5,21 +5,21 @@ public class pictureScript : MonoBehaviour {
 
 	public bool canPicture		= false;
 	public bool inPicture		= false;
-	public bool tookPicture	= false;
+	public bool tookPicture		= false;
 
 	public GameObject pc;
 	public GameObject text;
 	public GameObject holder;
 
 	private CharacterMotor		movement;
-	private uiSystem	message;
+	private uiSystem			message;
 	private cameraScript		cam;
 	private menuScript			menu;
 
 	void Awake () {
 
 		movement 	= pc.GetComponent <CharacterMotor> ();
-		message = text.GetComponent <uiSystem> ();
+		message 	= text.GetComponent <uiSystem> ();
 		cam 		= holder.GetComponent <cameraScript> ();
 		menu 		= holder.GetComponent <menuScript> ();
 	}
@@ -37,7 +37,7 @@ public class pictureScript : MonoBehaviour {
 			//Application.CaptureScreenshot("screenshot.png");
 			
 			message.displaySubtitle("Finally.. Now can I do what I came here to do?", 5);
-			message.displayWarning("Picture Taken, Received Badge \n Press Tab to Open Inventory", 5);
+			message.displayWarning("Picture Taken, Received Badge\nPress Tab to Open Inventory", 5);
 			message.displayInfo("Greg Clemens", 5);
 
 			movement.enabled = true;

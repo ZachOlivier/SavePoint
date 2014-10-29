@@ -178,7 +178,7 @@ public class richardBehavior : MonoBehaviour {
 			if (talkCount == 0 && !hasDisplayed && !isTalking) {
 				
 				message.displaySubtitle("Greg, you made it. I’m really glad you came.", 5);
-				message.displayInfo("Richard Fields - Press E To Talk", 100);
+				message.displayInfo("Richard Fields\nPress E To Talk", 100);
 				
 				hasDisplayed = true;
 			}

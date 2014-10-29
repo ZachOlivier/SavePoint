@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class irmaScript : MonoBehaviour {
 
+	public AudioClip irmaIntro;
+	public AudioClip riotingAmbience;
+	public AudioClip explosion;
+	public AudioClip sentBack;
+	public AudioClip gunShot;
+
+	public bool audioPlayed;
+
 	// Variables to tell if the NPC can talk, or is talking
-	//bool talk.canTalk		= false;
 	public bool isTalking			= false;
 	
 	public bool canSkip				= false;
@@ -208,6 +217,31 @@ public class irmaScript : MonoBehaviour {
 			}
 		}
 
+		if (talkNumber == 0 && talkCount >= 6)
+		{
+			if (!audio.isPlaying && talkCount == 6)
+			{
+				holder.audio.volume = .1f;
+
+				audio.clip = riotingAmbience;
+				audio.loop = true;
+				audio.volume = .5f;
+
+				audio.Play();
+			}
+
+			else if (!audio.isPlaying && talkCount == 7)
+			{
+				holder.audio.volume = .1f;
+				
+				audio.clip = riotingAmbience;
+				audio.loop = true;
+				audio.volume = .7f;
+				
+				audio.Play();
+			}
+		}
+
 		/*if (talkCount == 3 && Input.GetButtonDown("Talk"))
 		{
 			talkCount = 1000;
@@ -285,6 +319,9 @@ public class irmaScript : MonoBehaviour {
 
 					else if (Application.loadedLevel == 4)
 					{
+						menu.canMenu = true;
+						cam.canChange = true;
+
 						talkCount = 0;
 						talkSection = 0;
 						talkNumber = 1;
@@ -319,6 +356,15 @@ public class irmaScript : MonoBehaviour {
 					message.irmaTalk = true;
 
 					canSkip = true;
+
+					if (!audioPlayed)
+					{
+						holder.audio.volume = .1f;
+
+						audio.PlayOneShot(irmaIntro);
+
+						audioPlayed = true;
+					}
 					
 					message.displaySubtitle("Hello Dr. Clemens. I’m IRMA, your Internal Recall/Memory Assistant.", 100);
 					message.displayWarning("Right click to continue", 100);
@@ -330,6 +376,15 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 1)
 				{
 					canSkip = true;
+
+					if (audioPlayed)
+					{
+						audio.Stop();
+
+						holder.audio.volume = .4f;
+
+						audioPlayed = false;
+					}
 					
 					message.displaySubtitle("What the hell? You’re my what?", 100);
 					message.displayWarning("Right click to continue", 100);
@@ -1086,6 +1141,8 @@ public class irmaScript : MonoBehaviour {
 					
 					message.displayWarning("Journal Updated:\n Daughters of Iris ", 5);
 
+					audio.volume = .1f;
+
 					talkSection = 9;
 				}
 			}
@@ -1188,9 +1245,19 @@ public class irmaScript : MonoBehaviour {
 
 					canSkip = false;
 
+					if (!audioPlayed)
+					{
+						audio.volume = .6f;
+						audio.PlayOneShot(explosion);
+
+						audioPlayed = true;
+					}
+
 					if (timer > time)
 					{
 						cameraMain.localScale = camPosition;
+
+						audioPlayed = false;
 
 						talkSection = 8;
 					}

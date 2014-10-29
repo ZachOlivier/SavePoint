@@ -159,7 +159,7 @@ public class menuScript : MonoBehaviour {
 				menuMode = 11;
 			}
 			
-			if (GUI.Button (new Rect (btnX, btnY + 150, btnW, btnH), "Restart Game (Intro)"))
+			if (GUI.Button (new Rect (btnX, btnY + 150, btnW, btnH), "Restart Game"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -273,6 +273,11 @@ public class menuScript : MonoBehaviour {
 					{
 						Application.LoadLevel(3);
 					}
+
+					else if (Application.loadedLevel == 4)
+					{
+						Application.LoadLevel(4);
+					}
 				}
 			}
 		}
@@ -293,7 +298,7 @@ public class menuScript : MonoBehaviour {
 				menuMode = 1;
 			}
 			
-			if (GUI.Button (new Rect (btnX + 200, btnY, btnW, btnH), "Restart Game (Intro)"))
+			if (GUI.Button (new Rect (btnX + 200, btnY, btnW, btnH), "Restart Game"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{

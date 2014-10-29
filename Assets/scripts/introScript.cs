@@ -7,7 +7,17 @@ public class introScript : MonoBehaviour {
 
 	// Variables for holding time and what part the intro scene is at in order to let player skip if desired
 	//int timer		= 0;
-	public int part		= 0;
+	public int part			= 0;
+	public int audioPart 	= 0;
+	
+	public bool audioPlayed = false;
+
+	public float timer;
+	public float introTimer1;
+	public float introTimer2;
+	public float introTimer3;
+	public float introTimer4;
+	public float introTimer5;
 
 	public Texture2D icBG;
 
@@ -15,6 +25,9 @@ public class introScript : MonoBehaviour {
 	public AudioClip music2;
 	public AudioClip music3;
 	public AudioClip music4;
+
+	public AudioClip expandedIntro;
+	public AudioClip introTalk1;
 
 	public bool canSkip	= true;
 	public bool canBack	= true;
@@ -24,12 +37,10 @@ public class introScript : MonoBehaviour {
 	public GameObject text;
 
 	private uiSystem		message;
-	//private soundScript		music;
 
 	void Awake () {
 
 		message = text.GetComponent <uiSystem> ();
-		//music = this.GetComponent <soundScript> ();
 	}
 
 	// Use this for initialization
@@ -43,15 +54,39 @@ public class introScript : MonoBehaviour {
 	void Update () {
 	
 		if (Input.GetButtonDown("Fire1") && canSkip) {
-			part++;
+			if (part >= 1 && part <= 5)
+			{
+
+			}
+
+			else
+			{
+				part++;
+			}
 		}
 		
 		if (Input.GetButtonDown("Fire2") && canBack) {
-			part--;
+			if (part >= 1 && part <= 5)
+			{
+				
+			}
+			
+			else
+			{
+				part--;
+			}
 		}
 		
 		if (Input.GetButtonDown("Talk")) {
-			part = 48;
+			if (part > -1)
+			{
+				part = 48;
+			}
+		}
+
+		if (part >= 1 && part <= 5)
+		{
+			timer += Time.deltaTime;
 		}
 
 		if (!message.displayingOne)
@@ -77,8 +112,17 @@ public class introScript : MonoBehaviour {
 
 			canBack = false;
 
-			message.displaySubtitle("Do better", 100);
-			message.displayWarning("Left Click to Proceed, Right Click to Go Back", 100);
+			if (!audioPlayed)
+			{
+				audio.PlayOneShot(expandedIntro);
+
+				audioPart = 0;
+
+				audioPlayed = true;
+			}
+
+			message.displaySubtitle("My name is Gregory Clemens. I’m a particle physicist with a doctorate from MIT. I have a wife named Jill and a daughter, Angie. I’m 45 years old. My name is Gregory Clemens. I’m a particle physicist with a doctorate from MIT. I have a wife named Jill and a daughter, Angie. I’m 45 years old. My name is Gregory Clemens. I’m a particle physicist with a doctorate from MIT. I have a wife named Jill and a daughter, Angie. I’m 45 years old. I can.. I can do better. (Fading) My name is Gregory Clemens. I’m a particle physicist with a doctorate from MIT. I have a wife named Jill.....", 100);
+			message.displayWarning("Left Click to Proceed, Right Click to Go Back", 1000);
 			message.displayInfo("Press E to Skip", 1000);
 			message.display1Decision("Unknown Voice", 100);
 		}
@@ -86,24 +130,47 @@ public class introScript : MonoBehaviour {
 		if (part == 1) {
 			
 			canBack = true;
-			
-			audio.clip = music3;
-			audio.loop = true;
-			
-			if (!audio.isPlaying) {
-				audio.Play();
+
+			if (audioPart == 0)
+			{
+				audio.Stop();
+
+				audioPlayed = false;
+
+				audioPart++;
+			}
+
+			else if (audioPart == 1)
+			{
+				if (!audioPlayed)
+				{
+					audio.PlayOneShot(introTalk1);
+					
+					audioPlayed = true;
+				}
 			}
 			
 			message.displaySubtitle("Okay okay, so Dr. Clemens, I just have to ask you this one last question : \n You've created this.. what did you call it?", 100);
 			message.display1Decision("Broadcaster #1", 100);
 
+			if (timer >= introTimer1)
+			{
+				part++;
+			}
+
+			message.warning.enabled = false;
 			message.displayingThree = false;
 		}
 		
 		if (part == 2) {
 			
-			message.displaySubtitle("I-C Machine.", 100);
+			message.displaySubtitle("It's an I-C Machine.", 100);
 			message.display3Decision("", "Greg Clemens", "Main Character", 100);
+
+			if (timer >= introTimer2)
+			{
+				part++;
+			}
 
 			message.displayingOne = false;
 		}
@@ -113,6 +180,11 @@ public class introScript : MonoBehaviour {
 			message.displaySubtitle("This... amazing machine... that sends messages to the past and receives them from the future. \n So if you were to send yourself, your past self, a single personal message, what would it be?", 100);
 			message.display1Decision("Broadcaster #1", 100);
 
+			if (timer >= introTimer3)
+			{
+				part++;
+			}
+
 			message.displayingThree = false;
 		}
 		
@@ -120,19 +192,46 @@ public class introScript : MonoBehaviour {
 			
 			message.displaySubtitle("Do better.", 100);
 			message.display1Decision("Greg Clemens", 100);
+
+			if (timer >= introTimer4)
+			{
+				part++;
+			}
 		}
 		
 		if (part == 5) {
 			
-			message.displaySubtitle("Wait a minute, you’re the person responsible for what is potentially the most significant invention \n in the history of all humankind, and you’re message to yourself would be ‘Do better?’. All I can say \n to that is God help the rest of us! Thank you so much Dr. Gregory Clemens, or as the headlines are calling you : \n \n The Man Who Texted Yesterday.", 100);
+			message.displaySubtitle("Wait a minute, you’re the person responsible for what is potentially the most significant invention \n in the history of all humankind, and you’re message to yourself would be ‘Do better?’. All I can say \n to that is God help the rest of us! Thank you so much Dr. Gregory Clemens, or as the headlines are calling you : \n \nThe Man Who Texted Yesterday.", 100);
 			message.display1Decision("Broadcaster #1", 100);
+
+			if (timer >= introTimer5)
+			{
+				part++;
+
+				timer = 0;
+			}
 
 			message.displayingThree = false;
 		}
 		
 		if (part == 6) {
+
+			if (audioPart == 1)
+			{
+				audio.Stop();
+
+				audioPart++;
+			}
+
+			audio.clip = music3;
+			audio.loop = true;
 			
+			if (!audio.isPlaying) {
+				audio.Play();
+			}
+
 			message.displaySubtitle("“Do better”? I can’t believe you said that.", 100);
+			message.displayWarning("Left Click to Proceed, Right Click to Go Back", 1000);
 			message.display3Decision("", "Jill", "Greg's Wife", 100);
 
 			message.displayingOne = false;
@@ -411,6 +510,13 @@ public class introScript : MonoBehaviour {
 		}
 		
 		if (part == 48) {
+
+			if (audioPart == 0 || audioPart == 1)
+			{
+				audio.Stop();
+
+				audioPart += 5;
+			}
 			
 			audio.clip = music1;
 			audio.loop = true;
