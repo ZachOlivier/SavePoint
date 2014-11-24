@@ -11,9 +11,11 @@ public class cameraScript : MonoBehaviour {
 
 	// Variables to hold the player and npc game objects so that we can access their scripts
 	public GameObject pc;
+	public GameObject SH;
 	public GameObject npc;
 	public GameObject text;
 	public GameObject picture;
+	public GameObject gui;
 
 	private MouseLook 		mouse;
 	private CharacterMotor 	movement;
@@ -22,6 +24,7 @@ public class cameraScript : MonoBehaviour {
 	private menuScript 		menu;
 	private uiSystem 		message;
 	private pictureScript	pic;
+	private guiSystem		cursor;
 
 	void Awake () {
 
@@ -29,10 +32,20 @@ public class cameraScript : MonoBehaviour {
 		mouse 		= pc.GetComponent <MouseLook> ();
 		movement 	= pc.GetComponent <CharacterMotor> ();
 		cam 		= Camera.main.GetComponent <MouseLook> ();
-		talk 		= pc.GetComponent <playerScript> ();
 		menu 		= this.GetComponent <menuScript> ();
 		message 	= text.GetComponent <uiSystem> ();
 		pic 		= picture.GetComponent <pictureScript> ();
+		cursor		= gui.GetComponent <guiSystem> ();
+
+		if (Application.loadedLevel == 3)
+		{
+			talk 	= SH.GetComponent <playerScript> ();
+		}
+		
+		else
+		{
+			talk 	= pc.GetComponent <playerScript> ();
+		}
 	}
 
 	// This void only fires once during the start of this script
@@ -60,6 +73,13 @@ public class cameraScript : MonoBehaviour {
 			// Make it so the camera won't move
 			mouse.enabled = false;
 			cam.enabled = false;
+
+			message.subtitle.enabled = false;
+			message.info.enabled = false;
+
+			cursor.mouseShow = true;
+			cursor.cursorShow = false;
+			cursor.mouseLocked = false;
 			
 			// Display a message on the screen that will stay for 4 seconds
 			message.displayWarning("Inventory mode active.. \n Press Tab to Close", 10000);
@@ -88,6 +108,10 @@ public class cameraScript : MonoBehaviour {
 			
 			mouse.enabled = true;
 			cam.enabled = true;
+
+			cursor.mouseShow = false;
+			cursor.cursorShow = true;
+			cursor.mouseLocked = true;
 			
 			message.displayWarning("Normal mode active..", 4);
 		}
@@ -116,6 +140,10 @@ public class cameraScript : MonoBehaviour {
 				
 				mouse.enabled = true;
 				cam.enabled = true;
+
+				cursor.mouseShow = false;
+				cursor.cursorShow = true;
+				cursor.mouseLocked = true;
 				
 				message.displayWarning("Camera error!..", 4);
 			}

@@ -126,6 +126,7 @@ public class securityBehavior : MonoBehaviour {
 	public GameObject holder;
 	public GameObject text;
 	public GameObject pc;
+	public GameObject gui;
 
 	private cameraScript		cam;
 	//private timeChanger			chosen;
@@ -136,6 +137,7 @@ public class securityBehavior : MonoBehaviour {
 	private CharacterMotor		movement;
 	private displayInfo			info;
 	private playerScript		talk;
+	private guiSystem			cursor;
 
 	void Awake () {
 
@@ -149,6 +151,7 @@ public class securityBehavior : MonoBehaviour {
 		movement = pc.GetComponent <CharacterMotor> ();
 		info = this.GetComponent <displayInfo> ();
 		talk = pc.GetComponent <playerScript> ();
+		cursor = gui.GetComponent <guiSystem> ();
 	}
 
 	// Use this for initialization
@@ -256,6 +259,10 @@ public class securityBehavior : MonoBehaviour {
 					movement.enabled = true;
 					
 					info.canDisplay = true;
+
+					cursor.cursorShow = true;
+					cursor.mouseShow = false;
+					cursor.mouseLocked = true;
 					
 					hasDisplayed = false;
 					
@@ -338,7 +345,7 @@ public class securityBehavior : MonoBehaviour {
 					
 					message.displaySubtitle("It sure is nice seeing you again sir. It's been too long.", 100);
 					message.displayWarning("Click a decision to continue", 100);
-					message.displayInfo("William Hobb", 100);
+					message.displayInfo("William Hebb", 100);
 					
 					message.display4Decision("Apologetic", "Evasive", "Defensive", "Dismissive", 100);
 					
@@ -351,7 +358,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I know it has. I.. home had to come first.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -362,7 +369,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Thanks, William. It’s nice to see you too. How’ve you been?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -373,7 +380,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I have a daughter at home that might disagree.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -384,7 +391,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I know. But I’m back now.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -397,8 +404,8 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Of course it did. You’re absolutely right. I’m sorry if it sounded like I meant anything else. I was just trying to tell you how much you’ve been missed.", 100);
-						message.displayWarning("Right click to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayWarning("Press space to continue", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						hasDisplayed = true;
 					}
@@ -414,8 +421,8 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Of course you do! I’m sorry if it sounded like I meant anything else. I was just trying to tell you how much you’ve been missed.", 100);
-						message.displayWarning("Right click to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayWarning("Press space to continue", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						hasDisplayed = true;
 					}
@@ -433,7 +440,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("No, it’s fine. It’s just.. It’s been tough, with Angie.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -447,7 +454,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("I really am sorry, Doctor. How is she doing?", 100);
 						message.displayWarning("Click a decision to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						message.display3Decision("Confide", "", "Don't Confide", 100);
 						
@@ -461,7 +468,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("This morning at breakfast.. she’s sitting there in her wheelchair, at the kitchen table, and she’s making a mess, this huge mess, trying to lift her spoon to her mouth. So I go to take the spoon, to help her, and she says “Daddy I can do it myself!” Just like when she was four and learning to ride her bike. And for a split second I almost laugh. But then I remember-- she’s not four, she’s fifteen. At four she could still pedal a bike. At four she wasn’t wearing diapers. At four she didn’t.. she didn’t sound like a damn moron! And I think all this, right there, with her staring straight at me, and it takes everything I have in me not to just start bawling there on the spot. And somehow, somehow I don’t because I know it would only hurt her more, but my God it kills me inside.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -472,7 +479,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("It’s life, you know? Some days are better than others.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -485,8 +492,8 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Jesus..", 100);
-						message.displayWarning("Right click to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayWarning("Press space to continue", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						hasDisplayed = true;
 					}
@@ -497,7 +504,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("I’m so sorry Greg. I don’t know what to say.", 100);
 						message.displayWarning("Click a decision to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						message.display4Decision("Optimistic", "Pessimistic", "Determined", "Desperate", 100);
 						
@@ -511,7 +518,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Jill had been standing at the counter, chopping vegetables for lunch later. She didn’t say anything. But after what Angie said the chopping stopped. We never looked at each other. We deliberately avoided looking at each other. I think we both knew what would happen if we did. So I just stared down at my cereal and swirled the flakes around the bowl. That’s how things have been of late.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -522,7 +529,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. The rest will come with time.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -533,7 +540,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. She’s beyond their help, now.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -544,7 +551,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s nothing to say, really. She’s going to get better. Whatever it takes, she’s going to get better.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -555,7 +562,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, some way for her to get better. There has to.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -569,7 +576,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("I’m so sorry Greg. I don’t know what to say.", 100);
 						message.displayWarning("Click a decision to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						message.display4Decision("Optimistic", "Pessimistic", "Determined", "Desperate", 100);
 						
@@ -597,7 +604,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s nothing to say, really. She’s alive-- that’s the most important part. The rest will come with time.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 
 						hasDisplayed = true;
@@ -608,7 +615,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s nothing to say, really. Nothing to be done. The doctors have already admitted as much. She’s beyond their help, now.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -619,7 +626,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s nothing to say, really. She’s going to get better. Whatever it takes, she’s going to get better.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -630,7 +637,7 @@ public class securityBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s nothing to say, really. She has to get better. There has to be something, some way for her to get better. There has to.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 
 						hasDisplayed = true;
@@ -662,7 +669,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("Is there anything I can do for you?", 100);
 						message.displayWarning("Click a decision to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						message.display3Decision("News", "", "How are you?", 100);
 
@@ -675,7 +682,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Is there anything I can do for you?", 100);
 						message.displayWarning("Click a decision to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						message.display1Decision("News", 100);
 						
@@ -690,7 +697,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is.", 100);
 						message.displayWarning("Click a decision to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						message.display3Decision("", "", "How are you?", 100);
 						
@@ -701,7 +708,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is. Oh, speaking of technology changing: Here is your new key card.", 100);
 						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 100);
-						message.displayInfo("William Hobb", 100);;
+						message.displayInfo("William Hebb", 100);;
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -712,6 +719,10 @@ public class securityBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkCount = 2;
 						
@@ -727,7 +738,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Is there anything I can do for you?", 100);
 						message.displayWarning("Click a decision to continue", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						message.display1Decision("News", 100);
 						
@@ -738,7 +749,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("I'll see you later.", 5);
 						message.displayWarning("Conversation Ended.", 5);
-						message.displayInfo("William Hobb", 5);
+						message.displayInfo("William Hebb", 5);
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -749,6 +760,10 @@ public class securityBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkSection = 0;
 						path = path1;
@@ -763,7 +778,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("I'll see you later.", 5);
 						message.displayWarning("Conversation Ended.", 5);
-						message.displayInfo("William Hobb", 5);
+						message.displayInfo("William Hebb", 5);
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -774,6 +789,10 @@ public class securityBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkSection = 0;
 						path = path2;
@@ -790,7 +809,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("You know how this place is. The technology may be always changing but nothing else is. Oh, speaking of technology changing: Here is your new key card.", 100);
 						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -801,6 +820,10 @@ public class securityBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkCount = 2;
 						
@@ -814,7 +837,7 @@ public class securityBehavior : MonoBehaviour {
 						
 						message.displaySubtitle("I'll see you later.", 5);
 						message.displayWarning("Conversation Ended.", 5);
-						message.displayInfo("William Hobb", 5);
+						message.displayInfo("William Hebb", 5);
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -825,6 +848,10 @@ public class securityBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkSection = 1;
 						path = path13;
@@ -841,7 +868,7 @@ public class securityBehavior : MonoBehaviour {
 					{	
 						message.displaySubtitle("Oh, alright I suppose. Another day closer to retirement so.. can’t complain. Here's your new key card.", 100);
 						message.displayWarning("Key Card Obtained\nPress Tab To Open Inventory", 100);
-						message.displayInfo("William Hobb", 100);
+						message.displayInfo("William Hebb", 100);
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -852,6 +879,10 @@ public class securityBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkCount = 2;
 						
@@ -865,7 +896,7 @@ public class securityBehavior : MonoBehaviour {
 					{	
 						message.displaySubtitle("I'll see you later.", 5);
 						message.displayWarning("Conversation Ended.", 5);
-						message.displayInfo("William Hobb", 5);
+						message.displayInfo("William Hebb", 5);
 						
 						cam.canChange = true;
 						menu.canMenu = true;
@@ -876,6 +907,10 @@ public class securityBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkSection = 1;
 						path = path11;

@@ -137,6 +137,11 @@ public class doorScript : MonoBehaviour {
 				message.displayWarning("Door access denied", 10);
 			}
 		}
+
+		if (other.gameObject.tag == "Player" && this.gameObject.name == "Door")
+		{
+			animation.Play(doorOpen.name);
+		}
 	}
 	
 	void OnTriggerExit (Collider other) {
@@ -146,6 +151,11 @@ public class doorScript : MonoBehaviour {
 		}
 		
 		if (other.gameObject.tag == "Player" && this.gameObject.name == "ICsecurityDoor" && ICopen) {
+			animation.Play(doorClose.name);
+		}
+
+		if (other.gameObject.tag == "Player" && this.gameObject.name == "Door")
+		{
 			animation.Play(doorClose.name);
 		}
 		

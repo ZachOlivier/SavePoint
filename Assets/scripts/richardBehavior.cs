@@ -126,6 +126,7 @@ public class richardBehavior : MonoBehaviour {
 	public GameObject holder;
 	public GameObject text;
 	public GameObject pc;
+	public GameObject gui;
 
 	private cameraScript		cam;
 	//private timeChanger			chosen;
@@ -136,6 +137,7 @@ public class richardBehavior : MonoBehaviour {
 	private CharacterMotor		movement;
 	private displayInfo			info;
 	private playerScript		talk;
+	private guiSystem			cursor;
 
 	void Awake () {
 
@@ -149,6 +151,7 @@ public class richardBehavior : MonoBehaviour {
 		movement = pc.GetComponent <CharacterMotor> ();
 		info = this.GetComponent <displayInfo> ();
 		talk = pc.GetComponent <playerScript> ();
+		cursor = gui.GetComponent <guiSystem> ();
 	}
 
 	// Use this for initialization
@@ -240,6 +243,10 @@ public class richardBehavior : MonoBehaviour {
 					movement.enabled = true;
 					
 					info.canDisplay = true;
+
+					cursor.cursorShow = true;
+					cursor.mouseShow = false;
+					cursor.mouseLocked = true;
 					
 					hasDisplayed = false;
 					
@@ -269,6 +276,10 @@ public class richardBehavior : MonoBehaviour {
 					movement.enabled = false;
 					
 					info.canDisplay = false;
+
+					cursor.cursorShow = false;
+					cursor.mouseShow = false;
+					cursor.mouseLocked = true;
 					
 					hasDisplayed = false;
 					
@@ -331,7 +342,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("So what's the big emergency?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -342,7 +353,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Thanks Rich. It's good to see you.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -353,7 +364,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I’m not. I had to leave Jill and Angie to come in here. I told you I wasn’t ready to do that.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -366,7 +377,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I didn’t say emergency; I said it was urgent. But yeah, this is serious.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -377,7 +388,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("You too Greg, you too. Look pal, I wouldn’t have called you in but this is serious.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -388,7 +399,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I know, Greg, and I respect that. I really do. I wouldn’t have asked if it wasn’t important.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -401,7 +412,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("So, what is it?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -414,7 +425,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("You know the machine has been silent for some time, right? Well, five weeks ago she spoke.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -427,7 +438,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("What? And you didn’t tell me?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -455,7 +466,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Great, so now I’m kept out of the loop on my own machine?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -466,7 +477,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Why not?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -477,7 +488,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I understand. I was on leave and you didn’t know what you were dealing with.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -488,7 +499,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("...", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 
 						hasDisplayed = true;
@@ -501,7 +512,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Greg, it’s not like that.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -512,7 +523,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Let me explain..", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -523,7 +534,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Exactly.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -534,7 +545,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("...", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -547,7 +558,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Since then it’s been repeating the message, the same message. It’s a simple schematic, a modification to the machine.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -560,7 +571,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("What kind of modification?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -573,7 +584,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("An upgrade. It appears to be some kind of human public interface. The fact is the schematics that came through were clear, very clear, but they weren’t explanatory. We don’t understand the technology that we’re building here.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -586,7 +597,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Then why build it?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -599,7 +610,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Why? Because we’re stuck here Greg. We’re not getting anymore useful information from the machine, you were on leave, and yes, I understand why but that doesn’t change the facts. And the fact is the government wanted communication flowing again and we were at a dead end buddy, a total dead end.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -612,7 +623,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Okay, you were stuck and this message seemed like the solution. I get that. So what’s the problem?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -625,7 +636,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("There’s more. There was more to the message. At the end of the message, for each of these five weeks, they included a name.. Your name.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -638,7 +649,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("My name?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -651,7 +662,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I know. It’s weird. No reason was given, no explanation. Just your name. At first we thought it was some kind of sign off, or that they were addressing this to you. Hell, we even floated the idea that the message could be coming from you.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -664,7 +675,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Coming from me? Are you daft? The machine’s been on since August. It’s been what, a hundred and...", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -677,7 +688,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("1007 days Greg. And every day, corresponds to a new year in the future. That’s the system. That means 1007 years from now there is a machine sending us a message with some schematics and your name attached to it. And it’s been sending us that same message for 35 years.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -690,7 +701,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("And you thought it might be me?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -703,7 +714,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("We floated the idea. We never thought it was likely but think about it, every day a new year’s worth of technology was coming through to us. For 144 days that went on. We haven’t even scratched the surface sifting through that information. So yeah, we floated the idea.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -716,7 +727,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("My god.. None of this makes any sense.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -729,7 +740,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I know. That’s what we thought.. at first. But then it occurred to us, maybe the message means you’re the one that needs to public interface with the machine.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -742,7 +753,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("What would make you think.. wait a minute. You’ve already tried using it, haven’t you?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -755,7 +766,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Not me personally but--", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -768,7 +779,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("You know what I mean. I can’t believe this. You didn’t call me in here to work on the machine, you want me to be a guinea pig.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -781,7 +792,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Greg--", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -794,7 +805,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("No no no.. and tell me, how many others have you tried before calling me in?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -807,7 +818,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Greg--", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -820,7 +831,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Tell me.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -833,7 +844,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Seven..", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -846,7 +857,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("And what happened to them?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -859,7 +870,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Nothing much. A lot of static. A couple headaches. Two nosebleeds.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -872,7 +883,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Son of a..", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -885,7 +896,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Nothing severe though. Look, this is messed up, I’ll be the first to admit it. At the same time, could it be any more poetic? I mean she’s your girl. Maybe she’s just coming to you for help.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -898,7 +909,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("It’s a machine.. it’s not my girl..", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -911,7 +922,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Greg...", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -924,7 +935,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("(sigh)... All right, I’ll do it.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -937,7 +948,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Thanks Greg. Look, this shouldn’t take long, and then either way we’ll have our answer.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -950,7 +961,7 @@ public class richardBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Yeah..", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 
 						talkCount = 1;

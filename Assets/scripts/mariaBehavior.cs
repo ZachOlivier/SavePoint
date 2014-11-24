@@ -24,8 +24,8 @@ public class mariaBehavior : MonoBehaviour {
 	public int Damping		= 0;
 	public int MoveSpeed	= 0;
 
-	public int talkDistance	= 0;
-	public int triggerDistance		= 0;
+	public int talkDistance		= 0;
+	public int triggerDistance	= 0;
 	
 	// Variable to hold the current part of the conversation
 	public int talkSection		= 0;
@@ -131,6 +131,7 @@ public class mariaBehavior : MonoBehaviour {
 	public GameObject text;
 	public GameObject pc;
 	public GameObject picture;
+	public GameObject gui;
 
 	private cameraScript		cam;
 	//private timeChanger			chosen;
@@ -142,6 +143,7 @@ public class mariaBehavior : MonoBehaviour {
 	private displayInfo			info;
 	private playerScript		talk;
 	private pictureScript		pic;
+	private guiSystem			cursor;
 
 	void Awake () {
 
@@ -156,6 +158,7 @@ public class mariaBehavior : MonoBehaviour {
 		info 		= this.GetComponent <displayInfo> ();
 		talk 		= pc.GetComponent <playerScript> ();
 		pic 		= picture.GetComponent <pictureScript> ();
+		cursor 		= gui.GetComponent <guiSystem> ();
 	}
 
 	// Use this for initialization
@@ -166,7 +169,7 @@ public class mariaBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (Vector3.Distance(transform.position, Player.position) <= talkDistance)
+		if (Vector3.Distance(transform.position, Player.position) <= talkDistance && talkCount <= 0)
 		{
 			var rotation = Quaternion.LookRotation(Player.position - transform.position);
 			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
@@ -255,6 +258,10 @@ public class mariaBehavior : MonoBehaviour {
 					movement.enabled = true;
 					
 					info.canDisplay = true;
+
+					cursor.cursorShow = true;
+					cursor.mouseShow = false;
+					cursor.mouseLocked = true;
 					
 					hasDisplayed = false;
 					
@@ -284,6 +291,10 @@ public class mariaBehavior : MonoBehaviour {
 					movement.enabled = false;
 					
 					info.canDisplay = false;
+
+					cursor.cursorShow = false;
+					cursor.mouseShow = false;
+					cursor.mouseLocked = true;
 					
 					hasDisplayed = false;
 					
@@ -350,7 +361,7 @@ public class mariaBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Thank you, Maria. How are you?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -361,7 +372,7 @@ public class mariaBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I need to update my badge.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -372,7 +383,7 @@ public class mariaBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Yeah, maybe you can tell me why I get a call in the middle of the night telling me that I'm needed right away and yet when I get here I have to waste time updating a badge.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -385,7 +396,7 @@ public class mariaBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I'm well, doctor. And yourself?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Maria Figueroa", 100);
 						
 						hasDisplayed = true;
@@ -406,6 +417,10 @@ public class mariaBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkCount = 1;
 						
@@ -420,7 +435,7 @@ public class mariaBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I can’t say as to why you were called in here, doctor. That’s outside my purview. As far as the badge, it’s expired. Furthermore, we updated our security system a few weeks ago. Now, I understand your time is important to you. If you’d like, we can upgrade your badge now and in a few minutes you’ll be on your way.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Maria Figueroa", 100);
 						
 						hasDisplayed = true;
@@ -433,7 +448,7 @@ public class mariaBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("I'm good. William told me I needed to update my badge?", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -454,6 +469,10 @@ public class mariaBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkCount = 1;
 						
@@ -470,7 +489,7 @@ public class mariaBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Yeah, we updated our security systems a few weeks ago and everyone needed new badges. If you’d like I can update your badge right now. It will only take a few minutes.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Maria Figueroa", 100);
 						
 						hasDisplayed = true;
@@ -483,7 +502,7 @@ public class mariaBehavior : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Sure. Thanks Maria.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						hasDisplayed = true;
@@ -506,6 +525,10 @@ public class mariaBehavior : MonoBehaviour {
 						movement.enabled = true;
 						
 						info.canDisplay = true;
+
+						cursor.cursorShow = true;
+						cursor.mouseShow = false;
+						cursor.mouseLocked = true;
 						
 						talkCount = 1;
 						

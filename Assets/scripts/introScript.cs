@@ -19,7 +19,7 @@ public class introScript : MonoBehaviour {
 	public float introTimer4;
 	public float introTimer5;
 
-	public Texture2D icBG;
+	public GUITexture icBG;
 
 	public AudioClip music1;
 	public AudioClip music2;
@@ -48,6 +48,8 @@ public class introScript : MonoBehaviour {
 	
 		// Make sure that whenever the intro scene is played, it starts at the beginning
 		part = -1;
+
+		icBG.pixelInset = new Rect(0, 0, Screen.width, Screen.height);
 	}
 	
 	// Update is called once per frame
@@ -567,6 +569,8 @@ public class introScript : MonoBehaviour {
 
 		mySkin.box.normal.background = icBG;
 
-		GUILayout.Box("", GUILayout.Width (1600), GUILayout.Height (900));
+		GUI.depth = -100;
+
+		GUI.Box (new Rect(0, 0, Screen.width, Screen.height), "");
 	}*/
 }

@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\cameraScript.cs" />
      <Compile Include="Assets\scripts\coreSpin.cs" />
+     <Compile Include="Assets\scripts\creditsScript.cs" />
+     <Compile Include="Assets\scripts\cullingScript.cs" />
      <Compile Include="Assets\scripts\decisionScript.cs" />
      <Compile Include="Assets\scripts\displayInfo.cs" />
      <Compile Include="Assets\scripts\doorScript.cs" />
@@ -56,6 +58,7 @@
      <Compile Include="Assets\scripts\icScript.cs" />
      <Compile Include="Assets\scripts\introScript.cs" />
      <Compile Include="Assets\scripts\irmaScript.cs" />
+     <Compile Include="Assets\scripts\lightsScript.cs" />
      <Compile Include="Assets\scripts\mariaBehavior.cs" />
      <Compile Include="Assets\scripts\menuScript.cs" />
      <Compile Include="Assets\scripts\pictureScript.cs" />

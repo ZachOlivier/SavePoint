@@ -3,7 +3,12 @@ using System.Collections;
 
 public class guiSystem : MonoBehaviour {
 
+	/*public Texture2D 	cursorTexture;
+	public CursorMode 	cursorMode = CursorMode.Auto;
+	public Vector2 		hotSpot = Vector2.zero;*/
+
 	public Texture2D mouseTexture;
+	public Texture2D pointerTexture;
 
 	private int mouseWidth = 32;
 	private int mouseHeight = 32;
@@ -14,6 +19,10 @@ public class guiSystem : MonoBehaviour {
 	public bool badgeTaken		= false;
 
 	public bool locked			= false;
+
+	public bool mouseLocked		= true;
+	public bool cursorShow		= true;
+	public bool mouseShow		= false;
 
 	public GUITexture healthGUI;
 
@@ -58,6 +67,8 @@ public class guiSystem : MonoBehaviour {
 	void Start () {
 
 		Screen.showCursor = false;
+
+		//hotSpot = new Vector2(Screen.width / 2, Screen.height / 2);
 	}
 	
 	// Update is called once per frame
@@ -73,8 +84,34 @@ public class guiSystem : MonoBehaviour {
 			healthGUI.texture = healthNum[player.health - 1];
 		}*/
 
-		if (Input.mousePosition.x > 512 && !locked)
+		if (Input.mousePosition.x >= (Screen.width / 2) && !locked)
 		{
+			if (inv.cameraMode == 1)
+			{
+				if (!inventory.enabled)
+				{
+					inventory.enabled = true;
+				}
+			}
+			
+			else if (inv.cameraMode == 0)
+			{
+				if (inventory.enabled)
+				{
+					inventory.enabled = false;
+				}
+			}
+			
+			if (m.menuMode == 1)
+			{
+				
+			}
+			
+			else if (m.menuMode == 0)
+			{
+				
+			}
+
 			clearJournal();
 
 			if (Application.loadedLevel == 1)
@@ -121,43 +158,14 @@ public class guiSystem : MonoBehaviour {
 				}
 			}
 			
-			else if (Application.loadedLevel == 3)
-			{
-				
-			}
-
-			if (inv.cameraMode == 1)
-			{
-				if (!inventory.enabled)
-				{
-					inventory.enabled = true;
-				}
-			}
-			
-			else if (inv.cameraMode == 0)
-			{
-				if (inventory.enabled)
-				{
-					inventory.enabled = false;
-				}
-			}
-
-			if (m.menuMode == 1)
-			{
-				
-			}
-			
-			else if (m.menuMode == 0)
+			else if (Application.loadedLevel == 3 || Application.loadedLevel == 4)
 			{
 				
 			}
 		}
 
-		else if (Input.mousePosition.x < 512 && !locked)
-
+		else if (Input.mousePosition.x < (Screen.width / 2) && !locked)
 		{
-			clearInventory();
-
 			if (inv.cameraMode == 1)
 			{
 				if (!journal.enabled)
@@ -183,6 +191,8 @@ public class guiSystem : MonoBehaviour {
 			{
 				
 			}
+
+			clearInventory();
 		}
 	}
 
@@ -201,8 +211,48 @@ public class guiSystem : MonoBehaviour {
 		journal.enabled = false;
 	}
 
+	/*void OnMouseEnter () {
+		Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+	}
+
+	void OnMouseExit () {
+		Cursor.SetCursor(null, Vector2.zero, cursorMode);
+	}*/
+
 	void OnGUI () {
 
-		GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, mouseWidth, mouseHeight), mouseTexture);
+		if (mouseLocked)
+		{
+			if (cursorShow)
+			{
+				GUI.depth = 0;
+
+				GUI.DrawTexture(new Rect(Screen.width / 2, Screen.height / 2, mouseWidth, mouseHeight), pointerTexture);
+			}
+
+			else
+			{
+			
+			}
+
+			Screen.lockCursor = true;
+		}
+
+		else
+		{
+			if (mouseShow)
+			{
+				GUI.depth = 0;
+
+				GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, mouseWidth, mouseHeight), mouseTexture);
+			}
+
+			else
+			{
+
+			}
+
+			Screen.lockCursor = false;
+		}
 	}
 }

@@ -49,6 +49,7 @@ public class uiSystem : MonoBehaviour {
 	public GameObject Maria;
 	public GameObject Richard;
 	public GameObject IRMA;
+	public GameObject gui;
 
 	// Variables to hold the guiTexts so that we can access their scripts
 	public GUIText fourDecision1;
@@ -67,7 +68,7 @@ public class uiSystem : MonoBehaviour {
 	public GUITexture subtitleBox;
 	public GUITexture warningBox;
 
-	public int lineLength		= 400;
+	public float lineLength		= 400;
 	public int numberOfLines;
 	public GUIText block;
 	public string[] words;
@@ -160,13 +161,14 @@ public class uiSystem : MonoBehaviour {
 	private int path434												= 434;
 	private int path441												= 441;
 	private int path442												= 442;
-	public int path443												= 443;
-	public int path444												= 444;
+	private int path443												= 443;
+	private int path444												= 444;
 	
 	private securityBehavior talk;
 	private mariaBehavior talk2;
 	private richardBehavior talk3;
 	private irmaScript talk4;
+	private guiSystem cursor;
 
 	void Awake ()
 	{
@@ -175,17 +177,20 @@ public class uiSystem : MonoBehaviour {
 			talk = William.GetComponent <securityBehavior>();
 			talk2 = Maria.GetComponent <mariaBehavior>();
 			talk3 = Richard.GetComponent <richardBehavior>();
+			cursor = gui.GetComponent <guiSystem>();
 		}
 
 		else if (Application.loadedLevel == 3)
 		{
 			talk4 = IRMA.GetComponent <irmaScript>();
+			cursor = gui.GetComponent <guiSystem>();
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
 	
+		lineLength = Screen.width * .73f;
 	}
 	
 	// Update is called once per frame
@@ -368,7 +373,7 @@ public class uiSystem : MonoBehaviour {
 		message1 = msg1;
 
 		Vector3 position1 = fourDecision1.transform.localPosition;
-		position1.x = .5f;
+		position1.x = .51f;
 		position1.y = .22f;
 		fourDecision1.transform.localPosition = position1;
 
@@ -386,10 +391,19 @@ public class uiSystem : MonoBehaviour {
 		position4.x = 1f;
 		position4.y = 1f;
 		fourDecision4.transform.localPosition = position4;
+
+		oneDecisionBox.pixelInset = new Rect((Screen.width / 2) - (Screen.width * .03f), (Screen.height * .1f), Screen.width / 18, Screen.height / 14);
 		
 		decisionTime = time;
 		
 		decisionTimer = 0.0f;
+
+		if (Application.loadedLevel != 0)
+		{
+			cursor.mouseShow = true;
+			cursor.cursorShow = false;
+			cursor.mouseLocked = false;
+		}
 		
 		if (!displayingOne) {
 			fourDecision1.enabled = true;
@@ -426,10 +440,19 @@ public class uiSystem : MonoBehaviour {
 		position4.x = 1f;
 		position4.y = 1f;
 		fourDecision4.transform.localPosition = position4;
+
+		twoDecisionBox.pixelInset = new Rect((Screen.width / 2) - (Screen.width * .03f), (Screen.height * .1f), Screen.width / 14, Screen.height / 14);
 		
 		decisionTime = time;
 		
 		decisionTimer = 0.0f;
+
+		if (Application.loadedLevel != 0)
+		{
+			cursor.mouseShow = true;
+			cursor.cursorShow = false;
+			cursor.mouseLocked = false;
+		}
 		
 		if (!displayingTwo) {
 			fourDecision1.enabled = true;
@@ -451,7 +474,7 @@ public class uiSystem : MonoBehaviour {
 		message3 = msg3;
 
 		Vector3 position1 = fourDecision1.transform.localPosition;
-		position1.x = .515f;
+		position1.x = .51f;
 		position1.y = .22f;
 		fourDecision1.transform.localPosition = position1;
 
@@ -469,10 +492,19 @@ public class uiSystem : MonoBehaviour {
 		position4.x = 1f;
 		position4.y = 1f;
 		fourDecision4.transform.localPosition = position4;
+
+		threeDecisionBox.pixelInset = new Rect((Screen.width / 2) - (Screen.width * .03f), (Screen.height * .1f), Screen.width / 14, Screen.height / 14);
 		
 		decisionTime = time;
 		
 		decisionTimer = 0.0f;
+
+		if (Application.loadedLevel != 0)
+		{
+			cursor.mouseShow = true;
+			cursor.cursorShow = false;
+			cursor.mouseLocked = false;
+		}
 		
 		if (!displayingThree) {
 			fourDecision1.enabled = true;
@@ -515,10 +547,19 @@ public class uiSystem : MonoBehaviour {
 		position4.x = .59f;
 		position4.y = .14f;
 		fourDecision4.transform.localPosition = position4;
+
+		fourDecisionBox.pixelInset = new Rect((Screen.width / 2) - (Screen.width * .05f), (Screen.height * .1f), Screen.width / 10, Screen.height / 14);
 		
 		decisionTime = time;
 		
 		decisionTimer = 0.0f;
+
+		if (Application.loadedLevel != 0)
+		{
+			cursor.mouseShow = true;
+			cursor.cursorShow = false;
+			cursor.mouseLocked = false;
+		}
 		
 		if (!displayingFour) {
 			fourDecision1.enabled = true;
@@ -554,7 +595,7 @@ public class uiSystem : MonoBehaviour {
 		float a = 40.0f;
 		float b = -30.0f;
 
-		subtitleBox.pixelInset = new Rect (-507, b, 1014, a);
+		subtitleBox.pixelInset = new Rect ((Screen.width / 2) - ((Screen.width / 1.5f) / 2), b, (Screen.width * .9f), a);
 		
 		for( var index = 0; index < words.Length; index++)
 		{
@@ -578,12 +619,12 @@ public class uiSystem : MonoBehaviour {
 				//remover 
 				result = result.Substring(0,result.Length-(word.Length));
 				result += "\n" + word;
-				numberOfLines += 1;
+				//numberOfLines += 1;
 				block.text = result;
 				subtitleMessage = result;
 				a += 28.0f;
 				b -= 23.0f;
-				subtitleBox.pixelInset = new Rect (-507, b, 1014, a);
+				subtitleBox.pixelInset = new Rect ((Screen.width / 2) - ((Screen.width / 1.5f) / 2), b, (Screen.width * .9f), a);
 			}
 		}
 	}
@@ -606,16 +647,59 @@ public class uiSystem : MonoBehaviour {
 			if (subtitle.enabled)
 			{
 				float subtitleAreaW = Screen.width / 1.5f;
-				float subtitleAreaH = 900;
+				float subtitleAreaH = Screen.height;
 				float subtitleScreenX = (Screen.width / 2) - (subtitleAreaW / 2);
-				float subtitleScreenY = 100;
+				float subtitleScreenY = Screen.height / 5;
 
 				mySkin.box.normal.background = boxTexture;
 				mySkin.box.fontSize = 18;
 
-				if (mySkin.box.normal.textColor != Color.white)
+				if (info.text == "Greg Clemens")
 				{
-					mySkin.box.normal.textColor = Color.white;
+					if (mySkin.box.normal.textColor != Color.white)
+					{
+						mySkin.box.normal.textColor = Color.white;
+					}
+				}
+
+				else if (info.text == "William Hebb" || info.text == "William Hebb\nPress E To Talk")
+				{
+					if (mySkin.box.normal.textColor != Color.red)
+					{
+						mySkin.box.normal.textColor = Color.red;
+					}
+				}
+
+				else if (info.text == "Maria Figueroa" || info.text == "Maria Figueroa\nPress E To Talk")
+				{
+					if (mySkin.box.normal.textColor != Color.magenta)
+					{
+						mySkin.box.normal.textColor = Color.magenta;
+					}
+				}
+
+				else if (info.text == "Richard Fields" || info.text == "Richard Fields\nPress E To Talk")
+				{
+					if (mySkin.box.normal.textColor != Color.blue)
+					{
+						mySkin.box.normal.textColor = Color.blue;
+					}
+				}
+
+				else if (info.text == "IRMA" || info.text == "Unknown Voice")
+				{
+					if (mySkin.box.normal.textColor != Color.green)
+					{
+						mySkin.box.normal.textColor = Color.green;
+					}
+				}
+
+				else
+				{
+					if (mySkin.box.normal.textColor != Color.white)
+					{
+						mySkin.box.normal.textColor = Color.white;
+					}
 				}
 
 				GUILayout.BeginArea(new Rect (subtitleScreenX, subtitleScreenY, subtitleAreaW, subtitleAreaH));
@@ -637,8 +721,8 @@ public class uiSystem : MonoBehaviour {
 			{
 				float infoAreaW = Screen.width / 6;
 				float infoAreaH = 200;
-				float infoScreenX = Screen.width - (infoAreaW + 20);
-				float infoScreenY = Screen.height - (infoAreaH / 1.5f);
+				float infoScreenX = Screen.width * .833f;
+				float infoScreenY = Screen.height * .65f;
 
 				mySkin.box.normal.background = boxTexture;
 				mySkin.box.fontSize = 18;
@@ -667,8 +751,8 @@ public class uiSystem : MonoBehaviour {
 			{
 				float warningAreaW = Screen.width / 6;
 				float warningAreaH = 200;
-				float warningScreenX = 20;
-				float warningScreenY = Screen.height - (warningAreaH / 1.5f);
+				float warningScreenX = Screen.width * .001f;
+				float warningScreenY = Screen.height * .65f;
 
 				mySkin.box.normal.background = boxTexture;
 				mySkin.box.fontSize = 18;
@@ -706,7 +790,7 @@ public class uiSystem : MonoBehaviour {
 				if (message1 != "")
 				{
 					//One one
-					if (GUI.Button (new Rect (btnX, btnY + 225, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .5f) - (btnW / 2f), (Screen.height * .79f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -714,6 +798,7 @@ public class uiSystem : MonoBehaviour {
 						}
 						
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -1121,6 +1206,11 @@ public class uiSystem : MonoBehaviour {
 							displayingTwo 	= false;
 							displayingThree = false;
 							displayingFour 	= false;
+						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
 						}
 					}
 				}
@@ -1144,9 +1234,10 @@ public class uiSystem : MonoBehaviour {
 					}
 					
 					else
+					{
 
 					//Two one
-					if (GUI.Button (new Rect (btnX - 250, btnY + 250, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .44f) - (btnW / 1.15f), (Screen.height * .86f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (williamTalk)
 						{
@@ -1555,13 +1646,18 @@ public class uiSystem : MonoBehaviour {
 							displayingThree = false;
 							displayingFour 	= false;
 						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
+						}
 					}
 				}
 
 				if (message2 != "")
 				{
 					//Two two
-					if (GUI.Button (new Rect (btnX + 250, btnY + 250, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .56f) - (btnW * .125f), (Screen.height * .86f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -1569,6 +1665,7 @@ public class uiSystem : MonoBehaviour {
 						}
 						
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -1976,6 +2073,11 @@ public class uiSystem : MonoBehaviour {
 							displayingTwo 	= false;
 							displayingThree = false;
 							displayingFour 	= false;
+						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
 						}
 					}
 				}
@@ -1994,7 +2096,7 @@ public class uiSystem : MonoBehaviour {
 				if (message1 != "")
 				{
 					//Three one
-					if (GUI.Button (new Rect (btnX, btnY + 220, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .515f) - (btnW / 1.8f), (Screen.height * .79f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -2002,6 +2104,7 @@ public class uiSystem : MonoBehaviour {
 						}
 						
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -2410,13 +2513,18 @@ public class uiSystem : MonoBehaviour {
 							displayingThree = false;
 							displayingFour 	= false;
 						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
+						}
 					}
 				}
 
 				if (message2 != "")
 				{
 					//Three two
-					if (GUI.Button (new Rect (btnX - 250, btnY + 280, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .43f) - (btnW / 1.15f), (Screen.height * .86f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -2424,6 +2532,7 @@ public class uiSystem : MonoBehaviour {
 						}
 						
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -2832,13 +2941,18 @@ public class uiSystem : MonoBehaviour {
 							displayingThree = false;
 							displayingFour 	= false;
 						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
+						}
 					}
 				}
 
 				if (message3 != "")
 				{
 					//Three three
-					if (GUI.Button (new Rect (btnX + 250, btnY + 280, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .57f) - (btnW * .09f), (Screen.height * .86f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -2846,6 +2960,7 @@ public class uiSystem : MonoBehaviour {
 						}
 						
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -3253,6 +3368,11 @@ public class uiSystem : MonoBehaviour {
 							displayingTwo 	= false;
 							displayingThree = false;
 							displayingFour 	= false;
+						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
 						}
 					}
 				}
@@ -3271,7 +3391,7 @@ public class uiSystem : MonoBehaviour {
 				if (message1 != "")
 				{
 					//Four one
-					if (GUI.Button (new Rect (btnX - 200, btnY + 225, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .45f) - (btnW / 1.15f), (Screen.height * .79f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -3279,6 +3399,7 @@ public class uiSystem : MonoBehaviour {
 						}
 
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -3687,13 +3808,18 @@ public class uiSystem : MonoBehaviour {
 							displayingThree = false;
 							displayingFour 	= false;
 						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
+						}
 					}
 				}
 
 				if (message2 != "")
 				{
 					//Four two
-					if (GUI.Button (new Rect (btnX - 275, btnY + 285, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .39f) - (btnW / 1.15f), (Screen.height * .87f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -3701,6 +3827,7 @@ public class uiSystem : MonoBehaviour {
 						}
 						
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -4109,13 +4236,18 @@ public class uiSystem : MonoBehaviour {
 							displayingThree = false;
 							displayingFour 	= false;
 						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
+						}
 					}
 				}
 
 				if (message3 != "")
 				{
 					//Four three
-					if (GUI.Button (new Rect (btnX + 200, btnY + 225, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .55f) - (btnW * .125f), (Screen.height * .79f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -4123,6 +4255,7 @@ public class uiSystem : MonoBehaviour {
 						}
 						
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -4531,13 +4664,18 @@ public class uiSystem : MonoBehaviour {
 							displayingThree = false;
 							displayingFour 	= false;
 						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
+						}
 					}
 				}
 
 				if (message4 != "")
 				{
 					//Four four
-					if (GUI.Button (new Rect (btnX + 275, btnY + 285, btnW, btnH), ""))
+					if (GUI.Button (new Rect ((Screen.width * .61f) - (btnW * .125f), (Screen.height * .87f) - (btnH / 2), btnW, btnH), ""))
 					{
 						if (Event.current.button == 1 || Event.current.button == 2)
 						{
@@ -4545,6 +4683,7 @@ public class uiSystem : MonoBehaviour {
 						}
 						
 						else
+						{
 
 						if (williamTalk)
 						{
@@ -4952,6 +5091,11 @@ public class uiSystem : MonoBehaviour {
 							displayingTwo 	= false;
 							displayingThree = false;
 							displayingFour 	= false;
+						}
+
+						cursor.mouseShow = false;
+						cursor.cursorShow = false;
+						cursor.mouseLocked = true;
 						}
 					}
 				}

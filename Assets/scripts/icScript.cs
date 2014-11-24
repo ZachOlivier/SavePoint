@@ -24,7 +24,7 @@ public class icScript : MonoBehaviour {
 	public float btnX	= 0;
 	public float btnY	= 0;
 
-	public int icMenu = 0;
+	public int icMenu 	= 0;
 
 	public int interactDistance = 0;
 
@@ -166,13 +166,13 @@ public class icScript : MonoBehaviour {
 
 			GUI.Box(new Rect (0, 0, Screen.width, Screen.height), "");
 
-			GUI.Label(new Rect((Screen.width / 2) - 180, (Screen.height / 2) - 255, 1600, 100), "Iris Chronus Machine");
-			GUI.Label(new Rect((Screen.width / 2) - 180, (Screen.height / 2) - 215, 1600, 100), "Version 2.7.001");
-			GUI.Label(new Rect((Screen.width / 2) - 200, (Screen.height / 2) - 105, 1600, 100), "Welcome, Gregory Clemens");
+			GUI.Label(new Rect((Screen.width / 2) - (Screen.width / 6), (Screen.height / 2) - ((Screen.height / 5) * 1.6f), btnW, btnH), "Iris Chronus Machine");
+			GUI.Label(new Rect((Screen.width / 2) - (Screen.width / 6), (Screen.height / 2) - ((Screen.height / 5) * 1.3f), btnW, btnH), "Version 2.7.001");
+			GUI.Label(new Rect((Screen.width / 2) - (Screen.width / 6), (Screen.height / 2) - (Screen.height / 5), btnW, btnH), "Welcome, Gregory Clemens");
 
 			mySkin.button.normal.background = boxTexture;
 
-			if (GUI.Button (new Rect (btnX, btnY + 4, btnW, btnH), "Quantum Message System"))
+			if (GUI.Button (new Rect (btnX, btnY, btnW, btnH), "Quantum Message System"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -184,7 +184,7 @@ public class icScript : MonoBehaviour {
 				icMenu = 2;
 			}
 
-			if (GUI.Button (new Rect (btnX, btnY + 87, btnW, btnH), "Vignette Collection"))
+			if (GUI.Button (new Rect (btnX, btnY + (Screen.height / 8), btnW, btnH), "Vignette Collection"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -196,7 +196,7 @@ public class icScript : MonoBehaviour {
 				icMenu = 3;
 			}
 
-			if (GUI.Button (new Rect (btnX, btnY + 169, btnW, btnH), "Observation Repository"))
+			if (GUI.Button (new Rect (btnX, btnY + ((Screen.height / 8) * 2), btnW, btnH), "Observation Repository"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -208,7 +208,7 @@ public class icScript : MonoBehaviour {
 				icMenu = 4;
 			}
 
-			if (GUI.Button (new Rect (btnX - 440, btnY - 340, btnW / 3, btnH), "Exit Interface"))
+			if (GUI.Button (new Rect (btnX - (Screen.width / 3.1f), btnY - (Screen.height / 2.3f), btnW / 3, btnH), "Exit Interface"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -233,8 +233,8 @@ public class icScript : MonoBehaviour {
 			mySkin.box.normal.background = icBG;
 			GUI.Box(new Rect (0, 0, Screen.width, Screen.height), "");
 
-			GUI.Label(new Rect(50, 100, 1600, 100), "Quantum Message System");
-			GUI.Label(new Rect(Screen.width - 275, 20, Screen.width, 100), "G. Clemens  S.I. 1");
+			GUI.Label(new Rect(Screen.width / 20, Screen.height / 8, btnW, btnH), "Quantum Message System");
+			GUI.Label(new Rect(Screen.width / 1.4f, btnY - (Screen.height / 2.2f), btnW, btnH), "G. Clemens  S.I. 1");
 
 			mySkin.box.normal.background = boxTexture;
 			mySkin.box.fontSize = 22;
@@ -244,16 +244,18 @@ public class icScript : MonoBehaviour {
 				mySkin.box.normal.textColor = Color.white;
 			}
 
-			GUI.Box(new Rect(45, 190, Screen.width / 7, Screen.height / 1.4f), "Inbound");
-			GUI.Box(new Rect((Screen.width / 7) + (45 + 5), 190, Screen.width / 7, Screen.height / 1.4f), "Outbound");
+			GUI.Box(new Rect(Screen.width * .03f, Screen.height * .25f, Screen.width / 7, Screen.height / 1.4f), "Inbound");
+			GUI.Box(new Rect(Screen.width * .18f, Screen.height * .25f, Screen.width / 7, Screen.height / 1.4f), "Outbound");
 
-			GUI.Box (new Rect(Screen.width / 2.9f, 190, Screen.width / 1.6f, Screen.height / 1.4f), selectedTitle + "\n" + selectedWho);
-			GUI.TextField(new Rect(Screen.width / 2.7f, 255, Screen.width / 1.725f, Screen.height / 3), selectedMessage);
+			GUI.Box (new Rect(Screen.width / 2.9f, Screen.height * .25f, Screen.width / 1.6f, Screen.height / 1.4f), selectedTitle + "\n" + selectedWho);
+
+			GUI.TextField(new Rect(Screen.width / 2.7f, Screen.height * .35f, Screen.width / 1.725f, Screen.height / 3), selectedMessage);
+
 			//GUI.Label (new Rect((Screen.width / 2), 210, Screen.width, 100), selectedWho);
 
 			mySkin.button.normal.background = boxTexture;
 
-			if (GUI.Button (new Rect (10, btnY - 340, btnW / 3, btnH), "<< Back"))
+			if (GUI.Button (new Rect (btnX - (Screen.width / 3.1f), btnY - (Screen.height / 2.3f), btnW / 3, btnH), "<< Back"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -267,7 +269,7 @@ public class icScript : MonoBehaviour {
 
 			mySkin.button.normal.background = selectedTexture;
 
-			if (GUI.Button (new Rect(Screen.width / 1.2f, 680, Screen.width / 8, Screen.height / 20), "Send Message"))
+			if (GUI.Button (new Rect(Screen.width / 1.2f, Screen.height * .89f, Screen.width / 8, Screen.height / 20), "Send Message"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -283,7 +285,7 @@ public class icScript : MonoBehaviour {
 
 			mySkin.button.normal.background = icBG;
 
-			if (GUI.Button (new Rect (55, 260, Screen.width / 8, Screen.height / 14), "Message 1"))
+			if (GUI.Button (new Rect (Screen.width * .04f, Screen.height * .34f, Screen.width / 8, Screen.height / 14), "Message 1"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -297,7 +299,7 @@ public class icScript : MonoBehaviour {
 				selectedMessage = "Dr. Clemens,\n\nI realize this is highly inappropriate, but I think you should know that I know your secret. Yep, you are from the past and are now in the future. I plan to blackmail you. Keep this inbox available. I'll be in touch.\n\n-Anonymous";
 			}
 
-			if (GUI.Button (new Rect ((Screen.width / 8) + (55 + 32), 260, Screen.width / 8, Screen.height / 14), "Message 2"))
+			if (GUI.Button (new Rect (Screen.width * .19f, Screen.height * .34f, Screen.width / 8, Screen.height / 14), "Message 2"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -319,7 +321,7 @@ public class icScript : MonoBehaviour {
 
 			GUI.Box(new Rect (0, 0, Screen.width, Screen.height), "");
 
-			if (GUI.Button (new Rect (10, btnY - 340, btnW / 3, btnH), "<< Back"))
+			if (GUI.Button (new Rect (btnX - (Screen.width / 3.1f), btnY - (Screen.height / 2.3f), btnW / 3, btnH), "<< Back"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{
@@ -339,7 +341,7 @@ public class icScript : MonoBehaviour {
 
 			GUI.Box(new Rect (0, 0, Screen.width, Screen.height), "");
 
-			if (GUI.Button (new Rect (10, btnY - 340, btnW / 3, btnH), "<< Back"))
+			if (GUI.Button (new Rect (btnX - (Screen.width / 3.1f), btnY - (Screen.height / 2.3f), btnW / 3, btnH), "<< Back"))
 			{
 				if (Event.current.button == 1 || Event.current.button == 2)
 				{

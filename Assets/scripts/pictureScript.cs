@@ -6,6 +6,12 @@ public class pictureScript : MonoBehaviour {
 	public bool canPicture		= false;
 	public bool inPicture		= false;
 	public bool tookPicture		= false;
+	public bool flashed			= false;
+
+	public float time;
+	public float timer;
+
+	public GameObject light;
 
 	public GameObject pc;
 	public GameObject text;
@@ -46,6 +52,22 @@ public class pictureScript : MonoBehaviour {
 
 			tookPicture = true;
 			canPicture = false;
+		}
+
+		if (!flashed && tookPicture)
+		{
+			timer += Time.deltaTime;
+
+			light.light.enabled = true;
+
+			if (timer >= time)
+			{
+				light.light.enabled = false;
+
+				timer = 0;
+
+				flashed = true;
+			}
 		}
 	}
 	

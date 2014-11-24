@@ -4,30 +4,30 @@ using System.Collections;
 public class richardCutscene : MonoBehaviour {
 
 	// Variables to tell if the NPC can talk, or is talking
-	public bool canTalk		= false;
+	public bool canTalk			= false;
 	public bool isTalking		= false;
 
-	public Texture2D mouseTexture;
+	//public Texture2D mouseTexture;
 
-	private int mouseWidth = 32;
-	private int mouseHeight = 32;
+	//private int mouseWidth 	= 32;
+	//private int mouseHeight 	= 32;
 
-	public bool canSkip		= false;
+	public bool canSkip			= false;
 
 	public bool hasDisplayed	= false;
 	
 	// Variable to hold how much time has gone by in a conversation
-	public float timer		= 0.0f;
+	public float timer			= 0.0f;
 	
 	// Variable to hold how much time is allowed before moving on in conversation
-	public float time		= 0.0f;
+	public float time			= 0.0f;
 	
 	// Variable to hold the current part of the conversation
 	public int talkSection		= 0;
 	public int talkCount		= 0;
 	
 	// Variable to hold the holder and text game objects so that we can access its scripts
-	public GameObject text;
+	public GameObject	text;
 
 	private uiSystem	message;
 
@@ -70,7 +70,7 @@ public class richardCutscene : MonoBehaviour {
 					canSkip = true;
 					
 					message.displaySubtitle("A few minutes later...", 100);
-					message.displayWarning("Right click to continue", 100);
+					message.displayWarning("Press space to continue", 100);
 					
 					hasDisplayed = true;
 				}
@@ -80,8 +80,8 @@ public class richardCutscene : MonoBehaviour {
 						
 						canSkip = true;
 						
-						message.displaySubtitle("Okay, now just relax Greg. I’m going to turn it on now. \n Let me know if you feel any pain.", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displaySubtitle("Okay, now just relax Greg. I’m going to turn it on now.\nLet me know if you feel any pain.", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
 						hasDisplayed = true;
@@ -94,7 +94,7 @@ public class richardCutscene : MonoBehaviour {
 						canSkip = true;
 						
 						message.displaySubtitle("Okay. Right now I’m not feeling anything, except maybe a little-- (gasps)", 100);
-						message.displayWarning("Right click to continue", 100);
+						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
 						
 						talkCount = 1;
@@ -111,6 +111,10 @@ public class richardCutscene : MonoBehaviour {
 				if (timer >= 5)
 				{
 					Camera.main.enabled = false;
+
+					message.warning.enabled = false;
+					message.subtitle.enabled = false;
+					message.info.enabled = false;
 
 					timer = 0;
 					talkCount = 2;
@@ -129,8 +133,8 @@ public class richardCutscene : MonoBehaviour {
 		}
 	}
 
-	void OnGUI () {
+	/*void OnGUI () {
 		
 		GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, mouseWidth, mouseHeight), mouseTexture);
-	}
+	}*/
 }
