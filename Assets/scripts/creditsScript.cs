@@ -5,6 +5,11 @@ public class creditsScript : MonoBehaviour {
 
 	public GUITexture icBG;
 
+	public Texture2D mouseTexture;
+	
+	private int mouseWidth = 32;
+	private int mouseHeight = 32;
+
 	public float scrollSpeed;
 
 	public GUISkin mySkin;
@@ -45,6 +50,8 @@ public class creditsScript : MonoBehaviour {
 
 		icBG.pixelInset = new Rect(0, 0, Screen.width, Screen.height);
 
+		scrollSpeed = 1.25f;
+
 		oPosition1 = new Vector2(text1.transform.position.x, text1.transform.position.y);
 		oPosition2 = new Vector2(text2.transform.position.x, text2.transform.position.y);
 		oPosition3 = new Vector2(text3.transform.position.x, text3.transform.position.y);
@@ -64,6 +71,16 @@ public class creditsScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (Screen.showCursor == true)
+		{
+			Screen.showCursor = false;
+		}
+
+		if (Time.timeScale != 1f)
+		{
+			Time.timeScale = 1f;
+		}
 
 		if (position7.y >= 10)
 		{
@@ -102,6 +119,8 @@ public class creditsScript : MonoBehaviour {
 		{
 			GUI.skin = mySkin;
 		}
+
+		GUI.DrawTexture(new Rect(Input.mousePosition.x, Screen.height - Input.mousePosition.y, mouseWidth, mouseHeight), mouseTexture);
 
 		if (GUI.Button (new Rect(Screen.width * .87f, Screen.height * .8f, Screen.width / 9, Screen.height / 14), "Reset Game"))
 		{

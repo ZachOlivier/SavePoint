@@ -263,7 +263,7 @@ public class menuScript : MonoBehaviour {
 				
 				else
 
-				Application.Quit();
+				Application.LoadLevel(5);
 			}
 		}
 		
