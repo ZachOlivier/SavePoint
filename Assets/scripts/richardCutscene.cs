@@ -7,6 +7,9 @@ public class richardCutscene : MonoBehaviour {
 	public bool canTalk			= false;
 	public bool isTalking		= false;
 
+	public AudioClip gregClip;
+	public AudioClip richardClip;
+
 	//public Texture2D mouseTexture;
 
 	//private int mouseWidth 	= 32;
@@ -58,7 +61,8 @@ public class richardCutscene : MonoBehaviour {
 			
 			if (canSkip) {
 				if (Input.GetButtonDown("Fire2")) {
-					
+
+					audio.Stop();
 					talkSection++;
 					hasDisplayed = false;
 				}
@@ -79,7 +83,9 @@ public class richardCutscene : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(richardClip);
+
 						message.displaySubtitle("Okay, now just relax Greg. I’m going to turn it on now.\nLet me know if you feel any pain.", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
@@ -92,7 +98,9 @@ public class richardCutscene : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(gregClip);
+
 						message.displaySubtitle("Okay. Right now I’m not feeling anything, except maybe a little-- (gasps)", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);

@@ -7,11 +7,16 @@ public class richardBehavior : MonoBehaviour {
 	//bool talk.canTalk		= false;
 	public bool isTalking		= false;
 
-	public bool canSkip		= false;
+	public bool canSkip			= false;
 
 	public bool hasDisplayed	= false;
 
 	public bool thisDisplayed	= false;
+
+	public bool audioPlayed		= false;
+
+	public AudioClip[] richardClips	= new AudioClip[0];
+	public AudioClip[] gregClips	= new AudioClip[0];
 
 	// Variable to hold how much time has gone by in a conversation
 	public float timer		= 0.0f;
@@ -21,7 +26,7 @@ public class richardBehavior : MonoBehaviour {
 
 	public int Damping		= 0;
 
-	public int talkDistance	= 0;
+	public int talkDistance		= 0;
 	public int triggerDistance	= 0;
 	
 	// Variable to hold the current part of the conversation
@@ -29,7 +34,7 @@ public class richardBehavior : MonoBehaviour {
 	public int talkCount		= 0;
 	
 	// Variable to hold which path the player is on from the decisions they've made
-	public int path	= 0;
+	public int path				= 0;
 
 	// Variables to hold the decisions the player can make
 	private int path1												= 1;
@@ -179,7 +184,11 @@ public class richardBehavior : MonoBehaviour {
 			}
 			
 			if (talkCount == 0 && !hasDisplayed && !isTalking) {
-				
+
+				holder.audio.volume = .03f;
+
+				audio.PlayOneShot(richardClips[0]);
+
 				message.displaySubtitle("Greg, you made it. I’m really glad you came.", 5);
 				message.displayInfo("Richard Fields\nPress E To Talk", 100);
 				
@@ -316,7 +325,8 @@ public class richardBehavior : MonoBehaviour {
 			
 			if (canSkip) {
 				if (Input.GetButtonDown("Fire2")) {
-					
+
+					audio.Stop();
 					talkSection++;
 					hasDisplayed = false;
 				}
@@ -340,6 +350,8 @@ public class richardBehavior : MonoBehaviour {
 					if (path == path1 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[0]);
 						
 						message.displaySubtitle("So what's the big emergency?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -351,7 +363,9 @@ public class richardBehavior : MonoBehaviour {
 					else if (path == path2 && !hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(gregClips[1]);
+
 						message.displaySubtitle("Thanks Rich. It's good to see you.", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Greg Clemens", 100);
@@ -362,6 +376,8 @@ public class richardBehavior : MonoBehaviour {
 					else if (path == path3 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[2]);
 						
 						message.displaySubtitle("I’m not. I had to leave Jill and Angie to come in here. I told you I wasn’t ready to do that.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -375,7 +391,9 @@ public class richardBehavior : MonoBehaviour {
 					if (path == path1 && !hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(richardClips[1]);
+
 						message.displaySubtitle("I didn’t say emergency; I said it was urgent. But yeah, this is serious.", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
@@ -386,7 +404,9 @@ public class richardBehavior : MonoBehaviour {
 					else if (path == path2 && !hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(richardClips[2]);
+
 						message.displaySubtitle("You too Greg, you too. Look pal, I wouldn’t have called you in but this is serious.", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
@@ -397,6 +417,8 @@ public class richardBehavior : MonoBehaviour {
 					else if (path == path3 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[3]);
 						
 						message.displaySubtitle("I know, Greg, and I respect that. I really do. I wouldn’t have asked if it wasn’t important.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -410,6 +432,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[3]);
 						
 						message.displaySubtitle("So, what is it?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -423,7 +447,9 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(richardClips[4]);
+
 						message.displaySubtitle("You know the machine has been silent for some time, right? Well, five weeks ago she spoke.", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
@@ -436,6 +462,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[4]);
 						
 						message.displaySubtitle("What? And you didn’t tell me?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -449,6 +477,10 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = false;
+
+						audioPlayed = false;
+
+						audio.PlayOneShot(richardClips[5]);
 						
 						message.displaySubtitle("I know, I know. Thing is, you didn’t want bothered at the time and also.. Well, because of the contents of the message, brass didn’t want to involve you at first.", 100);
 						message.displayWarning("Click a decision to continue", 100);
@@ -464,6 +496,13 @@ public class richardBehavior : MonoBehaviour {
 					if (path == path11 || path == path21 || path == path31 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						if (!audioPlayed)
+						{
+							audio.PlayOneShot(gregClips[5]);
+
+							audioPlayed = true;
+						}
 						
 						message.displaySubtitle("Great, so now I’m kept out of the loop on my own machine?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -475,6 +514,13 @@ public class richardBehavior : MonoBehaviour {
 					else if (path == path12 || path == path22 || path == path32 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						if (!audioPlayed)
+						{
+							audio.PlayOneShot(gregClips[6]);
+
+							audioPlayed = true;
+						}
 						
 						message.displaySubtitle("Why not?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -486,6 +532,13 @@ public class richardBehavior : MonoBehaviour {
 					else if (path == path13 || path == path23 || path == path33 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						if (!audioPlayed)
+						{
+							audio.PlayOneShot(gregClips[7]);
+							
+							audioPlayed = true;
+						}
 						
 						message.displaySubtitle("I understand. I was on leave and you didn’t know what you were dealing with.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -510,6 +563,13 @@ public class richardBehavior : MonoBehaviour {
 					if (path == path11 || path == path21 || path == path31 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						if (audioPlayed)
+						{
+							audio.PlayOneShot(richardClips[6]);
+
+							audioPlayed = false;
+						}
 						
 						message.displaySubtitle("Greg, it’s not like that.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -521,6 +581,13 @@ public class richardBehavior : MonoBehaviour {
 					else if (path == path12 || path == path22 || path == path32 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						if (audioPlayed)
+						{
+							audio.PlayOneShot(richardClips[7]);
+							
+							audioPlayed = false;
+						}
 						
 						message.displaySubtitle("Let me explain..", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -532,6 +599,13 @@ public class richardBehavior : MonoBehaviour {
 					else if (path == path13 || path == path23 || path == path33 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						if (audioPlayed)
+						{
+							audio.PlayOneShot(richardClips[8]);
+							
+							audioPlayed = false;
+						}
 						
 						message.displaySubtitle("Exactly.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -556,6 +630,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[9]);
 						
 						message.displaySubtitle("Since then it’s been repeating the message, the same message. It’s a simple schematic, a modification to the machine.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -569,6 +645,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[8]);
 						
 						message.displaySubtitle("What kind of modification?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -582,6 +660,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[10]);
 						
 						message.displaySubtitle("An upgrade. It appears to be some kind of human public interface. The fact is the schematics that came through were clear, very clear, but they weren’t explanatory. We don’t understand the technology that we’re building here.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -595,6 +675,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[9]);
 						
 						message.displaySubtitle("Then why build it?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -608,6 +690,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[11]);
 						
 						message.displaySubtitle("Why? Because we’re stuck here Greg. We’re not getting anymore useful information from the machine, you were on leave, and yes, I understand why but that doesn’t change the facts. And the fact is the government wanted communication flowing again and we were at a dead end buddy, a total dead end.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -621,6 +705,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[10]);
 						
 						message.displaySubtitle("Okay, you were stuck and this message seemed like the solution. I get that. So what’s the problem?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -634,6 +720,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[12]);
 						
 						message.displaySubtitle("There’s more. There was more to the message. At the end of the message, for each of these five weeks, they included a name.. Your name.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -647,6 +735,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[11]);
 						
 						message.displaySubtitle("My name?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -660,7 +750,9 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(richardClips[13]);
+
 						message.displaySubtitle("I know. It’s weird. No reason was given, no explanation. Just your name. At first we thought it was some kind of sign off, or that they were addressing this to you. Hell, we even floated the idea that the message could be coming from you.", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
@@ -673,6 +765,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[12]);
 						
 						message.displaySubtitle("Coming from me? Are you daft? The machine’s been on since August. It’s been what, a hundred and...", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -686,8 +780,10 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[14]);
 						
-						message.displaySubtitle("1007 days Greg. And every day, corresponds to a new year in the future. That’s the system. That means 1007 years from now there is a machine sending us a message with some schematics and your name attached to it. And it’s been sending us that same message for 35 years.", 100);
+						message.displaySubtitle("207 days Greg. And every day, corresponds to a new year in the future. That’s the system. That means 1007 years from now there is a machine sending us a message with some schematics and your name attached to it. And it’s been sending us that same message for 35 years.", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Richard Fields", 100);
 						
@@ -699,6 +795,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[13]);
 						
 						message.displaySubtitle("And you thought it might be me?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -712,6 +810,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[19]);
 						
 						message.displaySubtitle("We floated the idea. We never thought it was likely but think about it, every day a new year’s worth of technology was coming through to us. For 144 days that went on. We haven’t even scratched the surface sifting through that information. So yeah, we floated the idea.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -725,6 +825,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[14]);
 						
 						message.displaySubtitle("My god.. None of this makes any sense.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -738,6 +840,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[22]);
 						
 						message.displaySubtitle("I know. That’s what we thought.. at first. But then it occurred to us, maybe the message means you’re the one that needs to public interface with the machine.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -751,6 +855,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[15]);
 						
 						message.displaySubtitle("What would make you think.. wait a minute. You’ve already tried using it, haven’t you?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -764,6 +870,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[20]);
 						
 						message.displaySubtitle("Not me personally but--", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -777,6 +885,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[16]);
 						
 						message.displaySubtitle("You know what I mean. I can’t believe this. You didn’t call me in here to work on the machine, you want me to be a guinea pig.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -790,6 +900,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[21]);
 						
 						message.displaySubtitle("Greg--", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -803,6 +915,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[17]);
 						
 						message.displaySubtitle("No no no.. and tell me, how many others have you tried before calling me in?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -816,6 +930,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[21]);
 						
 						message.displaySubtitle("Greg--", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -829,6 +945,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[18]);
 						
 						message.displaySubtitle("Tell me.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -842,6 +960,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[15]);
 						
 						message.displaySubtitle("Seven..", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -855,6 +975,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[19]);
 						
 						message.displaySubtitle("And what happened to them?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -868,6 +990,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[16]);
 						
 						message.displaySubtitle("Nothing much. A lot of static. A couple headaches. Two nosebleeds.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -881,6 +1005,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[20]);
 						
 						message.displaySubtitle("Son of a..", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -894,6 +1020,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[17]);
 						
 						message.displaySubtitle("Nothing severe though. Look, this is messed up, I’ll be the first to admit it. At the same time, could it be any more poetic? I mean she’s your girl. Maybe she’s just coming to you for help.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -907,6 +1035,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[21]);
 						
 						message.displaySubtitle("It’s a machine.. it’s not my girl..", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -920,6 +1050,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[21]);
 						
 						message.displaySubtitle("Greg...", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -933,6 +1065,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[22]);
 						
 						message.displaySubtitle("(sigh)... All right, I’ll do it.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -946,6 +1080,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(richardClips[18]);
 						
 						message.displaySubtitle("Thanks Greg. Look, this shouldn’t take long, and then either way we’ll have our answer.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -959,6 +1095,8 @@ public class richardBehavior : MonoBehaviour {
 					if (!hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[23]);
 						
 						message.displaySubtitle("Yeah..", 100);
 						message.displayWarning("Press space to continue", 100);

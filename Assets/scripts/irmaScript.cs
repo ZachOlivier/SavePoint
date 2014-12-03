@@ -4,14 +4,14 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 
 public class irmaScript : MonoBehaviour {
-
-	public AudioClip irmaIntro;
+	
 	public AudioClip riotingAmbience;
 	public AudioClip explosion;
 	public AudioClip sentBack;
 	public AudioClip gunShot;
 
-	public bool audioPlayed;
+	public AudioClip[] irmaClips	= new AudioClip[0];
+	public AudioClip[] gregClips	= new AudioClip[0];
 
 	// Variables to tell if the NPC can talk, or is talking
 	public bool isTalking			= false;
@@ -19,7 +19,10 @@ public class irmaScript : MonoBehaviour {
 	public bool canSkip				= false;
 	
 	public bool hasDisplayed		= false;
-	
+
+	public bool riotPlayed			= false;
+	public bool audioPlayed			= false;
+
 	public bool thisDisplayed		= false;
 
 	public bool firstPathOne		= false;
@@ -209,7 +212,8 @@ public class irmaScript : MonoBehaviour {
 	
 		if (canSkip) {
 			if (Input.GetButtonDown("Fire2")) {
-				
+
+				audio.Stop();
 				talkSection++;
 				hasDisplayed = false;
 			}
@@ -217,26 +221,21 @@ public class irmaScript : MonoBehaviour {
 
 		if (talkNumber == 0 && talkCount >= 6)
 		{
-			if (!audio.isPlaying && talkCount == 6)
+			if (holder.audio.volume <= .6f)
 			{
-				holder.audio.volume = .1f;
-
-				audio.clip = riotingAmbience;
-				audio.loop = true;
-				audio.volume = .5f;
-
-				audio.Play();
+				holder.audio.volume += .01f * Time.deltaTime;
 			}
 
-			else if (!audio.isPlaying && talkCount == 7)
+			if (!riotPlayed)
 			{
-				holder.audio.volume = .1f;
-				
-				audio.clip = riotingAmbience;
-				audio.loop = true;
-				audio.volume = .7f;
-				
-				audio.Play();
+				holder.audio.volume = .05f;
+
+				holder.audio.clip = riotingAmbience;
+				holder.audio.loop = true;
+
+				holder.audio.Play();
+
+				riotPlayed = true;
 			}
 		}
 
@@ -279,12 +278,25 @@ public class irmaScript : MonoBehaviour {
 			if (talkCount == 0)
 			{
 				timer += Time.deltaTime;
-				
-				message.displaySubtitle("(Gasping and Panting) God.. Oh God... What just happened?", 6);
-				message.displayInfo("Greg Clemens", 6);
+
+				if (!hasDisplayed)
+				{
+					holder.audio.volume = .03f;
+
+					audio.PlayOneShot(gregClips[0]);
+
+					message.displaySubtitle("(Gasping and Panting) God.. Oh God... What just happened?", 6);
+					message.displayInfo("Greg Clemens", 6);
+
+					hasDisplayed = true;
+				}
 				
 				if (timer >= time)
 				{
+					holder.audio.volume = .3f;
+
+					hasDisplayed = false;
+
 					talkCount = 1;
 				}
 			}
@@ -331,8 +343,17 @@ public class irmaScript : MonoBehaviour {
 			{
 				timer += Time.deltaTime;
 
-				message.displaySubtitle("W... Where am I? What’s happening?", 5);
-				message.displayInfo("Greg Clemens", 5);
+				if (!hasDisplayed)
+				{
+					holder.audio.volume = .03f;
+					
+					audio.PlayOneShot(gregClips[1]);
+					
+					message.displaySubtitle("W... Where am I? What’s happening?", 5);
+					message.displayInfo("Greg Clemens", 5);
+
+					hasDisplayed = true;
+				}
 
 				if (timer > time)
 				{
@@ -359,14 +380,10 @@ public class irmaScript : MonoBehaviour {
 
 					canSkip = true;
 
-					if (!audioPlayed)
-					{
-						holder.audio.volume = .1f;
-
-						audio.PlayOneShot(irmaIntro);
-
-						audioPlayed = true;
-					}
+					// Play Voiceover
+					holder.audio.volume = .03f;
+					audio.volume = .4f;
+					audio.PlayOneShot(irmaClips[0]);
 					
 					message.displaySubtitle("Hello Dr. Clemens. I’m IRMA, your Internal Recall/Memory Assistant.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -379,14 +396,8 @@ public class irmaScript : MonoBehaviour {
 				{
 					canSkip = true;
 
-					if (audioPlayed)
-					{
-						audio.Stop();
-
-						holder.audio.volume = .4f;
-
-						audioPlayed = false;
-					}
+					audio.volume = 1f;
+					audio.PlayOneShot(gregClips[2]);
 					
 					message.displaySubtitle("What the hell? You’re my what?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -632,6 +643,8 @@ public class irmaScript : MonoBehaviour {
 						}
 
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[3]);
 						
 						message.displaySubtitle("You said you were modified. Modified by who?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -654,6 +667,8 @@ public class irmaScript : MonoBehaviour {
 					else if (talkSection == 5)
 					{
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[4]);
 						
 						message.displaySubtitle("Unavailable? You mean because you don’t know or because you can’t tell me?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -676,6 +691,8 @@ public class irmaScript : MonoBehaviour {
 					else if (talkSection == 7)
 					{
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[5]);
 						
 						message.displaySubtitle("Okay, great.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -736,6 +753,8 @@ public class irmaScript : MonoBehaviour {
 						}
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[6]);
 						
 						message.displaySubtitle("Wait. 2102? You’re saying that I’m in the future?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -758,6 +777,8 @@ public class irmaScript : MonoBehaviour {
 					else if (talkSection == 5)
 					{
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[7]);
 						
 						message.displaySubtitle("Yeah, no, I know that. But this is the year 2102?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -780,6 +801,8 @@ public class irmaScript : MonoBehaviour {
 					else if (talkSection == 7)
 					{
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[8]);
 						
 						message.displaySubtitle("Wait... no no no... let me think. I need to think. I was in the lab. Richard had hooked me up to the new IC-Machine. He turned it on. No... no it has to still be 2018. I can’t be in the future, that’s impossible. Even if there was a way to transport particles larger than the sub-atomic level... you can’t send anything forward. You can’t. It can’t be done. This can’t be real.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -802,6 +825,8 @@ public class irmaScript : MonoBehaviour {
 					else if (talkSection == 9)
 					{
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[9]);
 						
 						message.displaySubtitle("No... no just thinking out loud.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -873,6 +898,8 @@ public class irmaScript : MonoBehaviour {
 						}
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[10]);
 						
 						message.displaySubtitle("You said I’m remotely connected to an IC-Machine. So there’s one nearby?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -956,6 +983,8 @@ public class irmaScript : MonoBehaviour {
 					cursor.cursorShow = false;
 					cursor.mouseShow = false;
 					cursor.mouseLocked = true;
+
+					audio.PlayOneShot(gregClips[11]);
 					
 					message.displaySubtitle("Jesus my head... It’s still ringing.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -978,6 +1007,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 3)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[12]);
 					
 					message.displaySubtitle("I think I’m going to throw up.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1000,6 +1031,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 5)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[13]);
 					
 					message.displaySubtitle("Uh, thank you, Irma.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1022,6 +1055,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 7)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[14]);
 					
 					message.displaySubtitle("Uh... alright then, I’ll keep that in mind.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1038,6 +1073,8 @@ public class irmaScript : MonoBehaviour {
 					cursor.cursorShow = true;
 					cursor.mouseShow = false;
 					cursor.mouseLocked = true;
+
+					holder.audio.volume = .3f;
 
 					cam.canChange = true;
 					menu.canMenu = true;
@@ -1062,6 +1099,8 @@ public class irmaScript : MonoBehaviour {
 					cam.canChange = false;
 					menu.canMenu = false;
 
+					holder.audio.volume = .03f;
+
 					movement.enabled = false;
 
 					cursor.cursorShow = false;
@@ -1069,6 +1108,8 @@ public class irmaScript : MonoBehaviour {
 					cursor.mouseLocked = true;
 
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[15]);
 					
 					message.displaySubtitle("This is an IC-Machine?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1091,6 +1132,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 2)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[16]);
 					
 					message.displaySubtitle("Looks like some kind of religious altar.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1113,6 +1156,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 4)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[17]);
 					
 					message.displaySubtitle("I know. I named the machine after them. I’ve always loved Greek mythology and it somehow seemed like an appropriate name for a machine that sent messages through time. This though... it’s so literal. Like I said, it looks more like an object of worship than a machine of science.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1135,6 +1180,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 6)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[18]);
 					
 					message.displaySubtitle("Who?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1164,6 +1211,8 @@ public class irmaScript : MonoBehaviour {
 
 					movement.enabled = true;
 
+					holder.audio.volume = .3f;
+
 					cursor.cursorShow = true;
 					cursor.mouseShow = false;
 					cursor.mouseLocked = true;
@@ -1174,8 +1223,6 @@ public class irmaScript : MonoBehaviour {
 					daphne.coreInspected = true;
 					
 					message.displayWarning("Journal Updated:\nDaughters of Iris ", 5);
-
-					audio.volume = .1f;
 
 					talkSection = 9;
 				}
@@ -1198,6 +1245,8 @@ public class irmaScript : MonoBehaviour {
 					cursor.mouseLocked = true;
 
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[19]);
 					
 					message.displaySubtitle("Shit! Somebody’s trapped under here!", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1209,6 +1258,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 1 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[20]);
 					
 					message.displaySubtitle("I don’t think she’s alive.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1231,6 +1282,10 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 3 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.volume = .1f;
+
+					audio.PlayOneShot(gregClips[21]);
 					
 					message.displaySubtitle("Us? What about her? What the hell happened here?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1253,6 +1308,10 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 5 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.volume = 1f;
+
+					audio.PlayOneShot(gregClips[22]);
 					
 					message.displaySubtitle("Under attack? By who?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1320,6 +1379,10 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 9 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.volume = 1f;
+
+					audio.PlayOneShot(gregClips[23]);
 					
 					message.displaySubtitle("What do you mean?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1342,6 +1405,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 11 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[24]);
 					
 					message.displaySubtitle("Jesus, what do I do?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1405,6 +1470,8 @@ public class irmaScript : MonoBehaviour {
 					cursor.mouseLocked = true;
 					
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[25]);
 					
 					message.displaySubtitle("This... caduceus looks broken.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1427,6 +1494,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 2 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[26]);
 					
 					message.displaySubtitle("Why, what’s going to happen?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1449,6 +1518,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 4 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[27]);
 					
 					message.displaySubtitle("Wait, iterations? I don’t understand any of this.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1471,6 +1542,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 6 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[28]);
 					
 					message.displaySubtitle("What good will that do us?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1493,6 +1566,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 8 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[29]);
 					
 					message.displaySubtitle("This IC machine is nothing like the one that I created. I don’t even know how to use it.", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1546,6 +1621,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 11 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[30]);
 					
 					message.displaySubtitle("What do we do now?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1568,6 +1645,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 13 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[31]);
 					
 					message.displaySubtitle("What?", 100);
 					message.displayWarning("Press space to continue", 100);
@@ -1590,6 +1669,8 @@ public class irmaScript : MonoBehaviour {
 				else if (talkSection == 15 && !hasDisplayed)
 				{
 					canSkip = true;
+
+					audio.PlayOneShot(gregClips[32]);
 					
 					message.displaySubtitle("Good-bye Irma.", 100);
 					message.displayWarning("Press space to continue", 100);

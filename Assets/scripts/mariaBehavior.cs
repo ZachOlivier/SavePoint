@@ -13,6 +13,11 @@ public class mariaBehavior : MonoBehaviour {
 
 	public bool thisDisplayed		= false;
 
+	public bool audioPlayed			= false;
+
+	public AudioClip[] gregClips	= new AudioClip[0];
+	public AudioClip[] soundClips	= new AudioClip[0];
+
 	// Variable to hold how much time has gone by in a conversation
 	public float timer		= 0.0f;
 	
@@ -186,7 +191,12 @@ public class mariaBehavior : MonoBehaviour {
 			}
 			
 			if (talkCount == 0 && !hasDisplayed && !isTalking) {
-				
+
+				// Play Voiceover
+				holder.audio.volume = .03f;
+
+				audio.PlayOneShot(soundClips[0]);
+
 				message.displaySubtitle("Dr. Clemens, welcome back.", 5);
 				message.displayInfo("Maria Figueroa\nPress E To Talk", 100);
 				
@@ -194,7 +204,9 @@ public class mariaBehavior : MonoBehaviour {
 			}
 			
 			else if (talkCount == 1 && !hasDisplayed && !isTalking) {
-				
+
+				holder.audio.volume = .03f;
+
 				message.displaySubtitle("You have access to the IC Room now.", 5);
 				message.displayInfo("Maria Figueroa", 5);
 				
@@ -227,6 +239,11 @@ public class mariaBehavior : MonoBehaviour {
 			
 			if (thisDisplayed)
 			{
+				if (talkCount <= 0)
+				{
+					holder.audio.volume = .3f;
+				}
+
 				if (message.subtitle.enabled == true)
 				{
 					message.subtitle.enabled = false;
@@ -334,8 +351,10 @@ public class mariaBehavior : MonoBehaviour {
 			}
 			
 			if (canSkip) {
+
 				if (Input.GetButtonDown("Fire2")) {
-					
+
+					audio.Stop();
 					talkSection++;
 					hasDisplayed = false;
 				}
@@ -359,6 +378,8 @@ public class mariaBehavior : MonoBehaviour {
 					if (path == path1 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[0]);
 						
 						message.displaySubtitle("Thank you, Maria. How are you?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -370,6 +391,8 @@ public class mariaBehavior : MonoBehaviour {
 					else if (path == path2 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[1]);
 						
 						message.displaySubtitle("I need to update my badge.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -381,6 +404,8 @@ public class mariaBehavior : MonoBehaviour {
 					else if (path == path3 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[2]);
 						
 						message.displaySubtitle("Yeah, maybe you can tell me why I get a call in the middle of the night telling me that I'm needed right away and yet when I get here I have to waste time updating a badge.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -394,7 +419,9 @@ public class mariaBehavior : MonoBehaviour {
 					if (path == path1 && !hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(soundClips[1]);
+
 						message.displaySubtitle("I'm well, doctor. And yourself?", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Maria Figueroa", 100);
@@ -403,7 +430,9 @@ public class mariaBehavior : MonoBehaviour {
 					}
 					
 					else if (path == path2 && !hasDisplayed) {
-						
+
+						audio.PlayOneShot(soundClips[2]);
+
 						message.displaySubtitle("I can help you with that right now.", 5);
 						message.displayWarning("Conversation Ended..", 5);
 						message.displayInfo("Maria Figueroa", 5);
@@ -433,6 +462,8 @@ public class mariaBehavior : MonoBehaviour {
 					else if (path == path3 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(soundClips[3]);
 						
 						message.displaySubtitle("I can’t say as to why you were called in here, doctor. That’s outside my purview. As far as the badge, it’s expired. Furthermore, we updated our security system a few weeks ago. Now, I understand your time is important to you. If you’d like, we can upgrade your badge now and in a few minutes you’ll be on your way.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -446,6 +477,8 @@ public class mariaBehavior : MonoBehaviour {
 					if (path == path1 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[3]);
 						
 						message.displaySubtitle("I'm good. William told me I needed to update my badge?", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -455,6 +488,8 @@ public class mariaBehavior : MonoBehaviour {
 					}
 					
 					else if (path == path3 && !hasDisplayed) {
+
+						audio.PlayOneShot(gregClips[4]);
 						
 						message.displaySubtitle("Fine, what do I have to do?", 5);
 						message.displayWarning("Conversation Ended..", 5);
@@ -487,7 +522,9 @@ public class mariaBehavior : MonoBehaviour {
 					if (path == path1 && !hasDisplayed) {
 						
 						canSkip = true;
-						
+
+						audio.PlayOneShot(soundClips[4]);
+
 						message.displaySubtitle("Yeah, we updated our security systems a few weeks ago and everyone needed new badges. If you’d like I can update your badge right now. It will only take a few minutes.", 100);
 						message.displayWarning("Press space to continue", 100);
 						message.displayInfo("Maria Figueroa", 100);
@@ -500,6 +537,8 @@ public class mariaBehavior : MonoBehaviour {
 					if (path == path1 && !hasDisplayed) {
 						
 						canSkip = true;
+
+						audio.PlayOneShot(gregClips[5]);
 						
 						message.displaySubtitle("Sure. Thanks Maria.", 100);
 						message.displayWarning("Press space to continue", 100);
@@ -511,7 +550,9 @@ public class mariaBehavior : MonoBehaviour {
 				
 				else if (talkSection == 6) {
 					if (path == path1 && !hasDisplayed) {
-						
+
+						audio.PlayOneShot(soundClips[5]);
+
 						message.displaySubtitle("Not a problem, doctor.", 5);
 						message.displayWarning("Conversation Ended..", 5);
 						message.displayInfo("Maria Figueroa", 5);
@@ -551,7 +592,19 @@ public class mariaBehavior : MonoBehaviour {
 		
 		if (talkCount > 0)
 		{
-			if (Vector3.Distance(transform.position, waypoint.position) > SnapDist)
+			if (timer < 4)
+			{
+				timer += Time.deltaTime;
+
+				if (!audioPlayed && timer >= 2)
+				{
+					audio.PlayOneShot(soundClips[6]);
+					
+					audioPlayed = true;
+				}
+			}
+
+			if (Vector3.Distance(transform.position, waypoint.position) > SnapDist && timer >= 3)
 			{
 				var rotation = Quaternion.LookRotation(waypoint.position - transform.position);
 				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * Damping);
@@ -579,10 +632,22 @@ public class mariaBehavior : MonoBehaviour {
 					
 					if (!pic.canPicture)
 					{
+						audio.PlayOneShot(soundClips[7]);
+
 						pic.canPicture = true;
 					}
 					
 					transform.position = waypoint.position;
+				}
+
+				if (pic.tookPicture)
+				{
+					if (audioPlayed)
+					{
+						audio.PlayOneShot(soundClips[10]);
+
+						audioPlayed = false;
+					}
 				}
 			}
 			
